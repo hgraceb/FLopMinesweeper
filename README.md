@@ -1,4 +1,4 @@
-# FLopMinesweeper
+# FLopMine
 数据来自扫雷网（http://www.saolei.net/Main/Index.asp）
 
 主要功能：
