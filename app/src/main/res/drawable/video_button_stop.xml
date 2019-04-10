@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enterFadeDuration="200"
+    android:exitFadeDuration="200">
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/ib_stop_press"/>
+
+    <item
+        android:drawable="@drawable/ib_stop"/>
+</selector>

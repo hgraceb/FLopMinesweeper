@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/silver"
+    tools:context=".MainActivity">
+
+    <ProgressBar
+        android:id="@+id/pbMainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@drawable/ic_background"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/ivPlay"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:src="@mipmap/iv_face_normal" />
+
+        <RelativeLayout
+            android:id="@+id/rlBomb"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ivBombHun"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:background="@mipmap/iv_c0"
+                android:contentDescription="@null" />
+
+            <ImageView
+                android:id="@+id/ivBombTen"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/ivBombHun"
+                android:layout_toRightOf="@id/ivBombHun"
+                android:background="@mipmap/iv_c1"
+                android:contentDescription="@null" />
+
+            <ImageView
+                android:id="@+id/ivBombBit"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/ivBombTen"
+                android:layout_toRightOf="@id/ivBombTen"
+                android:background="@mipmap/iv_c0"
+                android:contentDescription="@null" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlTime"
+            android:layout_width="75dp"
+            android:layout_height="44dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ivTimeBit"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@mipmap/iv_c0"
+                android:contentDescription="@null" />
+
+            <ImageView
+                android:id="@+id/ivTimeTen"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@id/ivTimeBit"
+                android:layout_toLeftOf="@id/ivTimeBit"
+                android:background="@mipmap/iv_c0"
+                android:contentDescription="@null" />
+
+            <ImageView
+                android:id="@+id/ivTimeHun"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@id/ivTimeTen"
+                android:layout_toLeftOf="@id/ivTimeTen"
+                android:background="@mipmap/iv_c0"
+                android:contentDescription="@null" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/hsMinesweeper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rlBottom"
+        android:layout_below="@+id/rlTop"
+        android:scrollbarSize="5dp">
+
+        <ScrollView
+            android:id="@+id/scMinesweeper"
+            android:layout_width="wrap_content"
+            android:scrollbarSize="5dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/lyMinesweeper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <GridLayout
+                        android:id="@+id/glMinesweeper"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginBottom="6dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/ivMouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/iv_mouse"
+                    android:contentDescription="@null"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </HorizontalScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rlBottom"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/ivVideo"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:contentDescription="@null"
+            android:src="@mipmap/iv_user" />
+
+        <ImageView
+            android:id="@+id/ivFlagBomb"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:src="@mipmap/iv_mine" />
+
+        <ImageView
+            android:id="@+id/ivSettings"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:contentDescription="@null"
+            android:src="@mipmap/iv_settings" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/cellScale"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

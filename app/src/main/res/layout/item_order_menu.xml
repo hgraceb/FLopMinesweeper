@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:clickable="false"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvOrder"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/ripple_divider_bottom"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center" />
+
+</LinearLayout>

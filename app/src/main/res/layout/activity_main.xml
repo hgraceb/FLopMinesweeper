@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/silver"
+    android:keepScreenOn="true"
+    tools:context=".MainActivity">
+
+    <ProgressBar
+        android:id="@+id/pbMainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@drawable/ic_background"
+        android:gravity="center_vertical">
+
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/hsMinesweeper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lyBottom"
+        android:layout_below="@+id/rlTop"
+        android:scrollbarSize="5dp">
+
+        <ScrollView
+            android:id="@+id/scMinesweeper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="5dp"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/lyMinesweeper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <GridLayout
+                        android:id="@+id/glMinesweeper"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginBottom="6dp">
+
+                    </GridLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvUserId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lyMinesweeper"
+                    android:background="@color/grayDark"
+                    android:gravity="center"
+                    android:maxLines="1" />
+
+                <ImageView
+                    android:id="@+id/ivMouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/iv_mouse"
+                    android:contentDescription="@null"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/lyBottom"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ivRestart"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/video_button_restart"
+            android:contentDescription="@null" />
+
+        <ImageButton
+            android:id="@+id/ivPause"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/video_button_pause"
+            android:contentDescription="@null" />
+
+        <ImageButton
+            android:id="@+id/ivStop"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/video_button_stop"
+            android:contentDescription="@null" />
+
+        <ImageButton
+            android:id="@+id/ivInfo"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/video_button_info"
+            android:contentDescription="@null" />
+
+        <SeekBar
+            android:id="@+id/sbSpeed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="15"
+            android:max="398"
+            android:maxHeight="4dp"
+            android:minHeight="4dp"
+            android:progress="198"
+            android:progressDrawable="@drawable/seekbar_style" />
+
+        <TextView
+            android:id="@+id/tvSpeed"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-5dp"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginTop="-1dp"
+            android:gravity="end"
+            android:text="1.00x" />
+
+        <SeekBar
+            android:id="@+id/sbTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:max="1000"
+            android:maxHeight="4dp"
+            android:minHeight="4dp"
+            android:progressDrawable="@drawable/seekbar_style" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-5dp"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginTop="-1dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="end"
+            android:text="0.00" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/cellScale"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

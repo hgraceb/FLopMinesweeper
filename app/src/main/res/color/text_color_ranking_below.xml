@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--排行榜页面下面一行时间和BVS信息的文字颜色-->
+
+    <item android:color="#E80000"
+        android:state_pressed="true"/>
+
+    <item android:color="#7D7D7D"
+        android:state_pressed="false"/>
+</selector>

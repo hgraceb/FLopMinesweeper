@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#029FEE</color>
+    <!--<color name="colorPrimaryDark">#31B3FB</color>-->
+    <color name="colorPrimaryDark">#028FD6</color>
+    <color name="colorAccent">#FF69B4</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="translucent">#80000000</color>
+
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+    <color name="gray">#808080</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="grayDark">#A0A0A0</color>
+
+    <color name="settingsText">#000000</color>
+    <color name="settingsTitle">#FA7298</color>
+    <color name="settingsPress">#E9E9E9</color>
+    <color name="settingsBackground">#E0E0E0</color>
+    <color name="settingsItemBackground">#FFFFFF</color>
+
+    <color name="tabItem">#029FEE</color>
+    <color name="IndicatorColor">#EAEAEA</color>
+    <color name="orderBackground">#F4F4F4</color>
+    <color name="videosTop">#E9E9E9</color>
+    <color name="videosName">#028FD6</color>
+    <color name="videosNamePink">#FF69B4</color>
+    <color name="videosDate">#999999</color>
+    <color name="videosInfo">#7E7E7E</color>
+    <color name="editView">#028FD6</color>
+    <color name="editPage">#C0C0C0</color>
+    <color name="itemSelector">#E3E3E3</color>
+
+    <color name="DialogInfo">#F0F0F0</color>
+    <color name="itemClicked">#80E0E0E0</color>
+</resources>

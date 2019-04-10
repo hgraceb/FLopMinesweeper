@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/settingsBackground"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_setting"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/settingsTitle"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="@string/settings"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="normal" />
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:id="@+id/lySettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:background="@color/settingsItemBackground">
+
+                <TextView
+                    android:id="@+id/tvLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="12dp"
+                    android:background="@drawable/settings_press"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/settingsLevel"
+                    android:textColor="@color/settingsTitle"
+                    android:textSize="@dimen/large_text"/>
+
+                <TextView
+                    android:id="@+id/tvBeg"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@+id/tvLevel"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/settings_press_divider"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/levelBeg"
+                    android:textColor="@color/settingsText"
+                    android:textSize="@dimen/small_text"/>
+
+                <TextView
+                    android:id="@+id/tvInt"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@+id/tvBeg"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/settings_press_divider"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/levelInt"
+                    android:textColor="@color/settingsText"
+                    android:textSize="@dimen/small_text" />
+
+                <TextView
+                    android:id="@+id/tvExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@+id/tvInt"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/settings_press"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/levelExp"
+                    android:textColor="@color/settingsText"
+                    android:textSize="@dimen/small_text" />
+
+                <Switch
+                    android:id="@+id/scBeg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@id/tvLevel"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:checked="true"
+                    android:clickable="false"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track" />
+
+                <Switch
+                    android:id="@+id/scInt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@id/tvBeg"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:clickable="false"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track" />
+
+                <Switch
+                    android:id="@+id/scExp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@id/tvInt"
+                    android:layout_alignEnd="@id/tvExp"
+                    android:layout_alignRight="@id/tvExp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:clickable="false"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:background="@color/settingsItemBackground">
+
+                <TextView
+                    android:id="@+id/tvVibration"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="12dp"
+                    android:background="@drawable/settings_press"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/settingsVibration"
+                    android:textColor="@color/settingsTitle"
+                    android:textSize="@dimen/large_text" />
+
+                <TextView
+                    android:id="@+id/tvLongClickVibration"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@+id/tvVibration"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:background="@drawable/settings_press_divider"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/longClickVibration"
+                    android:textColor="@color/settingsText"
+                    android:textSize="@dimen/small_text" />
+
+                <TextView
+                    android:id="@+id/tvWinVibration"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@+id/tvLongClickVibration"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:background="@drawable/settings_press_divider"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/winVibration"
+                    android:textColor="@color/settingsText"
+                    android:textSize="@dimen/small_text" />
+
+                <TextView
+                    android:id="@+id/tvLoseVibration"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@+id/tvWinVibration"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:background="@drawable/settings_press"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/loseVibration"
+                    android:textColor="@color/settingsText"
+                    android:textSize="@dimen/small_text" />
+
+                <Switch
+                    android:id="@+id/scLongClickVibration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@id/tvVibration"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:checked="true"
+                    android:clickable="false"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track" />
+
+                <Switch
+                    android:id="@+id/scWinVibration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@id/tvLongClickVibration"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:clickable="false"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track" />
+
+                <Switch
+                    android:id="@+id/scLoseVibration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/settings_item_height"
+                    android:layout_below="@id/tvWinVibration"
+                    android:layout_alignEnd="@id/tvLongClickVibration"
+                    android:layout_alignRight="@id/tvLongClickVibration"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:clickable="false"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:background="@color/settingsItemBackground">
+
+                <TextView
+                    android:id="@+id/tvShare"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="12dp"
+                    android:background="@drawable/settings_press"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/shareMinesweeper"
+                    android:textColor="@color/settingsTitle"
+                    android:textSize="@dimen/large_text" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

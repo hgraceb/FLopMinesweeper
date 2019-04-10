@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--主界面男性用户的姓名文字颜色（排行中不区分性别信息）-->
+
+    <item android:color="#E80000"
+        android:state_pressed="true"/>
+
+    <item android:color="#028FD6"
+        android:state_pressed="false"/>
+</selector>

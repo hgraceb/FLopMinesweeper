@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Flop Mine</string>
+
+    <string name="settings">设置</string>
+
+    <string name="settingsLevel">级别</string>
+    <string name="levelBeg">初级</string>
+    <string name="levelInt">中级</string>
+    <string name="levelExp">高级</string>
+
+    <string name="settingsVibration">震动</string>
+    <string name="longClickVibration">长按</string>
+    <string name="winVibration">胜利</string>
+    <string name="loseVibration">失败</string>
+
+    <string name="shareMinesweeper">分享</string>
+
+    <string name="newGame">新游戏</string>
+    <string name="saoleiNews">雷界快讯</string>
+    <string name="saoleiNew">最新录像</string>
+    <string name="section_format">敬请期待</string>
+
+    <string name="tab_text_1">雷界快讯</string>
+    <string name="tab_text_2">最新录像</string>
+    <string name="tab_text_3">排行榜</string>
+    <string name="tab_text_4">全部录像</string>
+    <string name="tab_text_5">我的地盘</string>
+    <string name="tab_text_6">进步历程</string>
+
+    <!--Drawer-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Flop Mine</string>
+    <string name="nav_header_subtitle">android.flop.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>

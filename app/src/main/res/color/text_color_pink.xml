@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--排序菜单主菜单文字颜色（无边框）-->
+    <item android:color="#FFFF69B4"
+        android:state_pressed="true"/>
+
+    <item android:color="#80000000"
+        android:state_pressed="false"/>
+</selector>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="settings_item_height">44dp</dimen>
+
+    <dimen name="large_text">24sp</dimen>
+    <dimen name="big_text">20sp</dimen>
+    <dimen name="middle_text">17sp</dimen>
+    <dimen name="small_text">16sp</dimen>
+    <dimen name="little_text">15sp</dimen>
+
+    <dimen name="name_text">19sp</dimen>
+    <dimen name="date_text">12sp</dimen>
+    <dimen name="info_text">14sp</dimen>
+    <dimen name="ranking_text">11.5sp</dimen>
+
+    <dimen name="item_horizontal_padding">12dp</dimen>
+    <dimen name="item_vertical_padding">7dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
