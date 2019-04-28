@@ -786,7 +786,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "overflow: " + (events.get(plan).getY() / 16) + " " + (events.get(plan).getX() / 16));
 
                 //避免超出后继续进行操作导致的有部分方块没有恢复正常状态
-                changeAroundNormal(current);
+                if(current!=null)changeAroundNormal(current);//判断current是否已经初始化
 
                 if (events.get(plan).getMouseType() == 3) {//lc
                     leftClick = true;
