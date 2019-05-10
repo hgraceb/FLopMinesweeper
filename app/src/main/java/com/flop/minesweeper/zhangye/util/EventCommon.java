@@ -8,12 +8,10 @@ import com.flop.minesweeper.zhangye.bean.RawEventDetailBean;
 import com.flop.minesweeper.zhangye.bean.RawProbBoardBean;
 import com.flop.minesweeper.zhangye.bean.RawVideoBean;
 import com.flop.minesweeper.zhangye.bean.VideoDisplayBean;
-//import com.flop.minesweeper.zhangye.core.ShowProb;
 
 import java.util.List;
-import java.util.logging.LogManager;
 
-import static com.flop.minesweeper.Constant.TAG;
+//import com.flop.minesweeper.zhangye.core.ShowProb;
 
 /**
  * event解析
@@ -230,7 +228,14 @@ public class EventCommon {
                 if (l == 0) {
                     firstLx = nx;
                     firstLy = ny;
-                    if (firstLx == 128 && firstLy == 128) {
+                    //FLOP(JSD修改):
+//                    if (firstLx == 128 && firstLy == 128) {
+//                        continue;
+//                    }
+                    if (firstLx == height * 16 && firstLy == width * 16)
+                    {
+                        ax = nx;
+                        ay = ny;
                         continue;
                     }
                 }
@@ -418,10 +423,24 @@ public class EventCommon {
                 holds++;
             }
 
-            if (i > 0 && rawEventDetailBean.getEventTime() > 0d) {
+            //FLOP:
+            if (i > 0 && rawEventDetailBean.getEventTime() >= 0d) {
                 path += Math
                         .sqrt((nx - ax) * (nx - ax) + (ny - ay) * (ny - ay));
             }
+//            if (i > 0 && rawEventDetailBean.getEventTime() > 0d) {
+//                path += Math
+//                        .sqrt((nx - ax) * (nx - ax) + (ny - ay) * (ny - ay));
+//            }
+
+//            if (i > 0 && rawEventDetailBean.getEventTime().compareTo(BigDecimal.ZERO) >= 0)
+//            {
+//                //BigDecimal spath=new BigDecimal(Math.sqrt((nx - ax) * (nx - ax) + (ny - ay) * (ny - ay)));
+//                BigDecimal spath=new BigDecimal(Math.abs(nx - ax)+ Math.abs(ny - ay));
+//                LOGGER.error(spath);
+//                path = path.add(spath);
+//                //LOGGER.trace(rawEventDetailBean.getEventTime() +","+path);
+//            }
 
             saoleiTime = rawEventDetailBean.getEventTime();
             ax = nx;
