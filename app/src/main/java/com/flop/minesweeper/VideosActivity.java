@@ -626,9 +626,9 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderOptionFirst, all));
                 break;
             case 4:
-                if(domain.getPlayerId()!=playerId){
+                if (domain.getPlayerId() != playerId) {
                     domain.setPlayerId(playerId);
-                    DOMAIN_PAGE=1;
+                    DOMAIN_PAGE = 1;
                     domain.initVideos();
                     etPage.setText("1");
                 }
@@ -645,9 +645,9 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderOptionFirst, domain));
                 break;
             case 5:
-                if(progress.getPlayerId()!=playerId){
+                if (progress.getPlayerId() != playerId) {
                     progress.setPlayerId(playerId);
-                    PROGRESS_PAGE=1;
+                    PROGRESS_PAGE = 1;
                     progress.initVideos();
                     etPage.setText("1");
                 }
@@ -747,6 +747,10 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            Log.i(TAG, "onActivityResult: data.toString(): " + data.toString());
+            Log.i(TAG, "onActivityResult: data.getData()(): " + data.getData());
+        }
         if (requestCode == VIDEO_REQUEST_CODE_LOCAL && resultCode == Activity.RESULT_OK && data != null) {
             Uri uri = data.getData();
             String filepath = "";
@@ -754,13 +758,12 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
             if ("file".equalsIgnoreCase(uri.getScheme())) {//使用第三方应用打开
                 Log.i(TAG, "其他应用的路径:--" + uri.getPath() + "--");
                 filepath = uri.getPath();
-
             } else {
-                Log.i(TAG, "4.4以后的路径:--" + getRealPathFromUri(this, uri) + "--");
                 filepath = getPathByUri4kitkat(this, uri);
+                Log.i(TAG, "4.4以后的路径:--" + filepath + "--");
             }
 
-            Log.i(TAG, "文件路径: "+filepath);
+            Log.i(TAG, "文件路径: " + filepath);
 
             if (filepath == null) {
                 ToastUtil.showShort(this, "请选择avf或mvf格式文件!");
@@ -814,8 +817,13 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 }
             } else if (isDownloadsDocument(uri)) {// DownloadsProvider
                 final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
-                        Long.valueOf(id));
+                Uri contentUri = uri;
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                    // 在高于安卓O（8.0）版本时将URI设为ContentUris.withAppendedId
+                    // 会导致 Unknown URI 的问题，所以只需要判断一下当前的安卓版本，如果大于 O 则直接使用文件选择器返回的URI即可
+                    contentUri = ContentUris.withAppendedId(
+                            Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                }
                 return getDataColumn(context, contentUri, null, null);
             } else if (isMediaDocument(uri)) {// MediaProvider
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -830,7 +838,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
                 }
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] { split[1] };
+                final String[] selectionArgs = new String[]{split[1]};
                 return getDataColumn(context, contentUri, selection, selectionArgs);
             }
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {// MediaStore
@@ -847,20 +855,16 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context
-     *            The context.
-     * @param uri
-     *            The Uri to query.
-     * @param selection
-     *            (Optional) Filter used in the query.
-     * @param selectionArgs
-     *            (Optional) Selection arguments used in the query.
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
     public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
         Cursor cursor = null;
         final String column = "_data";
-        final String[] projection = { column };
+        final String[] projection = {column};
         try {
             cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
@@ -875,8 +879,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     }
 
     /**
-     * @param uri
-     *            The Uri to check.
+     * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
     public static boolean isExternalStorageDocument(Uri uri) {
@@ -884,8 +887,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     }
 
     /**
-     * @param uri
-     *            The Uri to check.
+     * @param uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
     public static boolean isDownloadsDocument(Uri uri) {
@@ -893,8 +895,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     }
 
     /**
-     * @param uri
-     *            The Uri to check.
+     * @param uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
     public static boolean isMediaDocument(Uri uri) {
