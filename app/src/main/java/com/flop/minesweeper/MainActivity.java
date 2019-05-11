@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
     public ImageView current = null;
     List<RawEventDetailBean> events;//鼠标事件
     private static Thread mThread;//录像读取线程
+    private String videoType="";
 
     public int openCount = 0;//已打开方块数目，判断游戏是否胜利
     public int flagAround;//方块周围旗子数目,判断点击当前格子是否打开双击开周围方块
@@ -208,7 +209,13 @@ public class MainActivity extends AppCompatActivity {
                     keyValuePair.put("Value", df.format(realTime));
                     break;
                 case "Date":
-                    keyValuePair.put("Value", bean.getDate().substring(0, bean.getDate().indexOf(".")));
+                    if(videoType.equals("avf")){
+                        //avf日期格式：2019/04/18 21:55:05.0360
+                        keyValuePair.put("Value", bean.getDate().substring(0, bean.getDate().indexOf(".")));
+                    }else{
+                        //mvf日期格式：2010/10/22 20:52:24
+                        keyValuePair.put("Value", bean.getDate());
+                    }
                     break;
                 case "3BV":
                     keyValuePair.put("Value", bean.getBbbv());
@@ -373,13 +380,14 @@ public class MainActivity extends AppCompatActivity {
             if (bundle.getInt("request") == Constant.VIDEO_REQUEST_CODE_ONLINE) {
                 analyzeOnlineVideo(bundle.getString("down"));
             } else if (bundle.getInt("request") == Constant.VIDEO_REQUEST_CODE_LOCAL) {
-                analyzeLocalVideo(bundle.getByteArray("byteStream"), bundle.getString("videoType"));
+                videoType=bundle.getString("videoType");
+                analyzeLocalVideo(bundle.getByteArray("byteStream"));
             }
         }
     }
 
     //读取本地录像
-    private void analyzeLocalVideo(byte[] byteStream, String videoType) {
+    private void analyzeLocalVideo(byte[] byteStream) {
         bean = new VideoDisplayBean();
         //反射调用类，通过获取类类型，进而获取Method对象，进而调用类的方法
         Class<?> classMethod;
@@ -501,7 +509,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     String videoUrl = Constant.SAOLEI_NET + videoPageContent.substring(videoPageContent.indexOf("/V"),
                             videoPageContent.indexOf("'", videoPageContent.indexOf("/V"))).replaceAll(" ", "%20");
-                    String videoType = videoUrl.substring((videoUrl.lastIndexOf(".")));
+                    videoType = videoUrl.substring((videoUrl.lastIndexOf(".")));
                     switch (videoType) {
                         case ".avf":
                             videoType = "Avf";
