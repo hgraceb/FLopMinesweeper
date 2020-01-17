@@ -585,10 +585,13 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                //打开侧边时自动关闭排序菜单
-                closeOrderMenu();
+            public void onDrawerStateChanged(int newState) {
+                super.onDrawerStateChanged(newState);
+                // 如果当前有显示排序菜单
+                if (menuDrop) {
+                    // 打开侧边时自动关闭排序菜单
+                    closeOrderMenu();
+                }
             }
         };
         drawer.addDrawerListener(toggle);
@@ -648,14 +651,18 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 //设置排序选项适配器
                 rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderMenuWorld, latest));
                 break;
-//            case 2:
-//                //隐藏菜单选项
-//                flOrder.setVisibility(View.GONE);
-//                //设置排序选项布局管理器
-//                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, OrientationHelper.VERTICAL, false));
-//                //设置排序选项适配器
-//                rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderMenuWorld, ranking));
-//                break;
+           case 2:
+               flOrder.setVisibility(View.VISIBLE);
+               // //设置排序菜单布局管理器
+               // rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, OrientationHelper.VERTICAL, false));
+               // //设置排序菜单适配器
+               // rvOrderMenu.setAdapter(new AdapterOrderMenu(mActivity, all, true));
+               //
+               // //设置排序选项布局管理器
+               // rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
+               // //设置排序选项适配器
+               // rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderOptionFirst, all));
+               break;
             case 3:
                 flOrder.setVisibility(View.VISIBLE);
                 //设置排序菜单布局管理器
