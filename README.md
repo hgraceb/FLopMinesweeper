@@ -1,5 +1,5 @@
 # FLopMine
-录像及用户数据来自扫雷网（http://www.saolei.net/Main/Index.asp）
+录像及用户数据来自扫雷网（http://saolei.wang/Main/Index.asp）
 
 主要功能：
 
