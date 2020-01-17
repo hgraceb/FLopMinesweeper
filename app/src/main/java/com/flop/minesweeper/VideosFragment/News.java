@@ -215,6 +215,8 @@ public class News extends Fragment {
                 ToastUtil.showShort(mActivity, "网络错误");
                 refreshLayout.finishRefresh(false);
                 refreshLayout.setEnableRefresh(true);
+                // 设置Item为空，保证其他操作可以正常执行，如：翻页
+                setVideoItem();
             }
         }
     };
@@ -242,9 +244,9 @@ public class News extends Fragment {
                         case "Progress":
                             setPlayerId(Constant.playerId);
                             if(orderProgress.getMenu().equals(ORDER_MENU[0])){
-                                path="http://www.saolei.net/News/My.asp?Id="+ playerId +"&Page="+PROGRESS_PAGE;
+                                path="http://www.saolei.wang/News/My.asp?Id="+ playerId +"&Page="+PROGRESS_PAGE;
                             }else{
-                                path="http://www.saolei.net/News/My_"+orderProgress.getMenu()+".asp?Id="+ playerId +"&Page="+PROGRESS_PAGE;
+                                path="http://www.saolei.wang/News/My_"+orderProgress.getMenu()+".asp?Id="+ playerId +"&Page="+PROGRESS_PAGE;
                             }
                             break;
                         default:

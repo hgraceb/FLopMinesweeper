@@ -15,27 +15,27 @@ public class Constant {
     public static RawVideoBean rawVideo;//录像事件
     public static VideoDisplayBean bean;//录像信息
 
-    public static String SAOLEI_NET = "http://www.saolei.net";
+    public static String SAOLEI_NET = "http://www.saolei.wang";
 
     //雷界快讯页面数据请求目标网址
-    public static String SAOLEI_NEWS = "http://www.saolei.net/News/Index.asp?Page=";
+    public static String SAOLEI_NEWS = "http://www.saolei.wang/News/Index.asp?Page=";
     public static String[] SAOLEI_NEWS_ORDER = {
-            "http://www.saolei.net/News/Index.asp?Page=",
-            "http://www.saolei.net/News/Hero.asp?Page=",
-            "http://www.saolei.net/News/Man.asp?Page="};
+            "http://www.saolei.wang/News/Index.asp?Page=",
+            "http://www.saolei.wang/News/Hero.asp?Page=",
+            "http://www.saolei.wang/News/Man.asp?Page="};
 
     //最新录像页面数据请求目标网址
-    public static String SAOLEI_LATEST = "http://www.saolei.net/Video/New_Index.asp?Page=";
+    public static String SAOLEI_LATEST = "http://www.saolei.wang/Video/New_Index.asp?Page=";
     public static String[] SAOLEI_LATEST_ORDER = {
-            "http://www.saolei.net/Video/New_Index.asp?Page=",
-            "http://www.saolei.net/Video/New_Hero.asp?Page=",
-            "http://www.saolei.net/Video/New_Man.asp?Page="};
+            "http://www.saolei.wang/Video/New_Index.asp?Page=",
+            "http://www.saolei.wang/Video/New_Hero.asp?Page=",
+            "http://www.saolei.wang/Video/New_Man.asp?Page="};
 
     //全部录像页面数据请求目标网址
-    public static String SAOLEI_ALL = "http://www.saolei.net/Video/Video_All.asp?Page=";
+    public static String SAOLEI_ALL = "http://www.saolei.wang/Video/Video_All.asp?Page=";
 
     //全部录像页面数据请求目标网址
-    public static String SAOLEI_DOMAIN = "http://www.saolei.net/Video/My.asp?Id=";
+    public static String SAOLEI_DOMAIN = "http://www.saolei.wang/Video/My.asp?Id=";
 
     //各个页面Item数目
     public static int NEWS_ITEM = 12;
@@ -48,10 +48,15 @@ public class Constant {
     //各个页面当前页码
     public static int NEWS_PAGE = 1;
     public static int LATEST_PAGE = 1;
-    public static int RANKING_PAGE = 209;
+    public static int RANKING_PAGE = 1;
     public static int ALL_PAGE = 1;
     public static int DOMAIN_PAGE = 1;
     public static int PROGRESS_PAGE = 1;
+
+    // 最小页码
+    public static int PAGE_MIN = 1;
+    // 最大页码
+    public static int PAGE_MAX = 99999;
 
     //排行榜排序依据
     public static OrderOption orderRanking = new OrderOption("All", "Sum_Time", "");

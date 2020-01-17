@@ -239,6 +239,8 @@ public class Ranking extends Fragment {
                 ToastUtil.showShort(mActivity, "网络错误");
                 refreshLayout.finishRefresh(false);
                 refreshLayout.setEnableRefresh(true);
+                // 设置Item为空，保证其他操作可以正常执行，如：翻页
+                setVideoItem();
             }
         }
     };
@@ -264,12 +266,12 @@ public class Ranking extends Fragment {
                     String path;
                     switch (mPage) {
                         case "Ranking":
-                            path = "http://www.saolei.net/Ranking/Ranking_All.asp?Page=" + RANKING_PAGE
+                            path = "http://www.saolei.wang/Ranking/Ranking_All.asp?Page=" + RANKING_PAGE
                                     + "&By=Player_Sum_Time_Score";
                             break;
                         default:
                             //默认请求网址
-                            path = "http://www.saolei.net/Ranking/Ranking_All.asp?Page=1&By=Player_Sum_Time_Score";
+                            path = "http://www.saolei.wang/Ranking/Ranking_All.asp?Page=1&By=Player_Sum_Time_Score";
                             break;
                     }
                     URL url = new URL(path);
@@ -290,7 +292,7 @@ public class Ranking extends Fragment {
 //                    time = System.currentTimeMillis();
 
                     for (int i = 0; i < mItem; i++) {
-                        if (!response.contains("息\"")) {
+                        if (!response.contains(";位")) {
                             Log.i(TAG, "blankMessage: ");
                             break;
                         }

@@ -61,10 +61,6 @@ class AdapterNews extends RecyclerView.Adapter<AdapterNews.MyViewHolder> {
         holder.tvRecord.setText(keyValuePair.get("Record"));
         holder.tvPromote.setText(keyValuePair.get("Promote"));
         holder.tvAchieve.setText(keyValuePair.get("Achieve"));
-
-        if(position==0){
-            mViewPager.setCurrentItem(2);
-        }
     }
 
     @Override

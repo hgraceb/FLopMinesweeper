@@ -76,10 +76,13 @@ import static com.flop.minesweeper.Constant.LATEST_ITEM;
 import static com.flop.minesweeper.Constant.LATEST_PAGE;
 import static com.flop.minesweeper.Constant.NEWS_ITEM;
 import static com.flop.minesweeper.Constant.NEWS_PAGE;
+import static com.flop.minesweeper.Constant.PAGE_MAX;
+import static com.flop.minesweeper.Constant.PAGE_MIN;
 import static com.flop.minesweeper.Constant.PERMISSIONS_STORAGE;
 import static com.flop.minesweeper.Constant.PROGRESS_ITEM;
 import static com.flop.minesweeper.Constant.PROGRESS_PAGE;
 import static com.flop.minesweeper.Constant.RANKING_ITEM;
+import static com.flop.minesweeper.Constant.RANKING_PAGE;
 import static com.flop.minesweeper.Constant.REQUEST_EXTERNAL_STORAGE_CODE;
 import static com.flop.minesweeper.Constant.STORAGE_PERMISSION_REQUEST_CODE;
 import static com.flop.minesweeper.Constant.VIDEO_REQUEST_CODE_LOCAL;
@@ -108,8 +111,9 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
 
     //静态变量，保证handler内有效修改变量
     public static boolean refreshingNews = true;//雷界快讯页面正在刷新
-    public static boolean refreshingProgress = true;//雷界快讯页面正在刷新
+    public static boolean refreshingProgress = true;//进步历程页面正在刷新
     public static boolean refreshingLatest = true;//最新录像页面正在刷新
+    public static boolean refreshingRanking = true;//排行榜页面正在刷新
     public static boolean refreshingAll = true;//全部录像页面正在刷新
     public static boolean refreshingDomain = true;//我的地盘录像页面正在刷新
 
@@ -153,6 +157,9 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 case "RefreshedLatest":
                     refreshingLatest = false;
                     break;
+                case "RefreshedRanking":
+                    refreshingRanking = false;
+                    break;
                 case "RefreshedAll":
                     refreshingAll = false;
                     break;
@@ -168,6 +175,9 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     break;
                 case "RefreshingLatest":
                     refreshingLatest = true;
+                    break;
+                case "RefreshingRanking":
+                    refreshingRanking = true;
                     break;
                 case "RefreshingAll":
                     refreshingAll = true;
@@ -231,6 +241,9 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 break;
             case 1:
                 videoPage = LATEST_PAGE + "";
+                break;
+            case 2:
+                videoPage = RANKING_PAGE + "";
                 break;
             case 3:
                 videoPage = ALL_PAGE + "";
@@ -392,6 +405,16 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     latest.initVideos();
                 }
                 break;
+            case 2:
+                if (refreshingRanking) {
+                    //当用户输入指定页面，而当前页面还未加载完毕时不重新跳转页面
+                    resetPage();
+                    return;
+                } else if (!(RANKING_PAGE == Integer.parseInt(videoPage))) {
+                    RANKING_PAGE = Integer.parseInt(videoPage);
+                    ranking.initVideos();
+                }
+                break;
             case 3:
                 if (refreshingAll) {
                     //当用户输入指定页面，而当前页面还未加载完毕时不重新跳转页面
@@ -430,31 +453,37 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     private void skipNextPage() {
         switch (mViewPager.getCurrentItem()) {
             case 0:
-                if (!refreshingNews) {
+                if (NEWS_PAGE < PAGE_MAX && !refreshingNews) {
                     NEWS_PAGE++;
                     news.initVideos();
                 }
                 break;
             case 1:
-                if (!refreshingLatest) {
+                if (LATEST_PAGE < PAGE_MAX && !refreshingLatest) {
                     LATEST_PAGE++;
                     latest.initVideos();
                 }
                 break;
+            case 2:
+                if (RANKING_PAGE < PAGE_MAX && !refreshingRanking) {
+                    RANKING_PAGE++;
+                    ranking.initVideos();
+                }
+                break;
             case 3:
-                if (!refreshingAll) {
+                if (ALL_PAGE < PAGE_MAX && !refreshingAll) {
                     ALL_PAGE++;
                     all.initVideos();
                 }
                 break;
             case 4:
-                if (!refreshingDomain) {
+                if (DOMAIN_PAGE < PAGE_MAX && !refreshingDomain) {
                     DOMAIN_PAGE++;
                     domain.initVideos();
                 }
                 break;
             case 5:
-                if (!refreshingProgress) {
+                if (PROGRESS_PAGE < PAGE_MAX && !refreshingProgress) {
                     PROGRESS_PAGE++;
                     progress.initVideos();
                 }
@@ -467,31 +496,37 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     private void skipLastPage() {
         switch (mViewPager.getCurrentItem()) {
             case 0:
-                if (NEWS_PAGE > 1 && !refreshingNews) {
+                if (NEWS_PAGE > PAGE_MIN && !refreshingNews) {
                     NEWS_PAGE--;
                     news.initVideos();
                 }
                 break;
             case 1:
-                if (LATEST_PAGE > 1 && !refreshingLatest) {
+                if (LATEST_PAGE > PAGE_MIN && !refreshingLatest) {
                     LATEST_PAGE--;
                     latest.initVideos();
                 }
                 break;
+            case 2:
+                if (RANKING_PAGE > PAGE_MIN && !refreshingRanking) {
+                    RANKING_PAGE--;
+                    ranking.initVideos();
+                }
+                break;
             case 3:
-                if (ALL_PAGE > 1 && !refreshingAll) {
+                if (ALL_PAGE > PAGE_MIN && !refreshingAll) {
                     ALL_PAGE--;
                     all.initVideos();
                 }
                 break;
             case 4:
-                if (DOMAIN_PAGE > 1 && !refreshingDomain) {
+                if (DOMAIN_PAGE > PAGE_MIN && !refreshingDomain) {
                     DOMAIN_PAGE--;
                     domain.initVideos();
                 }
                 break;
             case 5:
-                if (PROGRESS_PAGE > 1 && !refreshingProgress) {
+                if (PROGRESS_PAGE > PAGE_MIN && !refreshingProgress) {
                     PROGRESS_PAGE--;
                     progress.initVideos();
                 }
@@ -613,6 +648,14 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 //设置排序选项适配器
                 rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderMenuWorld, latest));
                 break;
+//            case 2:
+//                //隐藏菜单选项
+//                flOrder.setVisibility(View.GONE);
+//                //设置排序选项布局管理器
+//                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, OrientationHelper.VERTICAL, false));
+//                //设置排序选项适配器
+//                rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderMenuWorld, ranking));
+//                break;
             case 3:
                 flOrder.setVisibility(View.VISIBLE);
                 //设置排序菜单布局管理器

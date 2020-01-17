@@ -206,7 +206,8 @@ public class Latest extends Fragment {
                 ToastUtil.showShort(mActivity, "网络错误");
                 refreshLayout.finishRefresh(false);
                 refreshLayout.setEnableRefresh(true);
-
+                // 设置Item为空，保证其他操作可以正常执行，如：翻页
+                setVideoItem();
             }
         }
     };
@@ -233,7 +234,7 @@ public class Latest extends Fragment {
                             path = SAOLEI_LATEST + LATEST_PAGE;
                             break;
                         case "All":
-                            path = "http://www.saolei.net/Video/Video_"
+                            path = "http://www.saolei.wang/Video/Video_"
                                     + orderOption.getMenu()
                                     + ".asp?Page=" + ALL_PAGE
                                     + "&Order=" + orderOption.getSort()
@@ -241,9 +242,9 @@ public class Latest extends Fragment {
                             break;
                         case "Domain":
                             if(orderDomain.getMenu().equals(ORDER_MENU[0])){
-                                path = "http://www.saolei.net/Video/My.asp?Id=";
+                                path = "http://www.saolei.wang/Video/My.asp?Id=";
                             }else{
-                                path = "http://www.saolei.net/Video/My_"+ orderDomain.getMenu()+".asp?Id=";
+                                path = "http://www.saolei.wang/Video/My_"+ orderDomain.getMenu()+".asp?Id=";
                             }
                             setPlayerId(Constant.playerId);
                             path += Constant.playerId
