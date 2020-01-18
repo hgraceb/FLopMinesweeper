@@ -1,4 +1,4 @@
-package com.flop.minesweeper.VideosFragment;
+package com.flop.minesweeper.Adapter;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.flop.minesweeper.R;
 import com.flop.minesweeper.Util.ToastUtil;
 import com.flop.minesweeper.Variable.OrderOption;
+import com.flop.minesweeper.VideosFragment.LatestFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,33 +31,34 @@ import static com.flop.minesweeper.Constant.orderOptionSecond;
 import static com.flop.minesweeper.Util.PixelUtil.dip2px;
 
 /**
+ * 排序主菜单Adapter
  * Created by Flop on 2018/11/25.
  */
-public class AdapterOrderMenu extends RecyclerView.Adapter<AdapterOrderMenu.MyViewHolder> {
+public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyViewHolder> {
     private Activity mActivity;
     private OrderOption mOrderOption;
     private RecyclerView rvOrderOption;
     private RecyclerView rvOrderMenu;
     private ViewPager mViewPager;
-    private Latest latest;
+    private LatestFragment latestFragment;
     private TextView tvOrderTop;
     private ImageView ivOrderIndicate;
-    private String TAG="FLOP";
+    private String TAG = "FLOP";
     private boolean moveIndicate;
 
-    public AdapterOrderMenu(Activity activity, Latest latest,boolean moveIndicate) {
+    public OrderMenuAdapter(Activity activity, LatestFragment latestFragment, boolean moveIndicate) {
         this.mActivity = activity;
         this.rvOrderOption = activity.findViewById(R.id.rvOrderOption);
         this.rvOrderMenu = activity.findViewById(R.id.rvOrderMenu);
         this.mViewPager = activity.findViewById(R.id.container);
-        this.latest = latest;
+        this.latestFragment = latestFragment;
         this.tvOrderTop = mActivity.findViewById(R.id.tvOrder);
-        this.ivOrderIndicate=mActivity.findViewById(R.id.ivOrderIndicate);
-        this.moveIndicate=moveIndicate;
+        this.ivOrderIndicate = mActivity.findViewById(R.id.ivOrderIndicate);
+        this.moveIndicate = moveIndicate;
 
         if (mViewPager.getCurrentItem() == 3) {
             mOrderOption = orderOption;
-        }else if (mViewPager.getCurrentItem() == 4) {
+        } else if (mViewPager.getCurrentItem() == 4) {
             mOrderOption = orderDomain;
         }
     }
@@ -98,7 +100,7 @@ public class AdapterOrderMenu extends RecyclerView.Adapter<AdapterOrderMenu.MyVi
                     holder.tvOrder.setText(bv);
                     tvOrderTop.setText(tvOrderTop.getText() + "  " + bv);
                 }
-                if(moveIndicate)moveIndicate(1);
+                if (moveIndicate) moveIndicate(1);
                 break;
         }
     }
@@ -117,14 +119,14 @@ public class AdapterOrderMenu extends RecyclerView.Adapter<AdapterOrderMenu.MyVi
             switch (getLayoutPosition()) {
                 case 0:
                     moveIndicate(1);
-                    rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderOptionFirst, latest));
+                    rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, latestFragment));
                     break;
                 case 1:
                     if (mOrderOption.getMenu().equals(ORDER_MENU[0])) {
                         ToastUtil.showShort(mActivity, "请先选择游戏级别");
                     } else {
                         moveIndicate(3);
-                        rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderOptionSecond, latest));
+                        rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionSecond, latestFragment));
                     }
                     break;
                 case 2:
@@ -137,23 +139,23 @@ public class AdapterOrderMenu extends RecyclerView.Adapter<AdapterOrderMenu.MyVi
                             data[j] = j + 2 + "";
                         }
                         moveIndicate(5);
-                        rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, data, latest));
-                    }else if (mOrderOption.getMenu().equals(ORDER_MENU[2])) {
+                        rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, data, latestFragment));
+                    } else if (mOrderOption.getMenu().equals(ORDER_MENU[2])) {
                         //中级BV
                         String data[] = new String[192];
                         for (int j = 0; j < data.length; j++) {
                             data[j] = j + 25 + "";
                         }
                         moveIndicate(5);
-                        rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, data, latest));
-                    }else if (mOrderOption.getMenu().equals(ORDER_MENU[3])) {
+                        rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, data, latestFragment));
+                    } else if (mOrderOption.getMenu().equals(ORDER_MENU[3])) {
                         //高级BV
                         String data[] = new String[286];
                         for (int j = 0; j < data.length; j++) {
                             data[j] = j + 96 + "";
                         }
                         moveIndicate(5);
-                        rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, data, latest));
+                        rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, data, latestFragment));
                     }
                     break;
             }
@@ -167,12 +169,12 @@ public class AdapterOrderMenu extends RecyclerView.Adapter<AdapterOrderMenu.MyVi
 
     //移动排序菜单菜单底部指示图标
     private void moveIndicate(int parts) {
-        moveIndicate=false;
+        moveIndicate = false;
         //取消上一个动画
         if (indicateAnimatorSet != null) indicateAnimatorSet.cancel();
 
         //位移宽度
-        float width = rvOrderMenu.getWidth()/6*parts-dip2px(mActivity,40)/2;
+        float width = rvOrderMenu.getWidth() / 6 * parts - dip2px(mActivity, 40) / 2;
         //设定时间
         int duration = 250;
         //水平动画

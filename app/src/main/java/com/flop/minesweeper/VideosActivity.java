@@ -56,11 +56,11 @@ import android.widget.TextView;
 import com.flop.minesweeper.Util.KeyboardUtil;
 import com.flop.minesweeper.Util.SDCardUtil;
 import com.flop.minesweeper.Util.ToastUtil;
-import com.flop.minesweeper.VideosFragment.AdapterOrderMenu;
-import com.flop.minesweeper.VideosFragment.AdapterOrderOption;
-import com.flop.minesweeper.VideosFragment.Latest;
-import com.flop.minesweeper.VideosFragment.News;
-import com.flop.minesweeper.VideosFragment.Ranking;
+import com.flop.minesweeper.Adapter.OrderMenuAdapter;
+import com.flop.minesweeper.Adapter.OrderOptionAdapter;
+import com.flop.minesweeper.VideosFragment.LatestFragment;
+import com.flop.minesweeper.VideosFragment.NewsFragment;
+import com.flop.minesweeper.VideosFragment.RankingFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,16 +94,19 @@ import static com.flop.minesweeper.Constant.playerId;
 import static com.flop.minesweeper.Util.MarginsUtil.setMarginsBottom;
 import static com.flop.minesweeper.Util.SDCardUtil.loadFileFromSDCard;
 
+/**
+ * 主界面
+ */
 public class VideosActivity extends AppCompatActivity implements KeyboardUtil.OnSoftKeyboardChangeListener,
-                                                                 NavigationView.OnNavigationItemSelectedListener {
+        NavigationView.OnNavigationItemSelectedListener {
     private String TAG = "FLOP";
 
-    private News news;//雷界快讯
-    private News progress;//进步历程
-    private Latest latest;//最新录像
-    private Ranking ranking;//排行榜
-    private Latest all;//全部录像
-    private Latest domain;//我的地盘
+    private NewsFragment newsFragment;//雷界快讯
+    private NewsFragment progressFragment;//进步历程
+    private LatestFragment latestFragment;//最新录像
+    private RankingFragment rankingFragment;//排行榜
+    private LatestFragment allFragment;//全部录像
+    private LatestFragment domainFragment;//我的地盘
 
     private Activity mActivity = this;
 
@@ -148,41 +151,41 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
             String action = (String) message.obj;//当前进行的操作
 
             switch (action) {
-                case "RefreshedNews":
+                case "RefreshedNewsFragment":
                     refreshingNews = false;
                     break;
-                case "RefreshedProgress":
+                case "RefreshedProgressFragment":
                     refreshingProgress = false;
                     break;
-                case "RefreshedLatest":
+                case "RefreshedLatestFragment":
                     refreshingLatest = false;
                     break;
-                case "RefreshedRanking":
+                case "RefreshedRankingFragment":
                     refreshingRanking = false;
                     break;
-                case "RefreshedAll":
+                case "RefreshedAllFragment":
                     refreshingAll = false;
                     break;
-                case "RefreshedDomain":
+                case "RefreshedDomainFragment":
                     refreshingDomain = false;
                     break;
 
-                case "RefreshingNews":
+                case "RefreshingNewsFragment":
                     refreshingNews = true;
                     break;
-                case "RefreshingProgress":
+                case "RefreshingProgressFragment":
                     refreshingProgress = true;
                     break;
-                case "RefreshingLatest":
+                case "RefreshingLatestFragment":
                     refreshingLatest = true;
                     break;
-                case "RefreshingRanking":
+                case "RefreshingRankingFragment":
                     refreshingRanking = true;
                     break;
-                case "RefreshingAll":
+                case "RefreshingAllFragment":
                     refreshingAll = true;
                     break;
-                case "RefreshingDomain":
+                case "RefreshingDomainFragment":
                     refreshingDomain = true;
                     break;
             }
@@ -392,7 +395,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     return;
                 } else if (!(NEWS_PAGE == Integer.parseInt(videoPage))) {
                     NEWS_PAGE = Integer.parseInt(videoPage);
-                    news.initVideos();
+                    newsFragment.initVideos();
                 }
                 break;
             case 1:
@@ -402,7 +405,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     return;
                 } else if (!(LATEST_PAGE == Integer.parseInt(videoPage))) {
                     LATEST_PAGE = Integer.parseInt(videoPage);
-                    latest.initVideos();
+                    latestFragment.initVideos();
                 }
                 break;
             case 2:
@@ -412,7 +415,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     return;
                 } else if (!(RANKING_PAGE == Integer.parseInt(videoPage))) {
                     RANKING_PAGE = Integer.parseInt(videoPage);
-                    ranking.initVideos();
+                    rankingFragment.initVideos();
                 }
                 break;
             case 3:
@@ -422,7 +425,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     return;
                 } else if (!(ALL_PAGE == Integer.parseInt(videoPage))) {
                     ALL_PAGE = Integer.parseInt(videoPage);
-                    all.initVideos();
+                    allFragment.initVideos();
                 }
                 break;
             case 4:
@@ -432,7 +435,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     return;
                 } else if (!(DOMAIN_PAGE == Integer.parseInt(videoPage))) {
                     DOMAIN_PAGE = Integer.parseInt(videoPage);
-                    domain.initVideos();
+                    domainFragment.initVideos();
                 }
                 break;
             case 5:
@@ -442,7 +445,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     return;
                 } else if (!(PROGRESS_PAGE == Integer.parseInt(videoPage))) {
                     PROGRESS_PAGE = Integer.parseInt(videoPage);
-                    progress.initVideos();
+                    progressFragment.initVideos();
                 }
                 break;
         }
@@ -455,37 +458,37 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
             case 0:
                 if (NEWS_PAGE < PAGE_MAX && !refreshingNews) {
                     NEWS_PAGE++;
-                    news.initVideos();
+                    newsFragment.initVideos();
                 }
                 break;
             case 1:
                 if (LATEST_PAGE < PAGE_MAX && !refreshingLatest) {
                     LATEST_PAGE++;
-                    latest.initVideos();
+                    latestFragment.initVideos();
                 }
                 break;
             case 2:
                 if (RANKING_PAGE < PAGE_MAX && !refreshingRanking) {
                     RANKING_PAGE++;
-                    ranking.initVideos();
+                    rankingFragment.initVideos();
                 }
                 break;
             case 3:
                 if (ALL_PAGE < PAGE_MAX && !refreshingAll) {
                     ALL_PAGE++;
-                    all.initVideos();
+                    allFragment.initVideos();
                 }
                 break;
             case 4:
                 if (DOMAIN_PAGE < PAGE_MAX && !refreshingDomain) {
                     DOMAIN_PAGE++;
-                    domain.initVideos();
+                    domainFragment.initVideos();
                 }
                 break;
             case 5:
                 if (PROGRESS_PAGE < PAGE_MAX && !refreshingProgress) {
                     PROGRESS_PAGE++;
-                    progress.initVideos();
+                    progressFragment.initVideos();
                 }
                 break;
         }
@@ -498,37 +501,37 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
             case 0:
                 if (NEWS_PAGE > PAGE_MIN && !refreshingNews) {
                     NEWS_PAGE--;
-                    news.initVideos();
+                    newsFragment.initVideos();
                 }
                 break;
             case 1:
                 if (LATEST_PAGE > PAGE_MIN && !refreshingLatest) {
                     LATEST_PAGE--;
-                    latest.initVideos();
+                    latestFragment.initVideos();
                 }
                 break;
             case 2:
                 if (RANKING_PAGE > PAGE_MIN && !refreshingRanking) {
                     RANKING_PAGE--;
-                    ranking.initVideos();
+                    rankingFragment.initVideos();
                 }
                 break;
             case 3:
                 if (ALL_PAGE > PAGE_MIN && !refreshingAll) {
                     ALL_PAGE--;
-                    all.initVideos();
+                    allFragment.initVideos();
                 }
                 break;
             case 4:
                 if (DOMAIN_PAGE > PAGE_MIN && !refreshingDomain) {
                     DOMAIN_PAGE--;
-                    domain.initVideos();
+                    domainFragment.initVideos();
                 }
                 break;
             case 5:
                 if (PROGRESS_PAGE > PAGE_MIN && !refreshingProgress) {
                     PROGRESS_PAGE--;
-                    progress.initVideos();
+                    progressFragment.initVideos();
                 }
                 break;
         }
@@ -641,7 +644,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 //设置排序选项布局管理器
                 rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, OrientationHelper.VERTICAL, false));
                 //设置排序选项适配器
-                rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderMenuWorld, news));
+                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderMenuWorld, newsFragment));
                 break;
             case 1:
                 //隐藏菜单选项
@@ -649,37 +652,37 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 //设置排序选项布局管理器
                 rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, OrientationHelper.VERTICAL, false));
                 //设置排序选项适配器
-                rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderMenuWorld, latest));
+                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderMenuWorld, latestFragment));
                 break;
-           case 2:
-               flOrder.setVisibility(View.VISIBLE);
-               // //设置排序菜单布局管理器
-               // rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, OrientationHelper.VERTICAL, false));
-               // //设置排序菜单适配器
-               // rvOrderMenu.setAdapter(new AdapterOrderMenu(mActivity, all, true));
-               //
-               // //设置排序选项布局管理器
-               // rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
-               // //设置排序选项适配器
-               // rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderOptionFirst, all));
-               break;
+            case 2:
+                flOrder.setVisibility(View.VISIBLE);
+                // //设置排序菜单布局管理器
+                // rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, OrientationHelper.VERTICAL, false));
+                // //设置排序菜单适配器
+                // rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, allFragment, true));
+                //
+                // //设置排序选项布局管理器
+                // rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
+                // //设置排序选项适配器
+                // rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, allFragment));
+                break;
             case 3:
                 flOrder.setVisibility(View.VISIBLE);
                 //设置排序菜单布局管理器
                 rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, OrientationHelper.VERTICAL, false));
                 //设置排序菜单适配器
-                rvOrderMenu.setAdapter(new AdapterOrderMenu(mActivity, all, true));
+                rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, allFragment, true));
 
                 //设置排序选项布局管理器
                 rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
                 //设置排序选项适配器
-                rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderOptionFirst, all));
+                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, allFragment));
                 break;
             case 4:
-                if (domain.getPlayerId() != playerId) {
-                    domain.setPlayerId(playerId);
+                if (domainFragment.getPlayerId() != playerId) {
+                    domainFragment.setPlayerId(playerId);
                     DOMAIN_PAGE = 1;
-                    domain.initVideos();
+                    domainFragment.initVideos();
                     etPage.setText("1");
                 }
 
@@ -687,18 +690,18 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 //设置排序菜单布局管理器
                 rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, OrientationHelper.VERTICAL, false));
                 //设置排序菜单适配器
-                rvOrderMenu.setAdapter(new AdapterOrderMenu(mActivity, domain, true));
+                rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, domainFragment, true));
 
                 //设置排序选项布局管理器
                 rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
                 //设置排序选项适配器
-                rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderOptionFirst, domain));
+                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, domainFragment));
                 break;
             case 5:
-                if (progress.getPlayerId() != playerId) {
-                    progress.setPlayerId(playerId);
+                if (progressFragment.getPlayerId() != playerId) {
+                    progressFragment.setPlayerId(playerId);
                     PROGRESS_PAGE = 1;
-                    progress.initVideos();
+                    progressFragment.initVideos();
                     etPage.setText("1");
                 }
 
@@ -707,7 +710,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 //设置排序选项布局管理器
                 rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, OrientationHelper.VERTICAL, false));
                 //设置排序选项适配器
-                rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, orderOptionFirst, progress));
+                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, progressFragment));
                 break;
             default:
                 //重置顶部排序信息显示
@@ -1072,24 +1075,24 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
             //不同Fragment设定不同内容
             switch (position) {
                 case 0:
-                    news = News.newInstance("News", NEWS_ITEM);
+                    newsFragment = NewsFragment.newInstance("NewsFragment", NEWS_ITEM);
                     resetOrderMenu();
-                    return news;
+                    return newsFragment;
                 case 1:
-                    latest = Latest.newInstance("Latest", LATEST_ITEM);
-                    return latest;
+                    latestFragment = LatestFragment.newInstance("LatestFragment", LATEST_ITEM);
+                    return latestFragment;
                 case 2:
-                    ranking = Ranking.newInstance("Ranking", RANKING_ITEM);
-                    return ranking;
+                    rankingFragment = RankingFragment.newInstance("RankingFragment", RANKING_ITEM);
+                    return rankingFragment;
                 case 3:
-                    all = Latest.newInstance("All", ALL_ITEM);
-                    return all;
+                    allFragment = LatestFragment.newInstance("All", ALL_ITEM);
+                    return allFragment;
                 case 4:
-                    domain = Latest.newInstance("Domain", DOMAIN_ITEM);
-                    return domain;
+                    domainFragment = LatestFragment.newInstance("Domain", DOMAIN_ITEM);
+                    return domainFragment;
                 case 5:
-                    progress = News.newInstance("Progress", PROGRESS_ITEM);
-                    return progress;
+                    progressFragment = NewsFragment.newInstance("Progress", PROGRESS_ITEM);
+                    return progressFragment;
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }

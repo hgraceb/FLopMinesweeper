@@ -1,4 +1,4 @@
-package com.flop.minesweeper.VideosFragment;
+package com.flop.minesweeper.Adapter;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.flop.minesweeper.R;
 import com.flop.minesweeper.Util.ToastUtil;
 import com.flop.minesweeper.VideosActivity;
+import com.flop.minesweeper.VideosFragment.LatestFragment;
+import com.flop.minesweeper.VideosFragment.NewsFragment;
 
 import java.util.Arrays;
 
@@ -45,32 +47,33 @@ import static com.flop.minesweeper.Constant.orderOptionSecond;
 import static com.flop.minesweeper.Constant.orderProgress;
 
 /**
+ * 排序选项Adapter
  * Created by Flop on 2018/11/25.
  */
-public class AdapterOrderOption extends RecyclerView.Adapter<AdapterOrderOption.MyViewHolder> {
+public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.MyViewHolder> {
     private Activity mActivity;
     private String[] mData;
     private View maskOrder;
     private LinearLayout lyOrder;
     private ViewPager mViewPager;
-    private News news;
-    private Latest latest;
+    private NewsFragment newsFragment;
+    private LatestFragment latestFragment;
     private TextView tvOrderTop;
     private EditText etPage;
     private RecyclerView rvOrderOption;
     private RecyclerView rvOrderMenu;
 
-    public AdapterOrderOption(Activity activity, String[] data, News news) {
+    public OrderOptionAdapter(Activity activity, String[] data, NewsFragment newsFragment) {
         this.mActivity = activity;
         this.mData = data;
-        this.news = news;
+        this.newsFragment = newsFragment;
         initLayout();
     }
 
-    public AdapterOrderOption(Activity activity, String[] data, Latest latest) {
+    public OrderOptionAdapter(Activity activity, String[] data, LatestFragment latestFragment) {
         this.mActivity = activity;
         this.mData = data;
-        this.latest = latest;
+        this.latestFragment = latestFragment;
         initLayout();
     }
 
@@ -142,7 +145,7 @@ public class AdapterOrderOption extends RecyclerView.Adapter<AdapterOrderOption.
                     holder.tvOrder.setTextColor(mActivity.getResources().getColorStateList(R.color.text_color_white));
                 }
             }
-        }else if (mViewPager.getCurrentItem() == 4) {//我的地盘录像
+        } else if (mViewPager.getCurrentItem() == 4) {//我的地盘录像
             //圆角边框着重显示当前排序依据
             if (Arrays.equals(mData, orderOptionFirst)) {
                 if (orderDomain.getMenu().equals(ORDER_MENU[position])) {
@@ -165,7 +168,7 @@ public class AdapterOrderOption extends RecyclerView.Adapter<AdapterOrderOption.
                     holder.tvOrder.setTextColor(mActivity.getResources().getColorStateList(R.color.text_color_white));
                 }
             }
-        }else if (mViewPager.getCurrentItem() == 5) {//进步历程
+        } else if (mViewPager.getCurrentItem() == 5) {//进步历程
             holder.tvOrder.setBackgroundResource(R.drawable.ripple_divider_bottom);
             if (orderProgress.getMenu().equals(ORDER_MENU[position])) {
                 //将雷界快讯当选排序依据文字置为粉色
@@ -196,23 +199,23 @@ public class AdapterOrderOption extends RecyclerView.Adapter<AdapterOrderOption.
         void chooseMenu() {
 
             int position = getAdapterPosition();
-            if (news != null) {
+            if (newsFragment != null) {
                 if (mViewPager.getCurrentItem() == 0) {
                     //当前页面为雷界快讯页面
                     tvOrderTop.setText(orderMenuWorld[position]);
                     SAOLEI_NEWS = SAOLEI_NEWS_ORDER[position];
                     NEWS_PAGE = 1;
-                }else if (mViewPager.getCurrentItem() == 5) {
+                } else if (mViewPager.getCurrentItem() == 5) {
                     //当前页面为进步历程页面
                     tvOrderTop.setText(orderOptionFirst[position]);
                     orderProgress.setMenu(ORDER_MENU[position]);
                     PROGRESS_PAGE = 1;
                 }
-                news.initVideos();
+                newsFragment.initVideos();
 
                 //重置当前适配器内容
-                rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, mData, news));
-            } else if (latest != null) {
+                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, mData, newsFragment));
+            } else if (latestFragment != null) {
                 if (mViewPager.getCurrentItem() == 1) {
                     //当前页面为最新录像页面
                     tvOrderTop.setText(orderMenuWorld[position]);
@@ -241,9 +244,9 @@ public class AdapterOrderOption extends RecyclerView.Adapter<AdapterOrderOption.
                     }
 
                     //重置rvOrderMenu
-                    rvOrderMenu.setAdapter(new AdapterOrderMenu(mActivity, latest, false));
+                    rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, latestFragment, false));
                     ALL_PAGE = 1;
-                }else if (mViewPager.getCurrentItem() == 4) {
+                } else if (mViewPager.getCurrentItem() == 4) {
                     //当前页面为全部录像页面
                     if (Arrays.equals(mData, orderOptionFirst)) {
                         orderDomain.setMenu(ORDER_MENU[position]);
@@ -258,13 +261,13 @@ public class AdapterOrderOption extends RecyclerView.Adapter<AdapterOrderOption.
                     }
 
                     //重置rvOrderMenu
-                    rvOrderMenu.setAdapter(new AdapterOrderMenu(mActivity, latest, false));
+                    rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, latestFragment, false));
                     DOMAIN_PAGE = 1;
                 }
-                latest.initVideos();
+                latestFragment.initVideos();
 
                 //重置当前适配器内容
-                rvOrderOption.setAdapter(new AdapterOrderOption(mActivity, mData, latest));
+                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, mData, latestFragment));
             }
             //重置当前页面数
             resetPage();

@@ -61,6 +61,7 @@ import static com.flop.minesweeper.Constant.rawVideo;
 import static com.flop.minesweeper.Util.MarginsUtil.setMargins;
 
 /***
+ * 录像播放页面
  * Created by Flop on 2018/10/01.
  *
  * 别的小朋友国庆都出去玩了
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     public ImageView current = null;
     List<RawEventDetailBean> events;//鼠标事件
     private static Thread mThread;//录像读取线程
-    private String videoType="";
+    private String videoType = "";
 
     public int openCount = 0;//已打开方块数目，判断游戏是否胜利
     public int flagAround;//方块周围旗子数目,判断点击当前格子是否打开双击开周围方块
@@ -209,10 +210,10 @@ public class MainActivity extends AppCompatActivity {
                     keyValuePair.put("Value", df.format(realTime));
                     break;
                 case "Date":
-                    if(videoType.equals("avf")){
+                    if (videoType.equals("avf")) {
                         //avf日期格式：2019/04/18 21:55:05.0360
                         keyValuePair.put("Value", bean.getDate().substring(0, bean.getDate().indexOf(".")));
-                    }else{
+                    } else {
                         //mvf日期格式：2010/10/22 20:52:24
                         keyValuePair.put("Value", bean.getDate());
                     }
@@ -380,7 +381,7 @@ public class MainActivity extends AppCompatActivity {
             if (bundle.getInt("request") == Constant.VIDEO_REQUEST_CODE_ONLINE) {
                 analyzeOnlineVideo(bundle.getString("down"));
             } else if (bundle.getInt("request") == Constant.VIDEO_REQUEST_CODE_LOCAL) {
-                videoType=bundle.getString("videoType");
+                videoType = bundle.getString("videoType");
                 analyzeLocalVideo(bundle.getByteArray("byteStream"));
             }
         }
@@ -794,7 +795,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "overflow: " + (events.get(plan).getY() / 16) + " " + (events.get(plan).getX() / 16));
 
                 //避免超出后继续进行操作导致的有部分方块没有恢复正常状态
-                if(current!=null)changeAroundNormal(current);//判断current是否已经初始化
+                if (current != null) changeAroundNormal(current);//判断current是否已经初始化
 
                 if (events.get(plan).getMouseType() == 3) {//lc
                     leftClick = true;

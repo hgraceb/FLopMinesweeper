@@ -38,6 +38,7 @@ import static com.flop.minesweeper.Constant.PLAY_REQUEST_CODE;
 import static com.flop.minesweeper.Constant.SETTINGS_RESULT_CODE;
 
 /**
+ * 新游戏页面
  * Created by Flop on 2018/10/01.
  */
 public class NewGameActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {

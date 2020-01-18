@@ -8,6 +8,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
+/**
+ * 异常捕获
+ */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private static CrashHandler myCrashHandler;
 
@@ -32,9 +35,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         String localizedMessage = throwable.getLocalizedMessage();
 
         ByteArrayOutputStream exception = new ByteArrayOutputStream();
-        try{
+        try {
             throwable.printStackTrace(new PrintStream(exception));
-        }finally{
+        } finally {
             try {
                 exception.close();
             } catch (IOException e) {
@@ -46,7 +49,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 exception.toString();
 
         Log.i(TAG, info);
-        LogErrorInfo.append(info,throwable);
+        LogErrorInfo.append(info, throwable);
 
 //        // TODO 下面捕获到异常以后要做的事情，可以重启应用，获取手机信息上传到服务器等
 //        Log.i(TAG, "------------------应用被重启----------------");

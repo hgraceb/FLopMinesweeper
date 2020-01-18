@@ -1,17 +1,18 @@
 package com.flop.minesweeper.Variable;
 
 /**
+ * 排序选项
  * Created by Flop on 2019/03/17.
  */
 public class OrderOption {
-    private String menu="";
-    private String sort ="";
-    private String bv="";
+    private String menu = "";
+    private String sort = "";
+    private String bv = "";
 
-    public OrderOption(String menu, String sort, String bv){
+    public OrderOption(String menu, String sort, String bv) {
         this.menu = menu;
         this.sort = sort;
-        this.bv=bv;
+        this.bv = bv;
     }
 
     public void setMenu(String menu) {

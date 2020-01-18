@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
+ * Toast工具类
  * Created by Flop on 2018/10/23.
  */
 public class ToastUtil {
@@ -25,7 +26,7 @@ public class ToastUtil {
      * 显示Toast
      *
      * @param context 上下文
-     * @param content   要显示的资源id
+     * @param content 要显示的资源id
      */
     public static void showLong(Context context, String content) {
         toast = Toast.makeText(context, null, Toast.LENGTH_LONG);//null用于取消应用名提示

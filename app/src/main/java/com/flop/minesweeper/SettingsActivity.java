@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnTouch;
 
 /**
+ * 新游戏设置页面
  * Created by Flop on 2018/10/09.
  */
 public class SettingsActivity extends Activity {

@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
+ * 储存卡工具类
  * Created by Flop on 2018/12/03.
  */
 public class SDCardUtil {
@@ -94,9 +95,9 @@ public class SDCardUtil {
 
     // 往SD卡的自定义目录下保存文件
     public static boolean saveFileToSDCardCustomDir(byte[] data, String dir,
-                                                    String fileName,boolean append) {
+                                                    String fileName, boolean append) {
         //剩余可用空间小于20M则不进行文件内容写入
-        if(getSDCardAvailableSize()<=20){
+        if (getSDCardAvailableSize() <= 20) {
             return false;
         }
         BufferedOutputStream bos = null;
@@ -107,7 +108,7 @@ public class SDCardUtil {
             }
             try {
                 bos = new BufferedOutputStream(new FileOutputStream(new File(
-                        file, fileName),append));
+                        file, fileName), append));
                 bos.write(data);
                 bos.flush();
                 return true;
@@ -274,8 +275,8 @@ public class SDCardUtil {
     }
 
     public static long getFileSize(String filePath) {
-        File file = new File(getSDCardBaseDir() + File.separator+filePath);
-        if(file.exists()){
+        File file = new File(getSDCardBaseDir() + File.separator + filePath);
+        if (file.exists()) {
             return file.length();
         }
         return 0;
@@ -283,7 +284,7 @@ public class SDCardUtil {
 
     // 从sdcard中删除文件
     public static boolean removeFileFromSDCard(String filePath) {
-        File file = new File(getSDCardBaseDir() + File.separator+filePath);
+        File file = new File(getSDCardBaseDir() + File.separator + filePath);
         if (file.exists()) {
             try {
                 file.delete();

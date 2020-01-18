@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.flop.minesweeper.Adapter.NewsAdapter;
 import com.flop.minesweeper.Constant;
 import com.flop.minesweeper.R;
 import com.flop.minesweeper.Util.LogUtil;
@@ -51,7 +52,7 @@ import static com.flop.minesweeper.Constant.orderProgress;
 /**
  * Created by Flop on 2018/10/14.
  */
-public class News extends Fragment {
+public class NewsFragment extends Fragment {
     private String mDate[];//日期
     private String mName[];//姓名
     private String mSex[];//性别
@@ -94,12 +95,12 @@ public class News extends Fragment {
      * 在setUserVisibleHint函数中判断是否为雷界快讯页面，是则等待onCreate函数执行完毕
      * 在onCreateView判断是否为雷界快讯页面，是则刷新一次页面
      */
-    private String mPage="News";//页面名称
-    private int mItem=NEWS_ITEM;//Item数目
+    private String mPage = "NewsFragment";//页面名称
+    private int mItem = NEWS_ITEM;//Item数目
 
     //构造函数传入参数
-    public static News newInstance(String pageName,int itemCount) {
-        News newFragment = new News();
+    public static NewsFragment newInstance(String pageName, int itemCount) {
+        NewsFragment newFragment = new NewsFragment();
         Bundle bundle = new Bundle();
         bundle.putString("mPage", pageName);//页面的名称
         bundle.putInt("mItem", itemCount);//Item数目
@@ -139,7 +140,7 @@ public class News extends Fragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
-                if (mThread!=null&&!mThread.isAlive()) {
+                if (mThread != null && !mThread.isAlive()) {
                     refreshVideos();
                 } else {
                     refreshlayout.finishRefresh(false);//传入false表示刷新失败
@@ -147,7 +148,7 @@ public class News extends Fragment {
             }
         });
 
-        if(mPage.equals("News"))refreshVideos();
+        if (mPage.equals("NewsFragment")) refreshVideos();
 
         return view;
     }
@@ -161,14 +162,14 @@ public class News extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         //当前Fragment可见而mData数据为空，判断为第一次进入此界面
-        if(isVisibleToUser&&mData==null){
-            if(!mPage.equals("News"))refreshVideos();
+        if (isVisibleToUser && mData == null) {
+            if (!mPage.equals("NewsFragment")) refreshVideos();
         }
     }
 
     //初始化录像数据
     public void initVideos() {
-        LogUtil.i("初始化"+mPage+"页面", new Throwable());
+        LogUtil.i("初始化" + mPage + "页面", new Throwable());
         initFields();
 
         //显示进度条
@@ -183,7 +184,7 @@ public class News extends Fragment {
 
     //初始化变量
     public void initFields() {
-        mDate= new String[mItem];
+        mDate = new String[mItem];
         mName = new String[mItem];
         mSex = new String[mItem];
         mLevel = new String[mItem];
@@ -197,7 +198,7 @@ public class News extends Fragment {
 
     //刷新当前界面
     public void refreshVideos() {
-        LogUtil.i("刷新"+mPage+"页面", new Throwable());
+        LogUtil.i("刷新" + mPage + "页面", new Throwable());
         initFields();
         getVideoItem();
     }
@@ -233,20 +234,20 @@ public class News extends Fragment {
 
                     //Message已经不是自己创建的了,而是从MessagePool拿的,省去了创建对象申请内存的开销
                     Message messageRefresh = handlerRefresh.obtainMessage();
-                    messageRefresh.obj = "Refreshing"+mPage;
+                    messageRefresh.obj = "Refreshing" + mPage;
                     handlerRefresh.sendMessage(messageRefresh);
 
                     String path;
                     switch (mPage) {
-                        case "News":
+                        case "NewsFragment":
                             path = SAOLEI_NEWS + NEWS_PAGE;
                             break;
                         case "Progress":
                             setPlayerId(Constant.playerId);
-                            if(orderProgress.getMenu().equals(ORDER_MENU[0])){
-                                path="http://www.saolei.wang/News/My.asp?Id="+ playerId +"&Page="+PROGRESS_PAGE;
-                            }else{
-                                path="http://www.saolei.wang/News/My_"+orderProgress.getMenu()+".asp?Id="+ playerId +"&Page="+PROGRESS_PAGE;
+                            if (orderProgress.getMenu().equals(ORDER_MENU[0])) {
+                                path = "http://www.saolei.wang/News/My.asp?Id=" + playerId + "&Page=" + PROGRESS_PAGE;
+                            } else {
+                                path = "http://www.saolei.wang/News/My_" + orderProgress.getMenu() + ".asp?Id=" + playerId + "&Page=" + PROGRESS_PAGE;
                             }
                             break;
                         default:
@@ -277,15 +278,15 @@ public class News extends Fragment {
                             break;
                         }
 
-                        response= response.substring(response.indexOf("135"));
-                        mDate[i]= response.substring(5,response.indexOf("</"))
-                                .replace("年","-")
-                                .replace("月","-")
-                                .replace("日&nbsp;"," ");
-                        mDate[i]= TimeUtil.dateFormat(mDate[i]);
+                        response = response.substring(response.indexOf("135"));
+                        mDate[i] = response.substring(5, response.indexOf("</"))
+                                .replace("年", "-")
+                                .replace("月", "-")
+                                .replace("日&nbsp;", " ");
+                        mDate[i] = TimeUtil.dateFormat(mDate[i]);
 
                         response = response.substring(response.indexOf("/P"));
-                        mPlayerId[i]=response.substring(20, response.indexOf("')"));
+                        mPlayerId[i] = response.substring(20, response.indexOf("')"));
 
                         response = response.substring(response.indexOf("息\""));
                         mName[i] = response.substring(15, response.indexOf("<"));
@@ -299,7 +300,7 @@ public class News extends Fragment {
                         response = response.substring(response.indexOf("/V"));
                         mDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
 
-                        mVideoId[i]=response.substring(19, response.indexOf("')"));
+                        mVideoId[i] = response.substring(19, response.indexOf("')"));
 
                         response = response.substring(response.indexOf(">"));
                         mRecord[i] = response.substring(1, response.indexOf("<"));
@@ -381,7 +382,7 @@ public class News extends Fragment {
         //设置布局管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //设置适配器
-        mRecyclerView.setAdapter(new AdapterNews(mActivity, mData));
+        mRecyclerView.setAdapter(new NewsAdapter(mActivity, mData));
 
         //完成刷新
         refreshLayout.finishRefresh();
@@ -390,7 +391,7 @@ public class News extends Fragment {
         refreshLayout.setEnableRefresh(true);
 
         Message messageRefresh = handlerRefresh.obtainMessage();
-        messageRefresh.obj = "Refreshed"+mPage;
+        messageRefresh.obj = "Refreshed" + mPage;
         handlerRefresh.sendMessage(messageRefresh);
     }
 }

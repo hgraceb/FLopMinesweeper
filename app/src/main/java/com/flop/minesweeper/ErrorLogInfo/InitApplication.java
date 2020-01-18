@@ -3,6 +3,7 @@ package com.flop.minesweeper.ErrorLogInfo;
 import android.app.Application;
 
 /**
+ * 注册
  * Created by Flop on 2019/02/25.
  */
 public class InitApplication extends Application {

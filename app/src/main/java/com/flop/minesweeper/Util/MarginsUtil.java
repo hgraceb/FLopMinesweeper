@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
+ * 边距工具类
  * Created by Flop on 2018/10/24.
  */
 public class MarginsUtil {

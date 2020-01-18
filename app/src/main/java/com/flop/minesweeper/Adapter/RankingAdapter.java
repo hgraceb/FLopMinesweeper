@@ -1,4 +1,4 @@
-package com.flop.minesweeper.VideosFragment;
+package com.flop.minesweeper.Adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,9 +27,10 @@ import butterknife.OnClick;
 import static com.flop.minesweeper.Constant.orderRanking;
 
 /**
+ * 排行榜页面Adapter
  * Created by Flop on 2018/11/16.
  */
-class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.MyViewHolder> {
+public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.MyViewHolder> {
 
     private String TAG = "FLOP";
 
@@ -64,7 +65,7 @@ class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.MyViewHolder> {
             "", "", "", ""};
     private String optionCurrent[] = {};//当前item内信息排版
 
-    AdapterRanking(Activity activity, List<Map<String, String>> data) {
+    public RankingAdapter(Activity activity, List<Map<String, String>> data) {
         this.mActivity = activity;
         this.mData = data;
 
@@ -245,7 +246,7 @@ class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.MyViewHolder> {
 
         void playVideo(int index) {
             Map<String, String> keyValuePair = mData.get(getAdapterPosition());
-            Log.i(TAG, "playVideo: "+keyValuePair.get("mName"));
+            Log.i(TAG, "playVideo: " + keyValuePair.get("mName"));
             String url = keyValuePair.get(optionCurrent[index] + "_Down");
             if (url != null) {
                 Intent intent = new Intent(mActivity, MainActivity.class);

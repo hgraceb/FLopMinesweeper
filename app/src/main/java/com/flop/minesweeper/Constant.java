@@ -7,6 +7,7 @@ import com.flop.minesweeper.zhangye.bean.RawVideoBean;
 import com.flop.minesweeper.zhangye.bean.VideoDisplayBean;
 
 /**
+ * 常量
  * Created by Flop on 2018/10/13.
  */
 public class Constant {
@@ -68,12 +69,12 @@ public class Constant {
     public static OrderOption orderProgress = new OrderOption("All", "", "");
 
     //用户ID,用于地盘与进步历程
-    public static int playerId =14512;
+    public static int playerId = 14512;
 
 
     //排序菜对应关键字
     public static String[] ORDER_MENU = {"All", "Beg", "Int", "Exp"};
-    public static String[] ORDER_SORT = {"Time", "Score", "3BV", "3BVS","Comment"};
+    public static String[] ORDER_SORT = {"Time", "Score", "3BV", "3BVS", "Comment"};
     //排序选项(子菜单)
     public static final String orderOptionFirst[] = new String[]{"全部", "初级", "中级", "高级"};
     public static final String orderOptionSecond[] = new String[]{"上传时间", "成绩", "3BV", "3BV/s", "评论", "", "", ""};
@@ -82,11 +83,11 @@ public class Constant {
 
 
     //排行榜排序关键字(网址)
-    public static String[] ORDER_RANKING_MENU = {"All", "Man", "Hero", "NF","Grow","Area","Click",""};
-    public static String[] ORDER_RANKING_SORT = {"Beg_Time", "Beg_3BVS", "Int_Time", "Int_3BVS","Exp_Time","Exp_3BVS","Sum_Time","Sum_3BVS"};
+    public static String[] ORDER_RANKING_MENU = {"All", "Man", "Hero", "NF", "Grow", "Area", "Click", ""};
+    public static String[] ORDER_RANKING_SORT = {"Beg_Time", "Beg_3BVS", "Int_Time", "Int_3BVS", "Exp_Time", "Exp_3BVS", "Sum_Time", "Sum_3BVS"};
     //排行榜排序选项(子菜单)
-    public static final String orderRankingFirst[] = new String[]{"雷界", "人界", "神界", "NF", "进步", "地区", "人气",""};
-    public static final String orderRankingSecond[] = new String[]{"初级", "3BV/s", "中级", "3BV/s", "高级", "3BV/s", "总计","3BV/s"};
+    public static final String orderRankingFirst[] = new String[]{"雷界", "人界", "神界", "NF", "进步", "地区", "人气", ""};
+    public static final String orderRankingSecond[] = new String[]{"初级", "3BV/s", "中级", "3BV/s", "高级", "3BV/s", "总计", "3BV/s"};
     //排行榜排序选项(主菜单)
     public static final String orderMenuRanking[] = new String[]{"雷界", "总计"};
 

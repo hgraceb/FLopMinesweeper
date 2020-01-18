@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
+ * 时间工具类
  * Created by Flop on 2018/11/20.
  */
 public class TimeUtil {
@@ -48,7 +49,6 @@ public class TimeUtil {
      * @param time    需要格式化的时间 如"2014-07-14 19:01:45"
      * @param pattern 输入参数time的时间格式 如:"yyyy-MM-dd HH:mm:ss"
      *                如果为空则默认使用"yyyy-MM-dd HH:mm:ss"格式
-     *
      * @return time为null，或者时间格式不匹配，输出空字符""
      * @throws ParseException
      */
@@ -74,7 +74,7 @@ public class TimeUtil {
      * 时间转换
      */
     public static String dateFormat(String date) {
-        long timeStamp=timeStamp(date,"yyyy-MM-dd HH:mm");
+        long timeStamp = timeStamp(date, "yyyy-MM-dd HH:mm");
         if (timeStamp == 0)
             return "";
         Calendar inputTime = Calendar.getInstance();

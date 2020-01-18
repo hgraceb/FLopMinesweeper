@@ -17,10 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.flop.minesweeper.Adapter.RankingAdapter;
 import com.flop.minesweeper.Constant;
 import com.flop.minesweeper.R;
 import com.flop.minesweeper.Util.LogUtil;
-import com.flop.minesweeper.Util.TimeUtil;
 import com.flop.minesweeper.Util.ToastUtil;
 import com.flop.minesweeper.VideosActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -40,32 +40,47 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.flop.minesweeper.Constant.ALL_PAGE;
-import static com.flop.minesweeper.Constant.DOMAIN_PAGE;
-import static com.flop.minesweeper.Constant.LATEST_PAGE;
-import static com.flop.minesweeper.Constant.ORDER_MENU;
-import static com.flop.minesweeper.Constant.SAOLEI_LATEST;
-import static com.flop.minesweeper.Constant.TAG;
-import static com.flop.minesweeper.Constant.orderOption;
-import static com.flop.minesweeper.Constant.orderDomain;
+import static com.flop.minesweeper.Constant.RANKING_PAGE;
 
 /**
  * Created by Flop on 2018/10/14.
  */
-public class Latest extends Fragment {
+public class RankingFragment extends Fragment {
+    private String TAG = Constant.TAG;
 
-    private String mDate[];
-    private String mName[];
-    private String mSex[];
-    private String mBv[];
-    private String mBvs[];
-    private String mLevel[];
-    private String mTime[];
-    private String mStyle[];
-    private String mDown[];
-    private String mPlayerId[];
-    private String mVideoId[];
+    private String mRanking[];//排名
+    private String mName[];//姓名
+    private String mPlayerId[];//用户ID
+    private String mTitle[];//称号
+
+    private String mBegTimeDown[];//初级录像地址
+    private String mBegTimeId[];//初级录像ID
+    private String mBegBvsDown[];//初级录像地址
+    private String mBegBvsId[];//初级录像ID
+    private String mBegTime[];//初级时间
+    private String mBegBvs[];//初级Bvs
+
+    private String mIntTimeDown[];//中级录像地址
+    private String mIntTimeId[];//中级录像ID
+    private String mIntBvsDown[];//中级录像地址
+    private String mIntBvsId[];//中级录像ID
+    private String mIntTime[];//中级时间
+    private String mIntBvs[];//中级Bvs
+
+    private String mExpTimeDown[];//高级录像地址
+    private String mExpTimeId[];//高级录像ID
+    private String mExpBvsDown[];//高级录像地址
+    private String mExpBvsId[];//高级录像ID
+    private String mExpTime[];//高级时间
+    private String mExpBvs[];//高级Bvs
+
+    private String mSumTime[];//总计时间
+    private String mSumBvs[];//总计Bvs
+
+    private String mRankingChange[];//一个月内的排名变化
+
     private Thread mThread;
+
     private int playerId;
     //mData定义为static类型，保证用户按返回键之后onPause时数据不被销毁
     public List<Map<String, String>> mData;
@@ -93,8 +108,8 @@ public class Latest extends Fragment {
     }
 
     //构造函数传入参数
-    public static Latest newInstance(String pageName, int itemCount) {
-        Latest newFragment = new Latest();
+    public static RankingFragment newInstance(String pageName, int itemCount) {
+        RankingFragment newFragment = new RankingFragment();
         Bundle bundle = new Bundle();
         bundle.putString("mPage", pageName);//页面的名称
         bundle.putInt("mItem", itemCount);//Item数目
@@ -173,17 +188,36 @@ public class Latest extends Fragment {
 
     /*初始化变量*/
     public void initFields() {
-        mDate = new String[mItem];
+        mRanking = new String[mItem];
         mName = new String[mItem];
-        mSex = new String[mItem];
-        mBv = new String[mItem];
-        mBvs = new String[mItem];
-        mLevel = new String[mItem];
-        mTime = new String[mItem];
-        mStyle = new String[mItem];
-        mDown = new String[mItem];
         mPlayerId = new String[mItem];
-        mVideoId = new String[mItem];
+        mTitle = new String[mItem];
+
+        mBegTimeDown = new String[mItem];
+        mBegTimeId = new String[mItem];
+        mBegBvsDown = new String[mItem];
+        mBegBvsId = new String[mItem];
+        mBegTime = new String[mItem];
+        mBegBvs = new String[mItem];
+
+        mIntTimeDown = new String[mItem];
+        mIntTimeId = new String[mItem];
+        mIntBvsDown = new String[mItem];
+        mIntBvsId = new String[mItem];
+        mIntTime = new String[mItem];
+        mIntBvs = new String[mItem];
+
+        mExpTimeDown = new String[mItem];
+        mExpTimeId = new String[mItem];
+        mExpBvsDown = new String[mItem];
+        mExpBvsId = new String[mItem];
+        mExpTime = new String[mItem];
+        mExpBvs = new String[mItem];
+
+        mSumTime = new String[mItem];
+        mSumBvs = new String[mItem];
+
+        mRankingChange = new String[mItem];
     }
 
     //刷新当前界面
@@ -224,36 +258,21 @@ public class Latest extends Fragment {
                 messageRefresh.obj = "Refreshing" + mPage;
                 handlerRefresh.sendMessage(messageRefresh);
 
+
                 HttpURLConnection conn = null;
                 BufferedReader in = null;
                 try {
+
 //                    long time = System.currentTimeMillis();
                     String path;
                     switch (mPage) {
-                        case "Latest":
-                            path = SAOLEI_LATEST + LATEST_PAGE;
-                            break;
-                        case "All":
-                            path = "http://www.saolei.wang/Video/Video_"
-                                    + orderOption.getMenu()
-                                    + ".asp?Page=" + ALL_PAGE
-                                    + "&Order=" + orderOption.getSort()
-                                    + "&Bv=" + orderOption.getBv();
-                            break;
-                        case "Domain":
-                            if(orderDomain.getMenu().equals(ORDER_MENU[0])){
-                                path = "http://www.saolei.wang/Video/My.asp?Id=";
-                            }else{
-                                path = "http://www.saolei.wang/Video/My_"+ orderDomain.getMenu()+".asp?Id=";
-                            }
-                            setPlayerId(Constant.playerId);
-                            path += Constant.playerId
-                                    + "&Page=" + DOMAIN_PAGE
-                                    + "&Order=" + orderDomain.getSort()
-                                    + "&Bv=" + orderDomain.getBv();
+                        case "RankingFragment":
+                            path = "http://www.saolei.wang/Ranking/Ranking_All.asp?Page=" + RANKING_PAGE
+                                    + "&By=Player_Sum_Time_Score";
                             break;
                         default:
-                            path = SAOLEI_LATEST + LATEST_PAGE;
+                            //默认请求网址
+                            path = "http://www.saolei.wang/Ranking/Ranking_All.asp?Page=1&By=Player_Sum_Time_Score";
                             break;
                     }
                     URL url = new URL(path);
@@ -274,47 +293,80 @@ public class Latest extends Fragment {
 //                    time = System.currentTimeMillis();
 
                     for (int i = 0; i < mItem; i++) {
-                        if (!response.contains("息\"")) {
+                        if (!response.contains(";位")) {
                             Log.i(TAG, "blankMessage: ");
                             break;
                         }
-                        response = response.substring(response.indexOf("4%"));
-                        mDate[i] = response.substring(22, response.indexOf("</"))
-                                .replace("年", "-")
-                                .replace("月", "-")
-                                .replace("日&nbsp;", " ");
-                        mDate[i] = TimeUtil.dateFormat(mDate[i]);
+
+                        response = response.substring(response.indexOf("第&"));
+                        mRanking[i] = response.substring(29, response.indexOf("</"));
 
                         response = response.substring(response.indexOf("/P"));
-                        mPlayerId[i]=response.substring(20, response.indexOf("')"));
+                        mPlayerId[i] = response.substring(20, response.indexOf("')"));
 
-                        response = response.substring(response.indexOf("息\""));
-                        mName[i] = response.substring(3, response.indexOf("<"));
+                        response = response.substring(response.indexOf("\">"));
+                        mName[i] = response.substring(2, response.indexOf("</"));
 
-                        response = response.substring(response.indexOf("r\""));
-                        mSex[i] = response.substring(3, response.indexOf("<"));
+                        response = response.substring(response.indexOf("/Help"));
+                        mTitle[i] = response.substring(27, response.indexOf("\" t"));
 
-                        response = response.substring(response.indexOf("V_"));
-                        mBv[i] = "3BV=" + response.substring(response.indexOf(">") + 1, response.indexOf("<"));
+                        response = response.substring(response.indexOf("/V"));
+                        mBegTimeDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
 
-                        response = response.substring(response.indexOf("S_"));
-                        mBvs[i] = "3BV/s=" + response.substring(response.indexOf(">") + 1, response.indexOf("<"));
+                        mBegTimeId[i] = mBegTimeDown[i].substring(40);
 
-                        response = response.substring(response.indexOf("5%"));
-                        mLevel[i] = response.substring(40, 42);
-                        mDown[i] = Constant.SAOLEI_NET + response.substring(94, response.indexOf("&"));
+                        response = response.substring(response.indexOf("\"Beg"));
+                        mBegTime[i] = response.substring(21, response.indexOf("</"));
 
-                        mVideoId[i]=response.substring(113, response.indexOf("&t"));
+                        response = response.substring(response.indexOf("/V"));
+                        mBegBvsDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
 
-                        response = response.substring(response.indexOf("像\""));
-                        mTime[i] = response.substring(3, response.indexOf("<"));
+                        mBegBvsId[i] = mBegBvsDown[i].substring(40);
 
-                        response = response.substring(response.indexOf("/a"));
-                        if (response.substring(4, 5).equals("s")) {
-                            mStyle[i] = "NF";
-                        } else {
-                            mStyle[i] = "FL";
-                        }
+                        response = response.substring(response.indexOf("\"Bold"));
+                        mBegBvs[i] = response.substring(22, response.indexOf("</"));
+
+                        response = response.substring(response.indexOf("/V"));
+                        mIntTimeDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
+
+                        mIntTimeId[i] = mIntTimeDown[i].substring(40);
+
+                        response = response.substring(response.indexOf("\"Int"));
+                        mIntTime[i] = response.substring(21, response.indexOf("</"));
+
+                        response = response.substring(response.indexOf("/V"));
+                        mIntBvsDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
+
+                        mIntBvsId[i] = mIntBvsDown[i].substring(40);
+
+                        response = response.substring(response.indexOf("\"Bold"));
+                        mIntBvs[i] = response.substring(22, response.indexOf("</"));
+
+                        response = response.substring(response.indexOf("/V"));
+                        mExpTimeDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
+
+                        mExpTimeId[i] = mExpTimeDown[i].substring(40);
+
+                        response = response.substring(response.indexOf("\"Exp"));
+                        mExpTime[i] = response.substring(21, response.indexOf("</"));
+
+                        response = response.substring(response.indexOf("/V"));
+                        mExpBvsDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
+
+                        mExpBvsId[i] = mExpBvsDown[i].substring(40);
+
+                        response = response.substring(response.indexOf("\"Bold"));
+                        mExpBvs[i] = response.substring(22, response.indexOf("</"));
+
+                        response = response.substring(response.indexOf("\"Signest"));
+                        mSumTime[i] = response.substring(10, response.indexOf("</"));
+
+                        response = response.substring(response.indexOf("\"Bold"));
+                        mSumBvs[i] = response.substring(7, response.indexOf("</"));
+
+                        response = response.substring(response.indexOf("\"cursor"));
+                        String temp = response.substring(0, response.indexOf("</"));
+                        mRankingChange[i] = temp.substring(temp.lastIndexOf(">") + 1);
                     }
 
 //                    Log.i(TAG, "connection计算耗时: " + (System.currentTimeMillis() - time));
@@ -351,17 +403,36 @@ public class Latest extends Fragment {
         mData = new ArrayList<>();
         for (int i = 0; i < mItem; i++) {
             Map<String, String> keyValuePair = new HashMap<>();
-            keyValuePair.put("Date", mDate[i]);
-            keyValuePair.put("Name", mName[i]);
-            keyValuePair.put("Sex", mSex[i]);
-            keyValuePair.put("Bv", mBv[i]);
-            keyValuePair.put("Bvs", mBvs[i]);
-            keyValuePair.put("Level", mLevel[i]);
-            keyValuePair.put("Time", mTime[i]);
-            keyValuePair.put("Style", mStyle[i]);
-            keyValuePair.put("Down", mDown[i]);
-            keyValuePair.put("PlayerId", mPlayerId[i]);
-            keyValuePair.put("VideoId", mVideoId[i]);
+            keyValuePair.put("mRanking", mRanking[i]);
+            keyValuePair.put("mName", mName[i]);
+            keyValuePair.put("mPlayerId", mPlayerId[i]);
+            keyValuePair.put("mTitle", mTitle[i]);
+
+            keyValuePair.put("Beg_Time_Down", mBegTimeDown[i]);
+            keyValuePair.put("Beg_Time_ID", mBegTimeId[i]);
+            keyValuePair.put("Beg_3BVS_Down", mBegBvsDown[i]);
+            keyValuePair.put("Beg_3BVS_ID", mBegBvsId[i]);
+            keyValuePair.put("Beg_Time", mBegTime[i]);
+            keyValuePair.put("Beg_3BVS", mBegBvs[i]);
+
+            keyValuePair.put("Int_Time_Down", mIntTimeDown[i]);
+            keyValuePair.put("Int_Time_ID", mIntTimeId[i]);
+            keyValuePair.put("Int_3BVS_Down", mIntBvsDown[i]);
+            keyValuePair.put("Int_3BVS_ID", mIntBvsId[i]);
+            keyValuePair.put("Int_Time", mIntTime[i]);
+            keyValuePair.put("Int_3BVS", mIntBvs[i]);
+
+            keyValuePair.put("Exp_Time_Down", mExpTimeDown[i]);
+            keyValuePair.put("Exp_Time_ID", mExpTimeId[i]);
+            keyValuePair.put("Exp_3BVS_Down", mExpBvsDown[i]);
+            keyValuePair.put("Exp_3BVS_ID", mExpBvsId[i]);
+            keyValuePair.put("Exp_Time", mExpTime[i]);
+            keyValuePair.put("Exp_3BVS", mExpBvs[i]);
+
+            keyValuePair.put("Sum_Time", mSumTime[i]);
+            keyValuePair.put("Sum_3BVS", mSumBvs[i]);
+
+            keyValuePair.put("mRankingChange", mRankingChange[i]);
             mData.add(keyValuePair);
         }
 
@@ -372,7 +443,7 @@ public class Latest extends Fragment {
         //设置布局管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //设置适配器
-        mRecyclerView.setAdapter(new AdapterLatest(mActivity, mData));
+        mRecyclerView.setAdapter(new RankingAdapter(mActivity, mData));
 
         //完成刷新
         refreshLayout.finishRefresh();
