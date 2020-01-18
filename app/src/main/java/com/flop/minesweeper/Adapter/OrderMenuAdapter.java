@@ -24,6 +24,7 @@ import butterknife.OnClick;
 import static com.flop.minesweeper.Constant.ORDER_MENU;
 import static com.flop.minesweeper.Constant.ORDER_SORT;
 import static com.flop.minesweeper.Constant.indicateAnimatorSet;
+import static com.flop.minesweeper.Constant.orderMenuLevel;
 import static com.flop.minesweeper.Constant.orderOption;
 import static com.flop.minesweeper.Constant.orderDomain;
 import static com.flop.minesweeper.Constant.orderOptionFirst;
@@ -81,6 +82,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
                         break;
                     }
                 }
+                if (moveIndicate) moveIndicate(position * 2 + 1);// 初始化指示方块位置
                 break;
             case 1:
                 for (int i = 0; i < ORDER_SORT.length; i++) {
@@ -100,14 +102,13 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
                     holder.tvOrder.setText(bv);
                     tvOrderTop.setText(tvOrderTop.getText() + "  " + bv);
                 }
-                if (moveIndicate) moveIndicate(1);
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return orderMenuLevel.length;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -118,14 +119,14 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
         void chooseMenu() {
             switch (getLayoutPosition()) {
                 case 0:
-                    moveIndicate(1);
+                    moveIndicate(getLayoutPosition() * 2 + 1);
                     rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, latestFragment));
                     break;
                 case 1:
                     if (mOrderOption.getMenu().equals(ORDER_MENU[0])) {
                         ToastUtil.showShort(mActivity, "请先选择游戏级别");
                     } else {
-                        moveIndicate(3);
+                        moveIndicate(getLayoutPosition() * 2 + 1);
                         rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionSecond, latestFragment));
                     }
                     break;
@@ -138,7 +139,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
                         for (int j = 0; j < data.length; j++) {
                             data[j] = j + 2 + "";
                         }
-                        moveIndicate(5);
+                        moveIndicate(getLayoutPosition() * 2 + 1);
                         rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, data, latestFragment));
                     } else if (mOrderOption.getMenu().equals(ORDER_MENU[2])) {
                         //中级BV
@@ -146,7 +147,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
                         for (int j = 0; j < data.length; j++) {
                             data[j] = j + 25 + "";
                         }
-                        moveIndicate(5);
+                        moveIndicate(getLayoutPosition() * 2 + 1);
                         rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, data, latestFragment));
                     } else if (mOrderOption.getMenu().equals(ORDER_MENU[3])) {
                         //高级BV
@@ -154,7 +155,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
                         for (int j = 0; j < data.length; j++) {
                             data[j] = j + 96 + "";
                         }
-                        moveIndicate(5);
+                        moveIndicate(getLayoutPosition() * 2 + 1);
                         rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, data, latestFragment));
                     }
                     break;
@@ -174,7 +175,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
         if (indicateAnimatorSet != null) indicateAnimatorSet.cancel();
 
         //位移宽度
-        float width = rvOrderMenu.getWidth() / 6 * parts - dip2px(mActivity, 40) / 2;
+        float width = rvOrderMenu.getWidth() / (orderMenuLevel.length * 2) * parts - dip2px(mActivity, 40) / 2;
         //设定时间
         int duration = 250;
         //水平动画

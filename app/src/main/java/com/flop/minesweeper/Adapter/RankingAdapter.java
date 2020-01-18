@@ -103,8 +103,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.MyViewHo
             holder.tvName.setText(keyValuePair.get("mName"));
             holder.tvName.setTextColor(mActivity.getResources().getColorStateList(R.color.text_color_player_man));
             holder.tvVideoRanking.setText(keyValuePair.get("mRanking"));
-//        holder.tvRankingChange.setText(keyValuePair.get("mRankingChange"));
-
+            holder.tvRankingChange.setText(keyValuePair.get("mRankingChange"));
         } else {
             //防止排名和姓名消耗点击事件影响水波纹效果
             holder.tvName.setClickable(false);
@@ -112,6 +111,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.MyViewHo
 
             holder.tvName.setText(null);
             holder.tvVideoRanking.setText(null);
+            holder.tvRankingChange.setText(null);
 
             //清除当前item所有内容
             current = optionNull;

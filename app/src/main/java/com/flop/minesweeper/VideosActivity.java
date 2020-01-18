@@ -53,11 +53,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flop.minesweeper.Adapter.OrderMenuAdapter;
+import com.flop.minesweeper.Adapter.OrderMenuRankingAdapter;
+import com.flop.minesweeper.Adapter.OrderOptionAdapter;
 import com.flop.minesweeper.Util.KeyboardUtil;
 import com.flop.minesweeper.Util.SDCardUtil;
 import com.flop.minesweeper.Util.ToastUtil;
-import com.flop.minesweeper.Adapter.OrderMenuAdapter;
-import com.flop.minesweeper.Adapter.OrderOptionAdapter;
 import com.flop.minesweeper.VideosFragment.LatestFragment;
 import com.flop.minesweeper.VideosFragment.NewsFragment;
 import com.flop.minesweeper.VideosFragment.RankingFragment;
@@ -88,8 +89,10 @@ import static com.flop.minesweeper.Constant.STORAGE_PERMISSION_REQUEST_CODE;
 import static com.flop.minesweeper.Constant.VIDEO_REQUEST_CODE_LOCAL;
 import static com.flop.minesweeper.Constant.orderAnimatorSet;
 import static com.flop.minesweeper.Constant.orderMenuLevel;
+import static com.flop.minesweeper.Constant.orderMenuRanking;
 import static com.flop.minesweeper.Constant.orderMenuWorld;
 import static com.flop.minesweeper.Constant.orderOptionFirst;
+import static com.flop.minesweeper.Constant.orderRankingFirst;
 import static com.flop.minesweeper.Constant.playerId;
 import static com.flop.minesweeper.Util.MarginsUtil.setMarginsBottom;
 import static com.flop.minesweeper.Util.SDCardUtil.loadFileFromSDCard;
@@ -300,7 +303,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
         return false;
     }
 
-    //关闭排序菜单,需要在AdapterOrderOption中二次声明
+    //关闭排序菜单,需要在OrderOptionAdapter中二次声明
     public void closeOrderMenu() {
         //取消上一个动画
         if (orderAnimatorSet != null) orderAnimatorSet.cancel();
@@ -375,9 +378,6 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
 
     //显示和隐藏排序信息框
     private void orderVideosMenu() {
-        //未完成页面不弹出排序菜单
-        if (mViewPager.getCurrentItem() == 2) return;
-
         if (menuDrop) {
             closeOrderMenu();
         } else {
@@ -656,15 +656,15 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 break;
             case 2:
                 flOrder.setVisibility(View.VISIBLE);
-                // //设置排序菜单布局管理器
-                // rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, OrientationHelper.VERTICAL, false));
-                // //设置排序菜单适配器
-                // rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, allFragment, true));
-                //
-                // //设置排序选项布局管理器
-                // rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
-                // //设置排序选项适配器
-                // rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, allFragment));
+                //设置排序菜单布局管理器
+                rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuRanking.length, OrientationHelper.VERTICAL, false));
+                //设置排序菜单适配器
+                rvOrderMenu.setAdapter(new OrderMenuRankingAdapter(mActivity, rankingFragment, true));
+
+                //设置排序选项布局管理器
+                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
+                //设置排序选项适配器
+                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderRankingFirst, rankingFragment));
                 break;
             case 3:
                 flOrder.setVisibility(View.VISIBLE);

@@ -41,9 +41,9 @@
                 android:textSize="@dimen/name_text" />
 
             <LinearLayout
-                android:gravity="center"
+                android:gravity="start|center"
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="160dp"
                 android:layout_height="match_parent">
 
                 <!--级别-->
@@ -80,17 +80,16 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color_ranking_above" />
 
-                <!--排名变化(暂未使用)-->
-                <TextView
-                    android:id="@+id/tvRankingChange"
-                    android:layout_weight="10"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:layout_marginStart="15dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-
             </LinearLayout>
+
+            <!--排名变化-->
+            <TextView
+                android:id="@+id/tvRankingChange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_gravity="center"
+                android:textSize="16sp" />
 
         </LinearLayout>
 

@@ -41,6 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.flop.minesweeper.Constant.RANKING_PAGE;
+import static com.flop.minesweeper.Constant.orderRanking;
 
 /**
  * Created by Flop on 2018/10/14.
@@ -267,8 +268,16 @@ public class RankingFragment extends Fragment {
                     String path;
                     switch (mPage) {
                         case "RankingFragment":
-                            path = "http://www.saolei.wang/Ranking/Ranking_All.asp?Page=" + RANKING_PAGE
-                                    + "&By=Player_Sum_Time_Score";
+                            path = "http://www.saolei.wang/Ranking/Ranking_"
+                                    + orderRanking.getMenu() + ".asp?Page="
+                                    + RANKING_PAGE
+                                    + "&By=Player_"
+                                    + orderRanking.getSort()
+                                    + "_Score";
+                            // NF排行榜页面还需要添加“_NF”的后缀
+                            if ("NF".equals(orderRanking.getMenu())) {
+                                path += "_NF";
+                            }
                             break;
                         default:
                             //默认请求网址
@@ -298,6 +307,17 @@ public class RankingFragment extends Fragment {
                             break;
                         }
 
+                        // 如果是进步页面，则排名升降的数据在最前面
+                        if(orderRanking.getMenu().equals("Grow")){
+                            // 如果有排名升降的数据
+                            int index = response.indexOf("\"cursor");
+                            if (index != -1) {
+                                response = response.substring(index);
+                                String temp = response.substring(0, response.indexOf("</"));
+                                mRankingChange[i] = temp.substring(temp.lastIndexOf(">") + 1);
+                            }
+                        }
+
                         response = response.substring(response.indexOf("第&"));
                         mRanking[i] = response.substring(29, response.indexOf("</"));
 
@@ -315,58 +335,66 @@ public class RankingFragment extends Fragment {
 
                         mBegTimeId[i] = mBegTimeDown[i].substring(40);
 
-                        response = response.substring(response.indexOf("\"Beg"));
-                        mBegTime[i] = response.substring(21, response.indexOf("</"));
+                        response = response.substring(response.indexOf("\">"));
+                        mBegTime[i] = response.substring(2, response.indexOf("</"));
 
                         response = response.substring(response.indexOf("/V"));
                         mBegBvsDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
 
                         mBegBvsId[i] = mBegBvsDown[i].substring(40);
 
-                        response = response.substring(response.indexOf("\"Bold"));
-                        mBegBvs[i] = response.substring(22, response.indexOf("</"));
+                        response = response.substring(response.indexOf("\">"));
+                        mBegBvs[i] = response.substring(2, response.indexOf("</"));
 
                         response = response.substring(response.indexOf("/V"));
                         mIntTimeDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
 
                         mIntTimeId[i] = mIntTimeDown[i].substring(40);
 
-                        response = response.substring(response.indexOf("\"Int"));
-                        mIntTime[i] = response.substring(21, response.indexOf("</"));
+                        response = response.substring(response.indexOf("\">"));
+                        mIntTime[i] = response.substring(2, response.indexOf("</"));
 
                         response = response.substring(response.indexOf("/V"));
                         mIntBvsDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
 
                         mIntBvsId[i] = mIntBvsDown[i].substring(40);
 
-                        response = response.substring(response.indexOf("\"Bold"));
-                        mIntBvs[i] = response.substring(22, response.indexOf("</"));
+                        response = response.substring(response.indexOf("\">"));
+                        mIntBvs[i] = response.substring(2, response.indexOf("</"));
 
                         response = response.substring(response.indexOf("/V"));
                         mExpTimeDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
 
                         mExpTimeId[i] = mExpTimeDown[i].substring(40);
 
-                        response = response.substring(response.indexOf("\"Exp"));
-                        mExpTime[i] = response.substring(21, response.indexOf("</"));
+                        response = response.substring(response.indexOf("\">"));
+                        mExpTime[i] = response.substring(2, response.indexOf("</"));
 
                         response = response.substring(response.indexOf("/V"));
                         mExpBvsDown[i] = Constant.SAOLEI_NET + response.substring(0, response.indexOf("'"));
 
                         mExpBvsId[i] = mExpBvsDown[i].substring(40);
 
-                        response = response.substring(response.indexOf("\"Bold"));
-                        mExpBvs[i] = response.substring(22, response.indexOf("</"));
+                        response = response.substring(response.indexOf("\">"));
+                        mExpBvs[i] = response.substring(2, response.indexOf("</"));
 
-                        response = response.substring(response.indexOf("\"Signest"));
-                        mSumTime[i] = response.substring(10, response.indexOf("</"));
+                        // 连续根据同一字符串进行定位查找时从第二个字符开始查找，避免数据重复
+                        response = response.substring(response.indexOf("\">", 1));
+                        mSumTime[i] = response.substring(2, response.indexOf("</"));
 
-                        response = response.substring(response.indexOf("\"Bold"));
-                        mSumBvs[i] = response.substring(7, response.indexOf("</"));
+                        response = response.substring(response.indexOf("\">", 1));
+                        mSumBvs[i] = response.substring(2, response.indexOf("</"));
 
-                        response = response.substring(response.indexOf("\"cursor"));
-                        String temp = response.substring(0, response.indexOf("</"));
-                        mRankingChange[i] = temp.substring(temp.lastIndexOf(">") + 1);
+                        // 如果不是进步页面，则排名升降的数据在最后面
+                        if(!orderRanking.getMenu().equals("Grow")){
+                            // 如果有排名升降的数据
+                            int index = response.indexOf("\"cursor");
+                            if (index != -1) {
+                                response = response.substring(index);
+                                String temp = response.substring(0, response.indexOf("</"));
+                                mRankingChange[i] = temp.substring(temp.lastIndexOf(">") + 1);
+                            }
+                        }
                     }
 
 //                    Log.i(TAG, "connection计算耗时: " + (System.currentTimeMillis() - time));

@@ -83,11 +83,11 @@ public class Constant {
 
 
     //排行榜排序关键字(网址)
-    public static String[] ORDER_RANKING_MENU = {"All", "Man", "Hero", "NF", "Grow", "Area", "Click", ""};
-    public static String[] ORDER_RANKING_SORT = {"Beg_Time", "Beg_3BVS", "Int_Time", "Int_3BVS", "Exp_Time", "Exp_3BVS", "Sum_Time", "Sum_3BVS"};
+    public static String[] ORDER_RANKING_MENU = {"All", "Man", "Hero", "NF", "Grow", "", "", ""};
+    public static String[] ORDER_RANKING_SORT = {"Sum_Time", "Sum_3BVS", "Beg_Time", "Beg_3BVS", "Int_Time", "Int_3BVS", "Exp_Time", "Exp_3BVS"};
     //排行榜排序选项(子菜单)
-    public static final String orderRankingFirst[] = new String[]{"雷界", "人界", "神界", "NF", "进步", "地区", "人气", ""};
-    public static final String orderRankingSecond[] = new String[]{"初级", "3BV/s", "中级", "3BV/s", "高级", "3BV/s", "总计", "3BV/s"};
+    public static final String orderRankingFirst[] = new String[]{"雷界", "人界", "神界", "NF", "进步", "", "", ""};
+    public static final String orderRankingSecond[] = new String[]{"总计时间", "总计3BV/s", "初级时间", "初级3BV/s", "中级时间", "中级3BV/s", "高级时间", "高级3BV/s"};
     //排行榜排序选项(主菜单)
     public static final String orderMenuRanking[] = new String[]{"雷界", "总计"};
 

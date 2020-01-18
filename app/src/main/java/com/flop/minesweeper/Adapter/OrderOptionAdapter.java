@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.flop.minesweeper.Util.ToastUtil;
 import com.flop.minesweeper.VideosActivity;
 import com.flop.minesweeper.VideosFragment.LatestFragment;
 import com.flop.minesweeper.VideosFragment.NewsFragment;
+import com.flop.minesweeper.VideosFragment.RankingFragment;
 
 import java.util.Arrays;
 
@@ -32,19 +34,25 @@ import static com.flop.minesweeper.Constant.DOMAIN_PAGE;
 import static com.flop.minesweeper.Constant.LATEST_PAGE;
 import static com.flop.minesweeper.Constant.NEWS_PAGE;
 import static com.flop.minesweeper.Constant.ORDER_MENU;
+import static com.flop.minesweeper.Constant.ORDER_RANKING_MENU;
+import static com.flop.minesweeper.Constant.ORDER_RANKING_SORT;
 import static com.flop.minesweeper.Constant.ORDER_SORT;
 import static com.flop.minesweeper.Constant.PROGRESS_PAGE;
+import static com.flop.minesweeper.Constant.RANKING_PAGE;
 import static com.flop.minesweeper.Constant.SAOLEI_LATEST;
 import static com.flop.minesweeper.Constant.SAOLEI_LATEST_ORDER;
 import static com.flop.minesweeper.Constant.SAOLEI_NEWS;
 import static com.flop.minesweeper.Constant.SAOLEI_NEWS_ORDER;
-import static com.flop.minesweeper.Constant.orderOption;
 import static com.flop.minesweeper.Constant.orderAnimatorSet;
 import static com.flop.minesweeper.Constant.orderDomain;
 import static com.flop.minesweeper.Constant.orderMenuWorld;
+import static com.flop.minesweeper.Constant.orderOption;
 import static com.flop.minesweeper.Constant.orderOptionFirst;
 import static com.flop.minesweeper.Constant.orderOptionSecond;
 import static com.flop.minesweeper.Constant.orderProgress;
+import static com.flop.minesweeper.Constant.orderRanking;
+import static com.flop.minesweeper.Constant.orderRankingFirst;
+import static com.flop.minesweeper.Constant.orderRankingSecond;
 
 /**
  * 排序选项Adapter
@@ -58,10 +66,12 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
     private ViewPager mViewPager;
     private NewsFragment newsFragment;
     private LatestFragment latestFragment;
+    private RankingFragment rankingFragment;
     private TextView tvOrderTop;
     private EditText etPage;
     private RecyclerView rvOrderOption;
     private RecyclerView rvOrderMenu;
+    private FrameLayout flOrder;
 
     public OrderOptionAdapter(Activity activity, String[] data, NewsFragment newsFragment) {
         this.mActivity = activity;
@@ -77,6 +87,13 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
         initLayout();
     }
 
+    public OrderOptionAdapter(Activity activity, String[] data, RankingFragment rankingFragment) {
+        this.mActivity = activity;
+        this.mData = data;
+        this.rankingFragment = rankingFragment;
+        initLayout();
+    }
+
     //获取所需控件
     private void initLayout() {
         this.maskOrder = mActivity.findViewById(R.id.maskOrder);
@@ -86,6 +103,7 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
         this.etPage = mActivity.findViewById(R.id.etPage);
         this.rvOrderOption = mActivity.findViewById(R.id.rvOrderOption);
         this.rvOrderMenu = mActivity.findViewById(R.id.rvOrderMenu);
+        this.flOrder = mActivity.findViewById(R.id.flOrder);
     }
 
     @NonNull
@@ -121,6 +139,19 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
                 tvOrderTop.setText(orderMenuWorld[position]);
             } else {
                 holder.tvOrder.setTextColor(mActivity.getResources().getColorStateList(R.color.text_color_pink));
+            }
+        } else if (mViewPager.getCurrentItem() == 2) {//排行榜录像
+            //圆角边框着重显示当前排序依据
+            if (Arrays.equals(mData, orderRankingFirst)) {
+                if (orderRanking.getMenu().equals(ORDER_RANKING_MENU[position])) {
+                    holder.tvOrder.setBackgroundResource(R.drawable.corner_pink);
+                    holder.tvOrder.setTextColor(Color.WHITE);
+                }
+            } else if (Arrays.equals(mData, orderRankingSecond)) {
+                if (orderRanking.getSort().equals(ORDER_RANKING_SORT[position])) {
+                    holder.tvOrder.setBackgroundResource(R.drawable.corner_pink);
+                    holder.tvOrder.setTextColor(Color.WHITE);
+                }
             }
         } else if (mViewPager.getCurrentItem() == 3) {//全部录像
             //圆角边框着重显示当前排序依据
@@ -268,6 +299,23 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
 
                 //重置当前适配器内容
                 rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, mData, latestFragment));
+            } else if (rankingFragment != null) {
+                if (mViewPager.getCurrentItem() == 2) {
+                    //当前页面为排行榜录像页面
+                    if (Arrays.equals(mData, orderRankingFirst)) {
+                        orderRanking.setMenu(ORDER_RANKING_MENU[position]);
+                    } else if (Arrays.equals(mData, orderRankingSecond)) {
+                        orderRanking.setSort(ORDER_RANKING_SORT[position]);
+                    }
+
+                    //重置rvOrderMenu
+                    rvOrderMenu.setAdapter(new OrderMenuRankingAdapter(mActivity, rankingFragment, false));
+                    RANKING_PAGE = 1;
+                }
+                rankingFragment.initVideos();
+
+                //重置当前适配器内容
+                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, mData, rankingFragment));
             }
             //重置当前页面数
             resetPage();
@@ -291,6 +339,9 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
                 break;
             case 1:
                 videoPage = LATEST_PAGE + "";
+                break;
+            case 2:
+                videoPage = RANKING_PAGE + "";
                 break;
             case 3:
                 videoPage = ALL_PAGE + "";
@@ -316,8 +367,8 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
 
         //位移高度
         float height = lyOrder.getHeight();
-        //设定时间
-        int duration = 200;
+        //设定时间，设定较短时间以避免卡顿感，只要我跑的够快，眼睛就追不上我
+        int duration = 120;
         //下拉动画
         ObjectAnimator animLyY;
         //透明度动画
