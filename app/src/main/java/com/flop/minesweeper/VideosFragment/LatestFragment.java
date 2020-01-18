@@ -234,14 +234,14 @@ public class LatestFragment extends Fragment {
                         case "LatestFragment":
                             path = SAOLEI_LATEST + LATEST_PAGE;
                             break;
-                        case "All":
+                        case "AllFragment":
                             path = "http://www.saolei.wang/Video/Video_"
                                     + orderOption.getMenu()
                                     + ".asp?Page=" + ALL_PAGE
                                     + "&Order=" + orderOption.getSort()
                                     + "&Bv=" + orderOption.getBv();
                             break;
-                        case "Domain":
+                        case "DomainFragment":
                             if (orderDomain.getMenu().equals(ORDER_MENU[0])) {
                                 path = "http://www.saolei.wang/Video/My.asp?Id=";
                             } else {

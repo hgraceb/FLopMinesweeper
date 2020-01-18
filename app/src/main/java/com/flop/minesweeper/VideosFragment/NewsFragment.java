@@ -242,7 +242,7 @@ public class NewsFragment extends Fragment {
                         case "NewsFragment":
                             path = SAOLEI_NEWS + NEWS_PAGE;
                             break;
-                        case "Progress":
+                        case "ProgressFragment":
                             setPlayerId(Constant.playerId);
                             if (orderProgress.getMenu().equals(ORDER_MENU[0])) {
                                 path = "http://www.saolei.wang/News/My.asp?Id=" + playerId + "&Page=" + PROGRESS_PAGE;

@@ -1085,13 +1085,13 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     rankingFragment = RankingFragment.newInstance("RankingFragment", RANKING_ITEM);
                     return rankingFragment;
                 case 3:
-                    allFragment = LatestFragment.newInstance("All", ALL_ITEM);
+                    allFragment = LatestFragment.newInstance("AllFragment", ALL_ITEM);
                     return allFragment;
                 case 4:
-                    domainFragment = LatestFragment.newInstance("Domain", DOMAIN_ITEM);
+                    domainFragment = LatestFragment.newInstance("DomainFragment", DOMAIN_ITEM);
                     return domainFragment;
                 case 5:
-                    progressFragment = NewsFragment.newInstance("Progress", PROGRESS_ITEM);
+                    progressFragment = NewsFragment.newInstance("ProgressFragment", PROGRESS_ITEM);
                     return progressFragment;
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
