@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.flop.minesweeper.R;
-import com.flop.minesweeper.Util.ToastUtil;
 import com.flop.minesweeper.VideosActivity;
 import com.flop.minesweeper.VideosFragment.LatestFragment;
 import com.flop.minesweeper.VideosFragment.NewsFragment;
@@ -286,9 +285,6 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
                         orderDomain.setBv("");
                     } else if (Arrays.equals(mData, orderOptionSecond)) {
                         orderDomain.setSort(ORDER_SORT[position]);
-                    } else {
-                        ToastUtil.showShort(mActivity, "此页面暂不支持指定BV");
-                        return;
                     }
 
                     //重置rvOrderMenu

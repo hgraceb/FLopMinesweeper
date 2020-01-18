@@ -687,8 +687,8 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 }
 
                 flOrder.setVisibility(View.VISIBLE);
-                //设置排序菜单布局管理器
-                rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, OrientationHelper.VERTICAL, false));
+                //设置排序菜单布局管理器，我的地盘页面暂不支持指定BV
+                rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length - 1, OrientationHelper.VERTICAL, false));
                 //设置排序菜单适配器
                 rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, domainFragment, true));
 
