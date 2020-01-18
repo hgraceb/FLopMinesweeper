@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
     private ImageView ivOrderIndicate;
     private String TAG = "FLOP";
     private boolean moveIndicate;
+    private int itemCount;
 
     public OrderMenuRankingAdapter(Activity activity, RankingFragment rankingFragment, boolean moveIndicate) {
         this.mActivity = activity;
@@ -56,6 +58,7 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
         this.ivOrderIndicate = mActivity.findViewById(R.id.ivOrderIndicate);
         this.moveIndicate = moveIndicate;
         this.mOrderOption = orderRanking;
+        this.itemCount = orderMenuRanking.length;
     }
 
     @NonNull
@@ -91,7 +94,7 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
 
     @Override
     public int getItemCount() {
-        return orderMenuRanking.length;
+        return itemCount;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -131,9 +134,9 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
         if (indicateAnimatorSet != null) indicateAnimatorSet.cancel();
 
         //位移宽度
-        float width = rvOrderMenu.getWidth() / (orderMenuRanking.length * 2) * parts - dip2px(mActivity, 40) / 2;
+        float width = rvOrderMenu.getWidth() / (itemCount * 2) * parts - dip2px(mActivity, 40) / 2;
         //设定时间
-        int duration = 250;
+        long duration = 600;
         //水平动画
         ObjectAnimator animLyX;
         //动画集合
@@ -142,6 +145,7 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
         animLyX = ObjectAnimator.ofFloat(ivOrderIndicate, "translationX", ivOrderIndicate.getTranslationX(), width);
 
         indicateAnimatorSet.play(animLyX);
+        indicateAnimatorSet.setInterpolator(new OvershootInterpolator(1.2f));
         indicateAnimatorSet.setDuration(duration);
         indicateAnimatorSet.start();
     }

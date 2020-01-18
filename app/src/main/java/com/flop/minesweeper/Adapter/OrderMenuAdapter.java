@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,9 +25,9 @@ import butterknife.OnClick;
 import static com.flop.minesweeper.Constant.ORDER_MENU;
 import static com.flop.minesweeper.Constant.ORDER_SORT;
 import static com.flop.minesweeper.Constant.indicateAnimatorSet;
+import static com.flop.minesweeper.Constant.orderDomain;
 import static com.flop.minesweeper.Constant.orderMenuLevel;
 import static com.flop.minesweeper.Constant.orderOption;
-import static com.flop.minesweeper.Constant.orderDomain;
 import static com.flop.minesweeper.Constant.orderOptionFirst;
 import static com.flop.minesweeper.Constant.orderOptionSecond;
 import static com.flop.minesweeper.Util.PixelUtil.dip2px;
@@ -46,6 +47,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
     private ImageView ivOrderIndicate;
     private String TAG = "FLOP";
     private boolean moveIndicate;
+    private int itemCount;
 
     public OrderMenuAdapter(Activity activity, LatestFragment latestFragment, boolean moveIndicate) {
         this.mActivity = activity;
@@ -59,7 +61,9 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
 
         if (mViewPager.getCurrentItem() == 3) {
             mOrderOption = orderOption;
+            itemCount = orderMenuLevel.length;
         } else if (mViewPager.getCurrentItem() == 4) {
+            itemCount = orderMenuLevel.length - 1;
             mOrderOption = orderDomain;
         }
     }
@@ -108,7 +112,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return orderMenuLevel.length;
+        return itemCount;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -175,9 +179,9 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
         if (indicateAnimatorSet != null) indicateAnimatorSet.cancel();
 
         //位移宽度
-        float width = rvOrderMenu.getWidth() / (orderMenuLevel.length * 2) * parts - dip2px(mActivity, 40) / 2;
+        float width = rvOrderMenu.getWidth() / (itemCount * 2) * parts - dip2px(mActivity, 40) / 2;
         //设定时间
-        int duration = 250;
+        long duration = 600;
         //水平动画
         ObjectAnimator animLyX;
         //动画集合
@@ -186,6 +190,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
         animLyX = ObjectAnimator.ofFloat(ivOrderIndicate, "translationX", ivOrderIndicate.getTranslationX(), width);
 
         indicateAnimatorSet.play(animLyX);
+        indicateAnimatorSet.setInterpolator(new OvershootInterpolator(1.2f));
         indicateAnimatorSet.setDuration(duration);
         indicateAnimatorSet.start();
     }
