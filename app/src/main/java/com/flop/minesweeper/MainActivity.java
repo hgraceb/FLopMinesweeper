@@ -565,6 +565,9 @@ public class MainActivity extends AppCompatActivity {
                         handler.sendMessage(message);
                     }
                 }
+                // 停止并回收录像读取线程，防止内存泄漏
+                mThread.interrupt();
+                mThread = null;
             }
         };
         mThread.start();
