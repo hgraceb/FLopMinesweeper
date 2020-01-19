@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
     private double beginTime;//开始时间
     private double passTime;//退出页面前已经计时的时间
     private Timer timer;//定时器
+    private boolean videoPause = false;//录像是否暂停，不主动结束录像读取的线程，让其自然结束
     DecimalFormat df = new DecimalFormat("#0.00");//格式化两位小数
 
     //定义Handler句柄
@@ -577,8 +578,10 @@ public class MainActivity extends AppCompatActivity {
             timer.cancel();
             passTime = (events.get(plan).getSec() * 1000 + events.get(plan).getHun() * 10);
             setVideoTimer();
-            Log.i(TAG, "onResume: resetTimer()");
+            Log.i(TAG, "onResume: resetTimer() timer = " + timer);
         }
+        // 回复录像播放
+        videoPause = false;
     }
 
     //退出界面暂停定时器
@@ -587,15 +590,10 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         if (timer != null) {
             timer.cancel();
-            Log.i(TAG, "onPause: timer.cancel");
+            Log.i(TAG, "onPause: timer.cancel timer = " + timer);
         }
-
-        //退出时结束线程，可能会有BUG
-        if (mThread != null) {
-            while (mThread.isAlive()) {
-            }
-            mThread.interrupt();
-        }
+        // 暂停录像播放，录像播放可能在录像读取线程完成后进行，此时timer为新的定时器
+        videoPause = true;
     }
 
     //界面销毁时停止定时器。。并不知道有没有用的一段语句，可能可以减少闪退的情况发生？？
@@ -785,6 +783,12 @@ public class MainActivity extends AppCompatActivity {
 
     //根据鼠标事件播放录像
     private void playEvents() {
+        // 如果需要暂停录像播放
+        if (videoPause) {
+            pausePlayVideos();
+            return;
+        }
+
         millisecond = (System.currentTimeMillis() - beginTime) * speed + passTime;
 
         //avf录像数据最后一个鼠标事件的时间为-1，mvf录像最后一个鼠标事件的时间为游戏结束时间
