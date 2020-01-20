@@ -65,7 +65,7 @@
 
         <!-- 主界面 -->
         <!--需要用Toolbar，主题必须为NoActionBar-->
-        <!--windowSoftInputMode选择adjustPan让界面整体上升-->
+        <!--windowSoftInputMode属性选择adjustNothing，手动调整输入框显示高度-->
         <activity
             android:name=".VideosActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
