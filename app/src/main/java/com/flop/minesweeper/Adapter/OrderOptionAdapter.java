@@ -234,22 +234,22 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
                     //当前页面为雷界快讯页面
                     tvOrderTop.setText(orderMenuWorld[position]);
                     SAOLEI_NEWS = SAOLEI_NEWS_ORDER[position];
+                    // 重置页码
                     NEWS_PAGE = 1;
                 } else if (mViewPager.getCurrentItem() == 5) {
                     //当前页面为进步历程页面
                     tvOrderTop.setText(orderOptionFirst[position]);
                     orderProgress.setMenu(ORDER_MENU[position]);
+                    // 重置页码
                     PROGRESS_PAGE = 1;
                 }
                 newsFragment.initVideos();
-
-                //重置当前适配器内容
-                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, mData, newsFragment));
             } else if (latestFragment != null) {
                 if (mViewPager.getCurrentItem() == 1) {
                     //当前页面为最新录像页面
                     tvOrderTop.setText(orderMenuWorld[position]);
                     SAOLEI_LATEST = SAOLEI_LATEST_ORDER[position];
+                    // 重置页码
                     LATEST_PAGE = 1;
                 } else if (mViewPager.getCurrentItem() == 3) {
                     //当前页面为全部录像页面
@@ -272,9 +272,7 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
                         }
                         orderOption.setBv(bv);
                     }
-
-                    //重置rvOrderMenu
-                    rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, latestFragment, false));
+                    // 重置页码
                     ALL_PAGE = 1;
                 } else if (mViewPager.getCurrentItem() == 4) {
                     //当前页面为全部录像页面
@@ -286,15 +284,10 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
                     } else if (Arrays.equals(mData, orderOptionSecond)) {
                         orderDomain.setSort(ORDER_SORT[position]);
                     }
-
-                    //重置rvOrderMenu
-                    rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, latestFragment, false));
+                    // 重置页码
                     DOMAIN_PAGE = 1;
                 }
                 latestFragment.initVideos();
-
-                //重置当前适配器内容
-                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, mData, latestFragment));
             } else if (rankingFragment != null) {
                 if (mViewPager.getCurrentItem() == 2) {
                     //当前页面为排行榜录像页面
@@ -303,16 +296,15 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
                     } else if (Arrays.equals(mData, orderRankingSecond)) {
                         orderRanking.setSort(ORDER_RANKING_SORT[position]);
                     }
-
-                    //重置rvOrderMenu
-                    rvOrderMenu.setAdapter(new OrderMenuRankingAdapter(mActivity, rankingFragment, false));
+                    // 重置页码
                     RANKING_PAGE = 1;
                 }
                 rankingFragment.initVideos();
-
-                //重置当前适配器内容
-                rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, mData, rankingFragment));
             }
+            //重置rvOrderMenu，根据已选项显示标题，此处不能重新实例化Adapter，避免parts变量被重置
+            rvOrderMenu.setAdapter(rvOrderMenu.getAdapter());
+            //重置当前适配器内容，着重显示已选项
+            rvOrderOption.setAdapter(rvOrderOption.getAdapter());
             //重置当前页面数
             resetPage();
             //关闭排序菜单

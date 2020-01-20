@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -44,7 +45,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -56,7 +57,8 @@ import android.widget.TextView;
 import com.flop.minesweeper.Adapter.OrderMenuAdapter;
 import com.flop.minesweeper.Adapter.OrderMenuRankingAdapter;
 import com.flop.minesweeper.Adapter.OrderOptionAdapter;
-import com.flop.minesweeper.Util.KeyboardUtil;
+import com.flop.minesweeper.Util.KeyboardHeightObserver;
+import com.flop.minesweeper.Util.KeyboardHeightProvider;
 import com.flop.minesweeper.Util.SDCardUtil;
 import com.flop.minesweeper.Util.ToastUtil;
 import com.flop.minesweeper.VideosFragment.LatestFragment;
@@ -94,14 +96,13 @@ import static com.flop.minesweeper.Constant.orderMenuWorld;
 import static com.flop.minesweeper.Constant.orderOptionFirst;
 import static com.flop.minesweeper.Constant.orderRankingFirst;
 import static com.flop.minesweeper.Constant.playerId;
-import static com.flop.minesweeper.Util.MarginsUtil.setMarginsBottom;
+import static com.flop.minesweeper.Util.EdgeUtil.setPaddingBottom;
 import static com.flop.minesweeper.Util.SDCardUtil.loadFileFromSDCard;
 
 /**
  * 主界面
  */
-public class VideosActivity extends AppCompatActivity implements KeyboardUtil.OnSoftKeyboardChangeListener,
-        NavigationView.OnNavigationItemSelectedListener {
+public class VideosActivity extends AppCompatActivity implements KeyboardHeightObserver, NavigationView.OnNavigationItemSelectedListener {
     private String TAG = "FLOP";
 
     private NewsFragment newsFragment;//雷界快讯
@@ -126,17 +127,21 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     //用户按返回键退出程序再重新进入时会触发软键盘监听事件，初始值0判断此种情况下不进行页面跳转
     private String videoPage = "0";
 
-    private ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener;
-    public boolean isKeyboardVisible;// true-->弹出,false-->末弹出,可直接继承这activity,然后通过这个标志位判断软键盘是否弹出.
+    // 软键盘监听
+    private KeyboardHeightProvider keyboardHeightProvider;
 
+    @BindView(R.id.drawer_layout) DrawerLayout drawer;//抽屉根布局
+
+    @BindView(R.id.rlVideosBottom) RelativeLayout rlVideosBottom;//底部导航栏根布局
+    @BindView(R.id.lvVideosBottom) LinearLayout lvVideosBottom;//底部导航容器
     @BindView(R.id.btnLastPage) Button btnLastPage;//上一页
     @BindView(R.id.btnNextPage) Button btnNextPage;//下一页
-    @BindView(R.id.etPage) EditText etPage;//指定输入页面
+    @BindView(R.id.etPage) EditText etPage;//页码输入框
     @BindView(R.id.btnFrontCursor) Button btnFrontCursor;//点击时光标移动到最前面
     @BindView(R.id.btnBehindCursor) Button btnBehindCursor;//点击时光标移动到最后面
 
-    @BindView(R.id.flOrder) FrameLayout flOrder;//
-    @BindView(R.id.rlOrder) RelativeLayout rlOrder;//
+    @BindView(R.id.rlOrder) RelativeLayout rlOrder;//筛选和排序根布局
+    @BindView(R.id.flOrder) FrameLayout flOrder;//筛选和排序菜单项根布局
     @BindView(R.id.lyOrder) LinearLayout lyOrder;//排序菜单
     @BindView(R.id.maskOrder) View maskOrder;//半透明遮罩，点击收回菜单
     @BindView(R.id.ivOrderIndicate) ImageView ivOrderIndicate;
@@ -146,13 +151,10 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     @BindView(R.id.tvOrder) TextView tvOrder;//顶部信息栏显示当前排序依据
 
     //定义Handler句柄,接收页面刷新信息
-    @SuppressLint("HandlerLeak")
-    public Handler handlerVideos = new Handler() {
+    public Handler handlerVideos = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message message) {
-            super.handleMessage(message);
-            String action = (String) message.obj;//当前进行的操作
-
+        public boolean handleMessage(Message msg) {
+            String action = (String) msg.obj;//当前进行的操作
             switch (action) {
                 case "RefreshedNewsFragment":
                     refreshingNews = false;
@@ -192,8 +194,9 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                     refreshingDomain = true;
                     break;
             }
+            return false;
         }
-    };
+    });
 
     //排序菜单是否显示
     public static boolean menuDrop = false;
@@ -205,36 +208,59 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
         videoPage = s.toString().replaceAll("^(0+)", "");
     }
 
-    //判断软键盘弹出与隐藏，进而判断是否已经完成页面的输入
+    /**
+     * 判断软键盘弹出与隐藏，进而判断是否已经完成页面的输入
+     */
     @Override
-    public void onSoftKeyBoardChange(int softKeyboardHeight, boolean visible) {
-        isKeyboardVisible = visible;
-        if (visible) {
+    public void onKeyboardHeightChanged(int height, int orientation) {
+        String or = orientation == Configuration.ORIENTATION_PORTRAIT ? "portrait" : "landscape";
+        // 键盘高度大于0则认为软键盘弹出
+        if (height > 0) {
+            // 设置光标选择按钮可点击
             btnFrontCursor.setClickable(true);
             btnBehindCursor.setClickable(true);
 
+            // 设置页码输入框样式
             etPage.setCursorVisible(true);
             etPage.setBackgroundResource(R.color.editView);
 
-            //解决软键盘挡住部分EditView的问题
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            setMarginsBottom(drawer, (int) etPage.getY());
-
+            // 设置和键盘高度相同的底边距
+            setPaddingBottom(height, rlVideosBottom, mViewPager);
         } else {
+            // 设置光标选择按钮不可点击
             btnFrontCursor.setClickable(false);
             btnBehindCursor.setClickable(false);
 
+            // 还原页码输入框
             etPage.setCursorVisible(false);
             etPage.setBackgroundResource(android.R.color.transparent);
 
-            //还原底部操作栏的Margin属性值
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            setMarginsBottom(drawer, 0);
+            // 还原视图的底边距
+            setPaddingBottom(0, rlVideosBottom, mViewPager);
 
-            if (!videoPage.equals("") && !videoPage.equals("0")) {
+            // 判断是否是合法的页码
+            if (!("").equals(videoPage) && !("0").equals(videoPage)) {
                 skipEditPage();
             } else {
                 resetPage();
+            }
+
+            // 重置指示方块的位置，防止屏幕旋转导致指示方块位置错误
+            // onConfigurationChanged方法内获取的宽度是旋转之前的，无法进行计算
+            if (flOrder.getVisibility() == View.VISIBLE) {
+                // 排行榜页面
+                if (mViewPager.getCurrentItem() == 2) {
+                    OrderMenuRankingAdapter orderMenuRankingAdapter = (OrderMenuRankingAdapter) rvOrderMenu.getAdapter();
+                    if (orderMenuRankingAdapter != null) {
+                        orderMenuRankingAdapter.moveIndicate(-1);
+                    }
+                    // 全部录像页面和我的地盘页面
+                } else if (mViewPager.getCurrentItem() == 3 || mViewPager.getCurrentItem() == 4) {
+                    final OrderMenuAdapter orderMenuAdapter = (OrderMenuAdapter) rvOrderMenu.getAdapter();
+                    if (orderMenuAdapter != null) {
+                        orderMenuAdapter.moveIndicate(-1);
+                    }
+                }
             }
         }
     }
@@ -268,8 +294,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     }
 
     //绑定按钮单击事件
-    @OnClick({R.id.btnLastPage, R.id.btnNextPage, R.id.btnFrontCursor, R.id.btnBehindCursor,
-            R.id.ivOrder})
+    @OnClick({R.id.btnLastPage, R.id.btnNextPage, R.id.btnFrontCursor, R.id.btnBehindCursor, R.id.ivOrder})
     public void bindViewOnClick(View v) {
         switch (v.getId()) {
             case R.id.btnLastPage:
@@ -287,7 +312,9 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 etPage.setSelection(etPage.length());
                 break;
             case R.id.ivOrder:
-                orderVideosMenu();
+                // 收起软键盘
+                closeKeyBoard();
+                toggleOrderVideosMenu();
                 break;
         }
     }
@@ -295,16 +322,16 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     //点击遮罩收回菜单
     @OnTouch(R.id.maskOrder)
     public boolean maskOrderTouch(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_UP:
-                closeOrderMenu();
-                break;
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            closeOrderMenu();
         }
         return false;
     }
 
     //关闭排序菜单,需要在OrderOptionAdapter中二次声明
     public void closeOrderMenu() {
+        // 如果排序菜单已经关闭
+        if (!menuDrop) return;
         //取消上一个动画
         if (orderAnimatorSet != null) orderAnimatorSet.cancel();
 
@@ -333,10 +360,10 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
 
     //打开排序菜单
     private void dropOrderMenu() {
+        // 如果排序菜单已经打开
+        if (menuDrop) return;
         //取消上一个动画，避免设定时间duration差异较大时发生错误
         if (orderAnimatorSet != null) orderAnimatorSet.cancel();
-
-//        setOrderTextColor();
 
         menuDrop = true;
         //遮罩拦截点击事件
@@ -376,8 +403,8 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
         orderAnimatorSet.start();
     }
 
-    //显示和隐藏排序信息框
-    private void orderVideosMenu() {
+    // 切换排序信息框的显示和隐藏
+    private void toggleOrderVideosMenu() {
         if (menuDrop) {
             closeOrderMenu();
         } else {
@@ -538,13 +565,26 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
         resetPage();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // 取消软键盘监听
+        keyboardHeightProvider.setKeyboardHeightObserver(null);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 设置软键盘监听
+        keyboardHeightProvider.setKeyboardHeightObserver(this);
+    }
+
     //退出程序
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        //取消软键盘监听
-        KeyboardUtil.removeSoftKeyboardObserver(this, mOnGlobalLayoutListener);
+        // 关闭软键盘监听
+        keyboardHeightProvider.close();
     }
 
     //声明适配器
@@ -572,7 +612,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
 
         //检测日志文件是否超过10M
         String logPath = "FlopMine/ErrorLog.txt";
-        if (SDCardUtil.getFileSize(logPath) > 10485760) {
+        if (SDCardUtil.getFileSize(logPath) > 10 * 1024 * 1024) {
             SDCardUtil.removeFileFromSDCard(logPath);
             ToastUtil.showShort(this, "日志文件超过10M已删除");
         }
@@ -584,28 +624,34 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
         setSupportActionBar(toolbar);
 
         //侧边栏
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerStateChanged(int newState) {
                 super.onDrawerStateChanged(newState);
-                // 如果当前有显示排序菜单
-                if (menuDrop) {
-                    // 打开侧边时自动关闭排序菜单
-                    closeOrderMenu();
-                }
+                // 打开侧边栏时自动关闭排序菜单
+                closeOrderMenu();
+                // 打开侧边栏时收起软键盘
+                closeKeyBoard();
             }
         };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // 设置键盘监听器
+        keyboardHeightProvider = new KeyboardHeightProvider(this);
+        drawer.post(new Runnable() {
+            @Override
+            public void run() {
+                // 在onResume方法之后开始监听软键盘
+                keyboardHeightProvider.start();
+            }
+        });
+
         //侧边栏点击事件监听
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        //设置键盘监听器
-        mOnGlobalLayoutListener = KeyboardUtil.observeSoftKeyboard(this, this);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -631,6 +677,16 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
             }
         });
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+    }
+
+    /**
+     * 收起软键盘
+     */
+    private void closeKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        }
     }
 
     //重置排序菜单
@@ -659,7 +715,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 //设置排序菜单布局管理器
                 rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuRanking.length, OrientationHelper.VERTICAL, false));
                 //设置排序菜单适配器
-                rvOrderMenu.setAdapter(new OrderMenuRankingAdapter(mActivity, rankingFragment, true));
+                rvOrderMenu.setAdapter(new OrderMenuRankingAdapter(mActivity, rankingFragment));
 
                 //设置排序选项布局管理器
                 rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
@@ -671,7 +727,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 //设置排序菜单布局管理器
                 rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, OrientationHelper.VERTICAL, false));
                 //设置排序菜单适配器
-                rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, allFragment, true));
+                rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, allFragment));
 
                 //设置排序选项布局管理器
                 rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
@@ -690,7 +746,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
                 //设置排序菜单布局管理器，我的地盘页面暂不支持指定BV
                 rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length - 1, OrientationHelper.VERTICAL, false));
                 //设置排序菜单适配器
-                rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, domainFragment, true));
+                rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, domainFragment));
 
                 //设置排序选项布局管理器
                 rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
@@ -721,7 +777,6 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
     //用户点击返回键关闭侧边栏
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (menuDrop) {
@@ -782,7 +837,6 @@ public class VideosActivity extends AppCompatActivity implements KeyboardUtil.On
         }
 
         //关闭侧边栏
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

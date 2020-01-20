@@ -72,17 +72,16 @@ public class NewGameActivity extends AppCompatActivity implements View.OnClickLi
     private Timer timer;//定时器
 
     //定义Handler句柄
-    @SuppressLint("HandlerLeak")
-    Handler handler = new Handler() {
+    Handler handler = new Handler(new Handler.Callback(){
         @Override
-        public void handleMessage(Message message) {
-            super.handleMessage(message);
-            if (message.what == 1) {
+        public boolean handleMessage(Message msg) {
+            if (msg.what == 1) {
                 millisecond = System.currentTimeMillis() - beginTime + passTime;
                 setTimeCount();
             }
+            return false;
         }
-    };
+    });
 
     @BindView(R.id.hsMinesweeper) HorizontalScrollView hsMinesweeper;//水平滑动框
     @BindView(R.id.glMinesweeper) GridLayout glMinesweeper;//方块总框架

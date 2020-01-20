@@ -8,12 +8,16 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <!--顶部导航栏和翻页控制页面-->
     <include layout="@layout/videos_app_bar" />
 
+    <!--底部导航栏-->
     <include layout="@layout/videos_content" />
 
+    <!--排序菜单-->
     <include layout="@layout/videos_order" />
 
+    <!--导航抽屉-->
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

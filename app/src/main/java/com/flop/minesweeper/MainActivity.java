@@ -58,7 +58,7 @@ import butterknife.OnClick;
 import static com.flop.minesweeper.Constant.VIDEO_INFO;
 import static com.flop.minesweeper.Constant.bean;
 import static com.flop.minesweeper.Constant.rawVideo;
-import static com.flop.minesweeper.Util.MarginsUtil.setMargins;
+import static com.flop.minesweeper.Util.EdgeUtil.setMargins;
 
 /***
  * 录像播放页面
@@ -120,24 +120,23 @@ public class MainActivity extends AppCompatActivity {
     DecimalFormat df = new DecimalFormat("#0.00");//格式化两位小数
 
     //定义Handler句柄
-    @SuppressLint("HandlerLeak")
-    Handler handler = new Handler() {
+    Handler handler = new Handler(new Handler.Callback(){
         @Override
-        public void handleMessage(Message message) {
-            super.handleMessage(message);
-            if (message.what == 1) {
+        public boolean handleMessage(Message msg) {
+            if (msg.what == 1) {
                 playEvents();
-            } else if (message.what == 200 && bean != null) {
+            } else if (msg.what == 200 && bean != null) {
                 initVideos();
-            } else if (message.what == -1) {
+            } else if (msg.what == -1) {
                 ToastUtil.showShort(MainActivity.this, "网络错误");
                 finish();
-            } else if (message.what == -2) {
+            } else if (msg.what == -2) {
                 ToastUtil.showShort(MainActivity.this, "录像不存在");
                 finish();
             }
+            return false;
         }
-    };
+    });
 
     @BindView(R.id.hsMinesweeper) HorizontalScrollView hsMinesweeper;//水平滑动框架
     @BindView(R.id.glMinesweeper) GridLayout glMinesweeper;//方块总框架
@@ -631,16 +630,16 @@ public class MainActivity extends AppCompatActivity {
             glColumns = 8;
             bombNumber = 10;
             sideLength = (glWidth < glHeight ? glWidth : glHeight) / 9;
-            setMargins(scMinesweeper, (glWidth - glColumns * sideLength) / 2, (glHeight - glRows * sideLength) / 2, 0, 0);
+            setMargins((glWidth - glColumns * sideLength) / 2, (glHeight - glRows * sideLength) / 2, 0, 0, scMinesweeper);
         } else if (level == 2) {
             glRows = 16;
             glColumns = 16;
             bombNumber = 40;
             sideLength = glHeight / 16;
             if (glWidth < glHeight) {//横屏状态
-                setMargins(scMinesweeper, 0, 0, 0, 0);
+                setMargins(0, 0, 0, 0, scMinesweeper);
             } else {
-                setMargins(scMinesweeper, (glWidth - glColumns * sideLength) / 2, (glHeight - glRows * sideLength) / 2, 0, 0);
+                setMargins((glWidth - glColumns * sideLength) / 2, (glHeight - glRows * sideLength) / 2, 0, 0, scMinesweeper);
             }
         } else if (level == 3) {
             glRows = 16;
@@ -648,9 +647,9 @@ public class MainActivity extends AppCompatActivity {
             bombNumber = 99;
             sideLength = glHeight / 16;
             if (glWidth < glHeight) {//横屏状态
-                setMargins(scMinesweeper, 0, 0, 0, 0);
+                setMargins(0, 0, 0, 0, scMinesweeper);
             } else {
-                setMargins(scMinesweeper, (glWidth - glColumns * sideLength) / 2, (glHeight - glRows * sideLength) / 2, 0, 0);
+                setMargins((glWidth - glColumns * sideLength) / 2, (glHeight - glRows * sideLength) / 2, 0, 0, scMinesweeper);
             }
         }
     }
@@ -831,7 +830,7 @@ public class MainActivity extends AppCompatActivity {
             //设置鼠标指针的位置
             if (plan < events.size() - 1) {
                 //+16为背景边框宽度
-                setMargins(ivMouse, (int) (events.get(plan).getX() * sideLength / 16 * scale + 16), (int) (events.get(plan).getY() * sideLength / 16 * scale + 16), 0, 0);
+                setMargins((int) (events.get(plan).getX() * sideLength / 16 * scale + 16), (int) (events.get(plan).getY() * sideLength / 16 * scale + 16), 0, 0, ivMouse);
             }
 
             front = current;
@@ -1376,9 +1375,9 @@ public class MainActivity extends AppCompatActivity {
         int marginVertical = (int) ((glHeight - glRows * sideLength * scale) / 2);
         if (marginHorizontal < 0) marginHorizontal = 0;
         if (marginVertical < 0) marginVertical = 0;
-        setMargins(scMinesweeper, marginHorizontal, marginVertical, marginHorizontal, marginVertical);
+        setMargins(marginHorizontal, marginVertical, marginHorizontal, marginVertical, scMinesweeper);
         tvUserId.setWidth((int) (glColumns * sideLength * scale) + 32);
-        setMargins(ivMouse, (int) (events.get(plan).getX() * sideLength / 16 * scale + 16), (int) (events.get(plan).getY() * sideLength / 16 * scale + 16), 0, 0);
+        setMargins((int) (events.get(plan).getX() * sideLength / 16 * scale + 16), (int) (events.get(plan).getY() * sideLength / 16 * scale + 16), 0, 0, ivMouse);
     }
 
     //根据级别初始化缩放比例

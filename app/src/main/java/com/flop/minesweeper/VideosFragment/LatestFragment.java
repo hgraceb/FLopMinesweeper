@@ -1,6 +1,5 @@
 package com.flop.minesweeper.VideosFragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -55,17 +54,17 @@ import static com.flop.minesweeper.Constant.orderOption;
  */
 public class LatestFragment extends Fragment {
 
-    private String mDate[];
-    private String mName[];
-    private String mSex[];
-    private String mBv[];
-    private String mBvs[];
-    private String mLevel[];
-    private String mTime[];
-    private String mStyle[];
-    private String mDown[];
-    private String mPlayerId[];
-    private String mVideoId[];
+    private String[] mDate;
+    private String[] mName;
+    private String[] mSex;
+    private String[] mBv;
+    private String[] mBvs;
+    private String[] mLevel;
+    private String[] mTime;
+    private String[] mStyle;
+    private String[] mDown;
+    private String[] mPlayerId;
+    private String[] mVideoId;
     private Thread mThread;
     private int playerId;
     //mData定义为static类型，保证用户按返回键之后onPause时数据不被销毁
@@ -195,11 +194,9 @@ public class LatestFragment extends Fragment {
     }
 
     //定义Handler句柄
-    @SuppressLint("HandlerLeak")
-    Handler handler = new Handler() {
+    Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             if (msg.what == 200) setVideoItem();
             else if (msg.what == -1) {
                 mRecyclerView.setVisibility(View.INVISIBLE);
@@ -210,8 +207,9 @@ public class LatestFragment extends Fragment {
                 // 设置Item为空，保证其他操作可以正常执行，如：翻页
                 setVideoItem();
             }
+            return false;
         }
-    };
+    });
 
     //请求雷网录像数据
     public void getVideoItem() {

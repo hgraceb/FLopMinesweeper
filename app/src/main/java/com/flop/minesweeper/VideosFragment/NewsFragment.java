@@ -1,6 +1,5 @@
 package com.flop.minesweeper.VideosFragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -53,16 +52,16 @@ import static com.flop.minesweeper.Constant.orderProgress;
  * Created by Flop on 2018/10/14.
  */
 public class NewsFragment extends Fragment {
-    private String mDate[];//日期
-    private String mName[];//姓名
-    private String mSex[];//性别
-    private String mLevel[];//级别
-    private String mRecord[];//纪录
-    private String mPromote[];//提升
-    private String mAchieve[];//提升
-    private String mDown[];//录像地址
-    private String mPlayerId[];//用户ID
-    private String mVideoId[];//录像ID
+    private String[] mDate;//日期
+    private String[] mName;//姓名
+    private String[] mSex;//性别
+    private String[] mLevel;//级别
+    private String[] mRecord;//纪录
+    private String[] mPromote;//提升
+    private String[] mAchieve;//提升
+    private String[] mDown;//录像地址
+    private String[] mPlayerId;//用户ID
+    private String[] mVideoId;//录像ID
     private int playerId;
     private static Thread mThread;
     //mData定义为static类型，保证用户按返回键之后onPause时数据不被销毁
@@ -204,11 +203,9 @@ public class NewsFragment extends Fragment {
     }
 
     //定义Handler句柄
-    @SuppressLint("HandlerLeak")
-    Handler handler = new Handler() {
+    Handler handler = new Handler(new Handler.Callback(){
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             if (msg.what == 200) setVideoItem();
             else if (msg.what == -1) {
                 mRecyclerView.setVisibility(View.INVISIBLE);
@@ -219,8 +216,9 @@ public class NewsFragment extends Fragment {
                 // 设置Item为空，保证其他操作可以正常执行，如：翻页
                 setVideoItem();
             }
+            return false;
         }
-    };
+    });
 
     public void getVideoItem() {
         mThread = new Thread() {

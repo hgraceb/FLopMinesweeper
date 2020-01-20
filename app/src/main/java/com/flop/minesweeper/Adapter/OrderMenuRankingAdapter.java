@@ -45,10 +45,10 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
     private TextView tvOrderTop;
     private ImageView ivOrderIndicate;
     private String TAG = "FLOP";
-    private boolean moveIndicate;
     private int itemCount;
+    private int parts;
 
-    public OrderMenuRankingAdapter(Activity activity, RankingFragment rankingFragment, boolean moveIndicate) {
+    public OrderMenuRankingAdapter(Activity activity, RankingFragment rankingFragment) {
         this.mActivity = activity;
         this.rvOrderOption = activity.findViewById(R.id.rvOrderOption);
         this.rvOrderMenu = activity.findViewById(R.id.rvOrderMenu);
@@ -56,9 +56,16 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
         this.rankingFragment = rankingFragment;
         this.tvOrderTop = mActivity.findViewById(R.id.tvOrder);
         this.ivOrderIndicate = mActivity.findViewById(R.id.ivOrderIndicate);
-        this.moveIndicate = moveIndicate;
         this.mOrderOption = orderRanking;
         this.itemCount = orderMenuRanking.length;
+        // 初始化指示方块位置
+        this.parts = 0;
+        rvOrderMenu.post(new Runnable() {
+            @Override
+            public void run() {
+                moveIndicate(parts);
+            }
+        });
     }
 
     @NonNull
@@ -79,7 +86,6 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
                         break;
                     }
                 }
-                if (moveIndicate) moveIndicate(position * 2 + 1);// 初始化指示方块位置
                 break;
             case 1:
                 for (int i = 0; i < ORDER_RANKING_SORT.length; i++) {
@@ -105,7 +111,7 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
         void chooseMenu() {
             switch (getLayoutPosition()) {
                 case 0:
-                    moveIndicate(getLayoutPosition() * 2 + 1);
+                    moveIndicate(getLayoutPosition());
                     rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderRankingFirst, rankingFragment));
                     break;
                 case 1:
@@ -114,7 +120,7 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
                         ToastUtil.showShort(mActivity, "进步排行榜页面暂不支持条件排序");
                         return;
                     } else {
-                        moveIndicate(getLayoutPosition() * 2 + 1);
+                        moveIndicate(getLayoutPosition());
                         rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderRankingSecond, rankingFragment));
                     }
                     break;
@@ -127,26 +133,29 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
         }
     }
 
-    //移动排序菜单菜单底部指示图标
-    private void moveIndicate(int parts) {
-        moveIndicate = false;
-        //取消上一个动画
+    /**
+     * 移动排序菜单菜单底部指示图标
+     *
+     * @param parts 目标菜单位置，-1则为重置当前位置，如旋转屏幕时需要重置位置
+     */
+    public void moveIndicate(int parts) {
+        // 判断目标位置
+        this.parts = parts == -1 ? this.parts : parts * 2 + 1;
+        // 取消上一个动画
         if (indicateAnimatorSet != null) indicateAnimatorSet.cancel();
-
-        //位移宽度
-        float width = rvOrderMenu.getWidth() / (itemCount * 2) * parts - dip2px(mActivity, 40) / 2;
-        //设定时间
-        long duration = 600;
-        //水平动画
-        ObjectAnimator animLyX;
-        //动画集合
+        // 位移宽度
+        float width = rvOrderMenu.getWidth() / (itemCount * 2) * this.parts - dip2px(mActivity, 40) / 2;
+        // 水平动画
+        ObjectAnimator animLyX = ObjectAnimator.ofFloat(ivOrderIndicate, "translationX", ivOrderIndicate.getTranslationX(), width);
+        // 动画集合
         indicateAnimatorSet = new AnimatorSet();
-
-        animLyX = ObjectAnimator.ofFloat(ivOrderIndicate, "translationX", ivOrderIndicate.getTranslationX(), width);
-
+        // 添加水平动画到集合中
         indicateAnimatorSet.play(animLyX);
+        // 设置插值器动画
         indicateAnimatorSet.setInterpolator(new OvershootInterpolator(1.2f));
-        indicateAnimatorSet.setDuration(duration);
+        // 设定动画时长
+        indicateAnimatorSet.setDuration(parts == -1 ? 0 : 600);
+        // 开始动画
         indicateAnimatorSet.start();
     }
 }

@@ -1,6 +1,5 @@
 package com.flop.minesweeper.VideosFragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -49,36 +48,36 @@ import static com.flop.minesweeper.Constant.orderRanking;
 public class RankingFragment extends Fragment {
     private String TAG = Constant.TAG;
 
-    private String mRanking[];//排名
-    private String mName[];//姓名
-    private String mPlayerId[];//用户ID
-    private String mTitle[];//称号
+    private String[] mRanking;//排名
+    private String[] mName;//姓名
+    private String[] mPlayerId;//用户ID
+    private String[] mTitle;//称号
 
-    private String mBegTimeDown[];//初级录像地址
-    private String mBegTimeId[];//初级录像ID
-    private String mBegBvsDown[];//初级录像地址
-    private String mBegBvsId[];//初级录像ID
-    private String mBegTime[];//初级时间
-    private String mBegBvs[];//初级Bvs
+    private String[] mBegTimeDown;//初级录像地址
+    private String[] mBegTimeId;//初级录像ID
+    private String[] mBegBvsDown;//初级录像地址
+    private String[] mBegBvsId;//初级录像ID
+    private String[] mBegTime;//初级时间
+    private String[] mBegBvs;//初级Bvs
 
-    private String mIntTimeDown[];//中级录像地址
-    private String mIntTimeId[];//中级录像ID
-    private String mIntBvsDown[];//中级录像地址
-    private String mIntBvsId[];//中级录像ID
-    private String mIntTime[];//中级时间
-    private String mIntBvs[];//中级Bvs
+    private String[] mIntTimeDown;//中级录像地址
+    private String[] mIntTimeId;//中级录像ID
+    private String[] mIntBvsDown;//中级录像地址
+    private String[] mIntBvsId;//中级录像ID
+    private String[] mIntTime;//中级时间
+    private String[] mIntBvs;//中级Bvs
 
-    private String mExpTimeDown[];//高级录像地址
-    private String mExpTimeId[];//高级录像ID
-    private String mExpBvsDown[];//高级录像地址
-    private String mExpBvsId[];//高级录像ID
-    private String mExpTime[];//高级时间
-    private String mExpBvs[];//高级Bvs
+    private String[] mExpTimeDown;//高级录像地址
+    private String[] mExpTimeId;//高级录像ID
+    private String[] mExpBvsDown;//高级录像地址
+    private String[] mExpBvsId;//高级录像ID
+    private String[] mExpTime;//高级时间
+    private String[] mExpBvs;//高级Bvs
 
-    private String mSumTime[];//总计时间
-    private String mSumBvs[];//总计Bvs
+    private String[] mSumTime;//总计时间
+    private String[] mSumBvs;//总计Bvs
 
-    private String mRankingChange[];//一个月内的排名变化
+    private String[] mRankingChange;//一个月内的排名变化
 
     private Thread mThread;
 
@@ -229,11 +228,9 @@ public class RankingFragment extends Fragment {
     }
 
     //定义Handler句柄
-    @SuppressLint("HandlerLeak")
-    Handler handler = new Handler() {
+    Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public boolean handleMessage(Message msg) {
             if (msg.what == 200) setVideoItem();
             else if (msg.what == -1) {
                 mRecyclerView.setVisibility(View.INVISIBLE);
@@ -244,8 +241,9 @@ public class RankingFragment extends Fragment {
                 // 设置Item为空，保证其他操作可以正常执行，如：翻页
                 setVideoItem();
             }
+            return false;
         }
-    };
+    });
 
     //请求雷网录像数据
     public void getVideoItem() {
@@ -308,7 +306,7 @@ public class RankingFragment extends Fragment {
                         }
 
                         // 如果是进步页面，则排名升降的数据在最前面
-                        if(orderRanking.getMenu().equals("Grow")){
+                        if (orderRanking.getMenu().equals("Grow")) {
                             // 如果有排名升降的数据
                             int index = response.indexOf("\"cursor");
                             if (index != -1) {
@@ -386,7 +384,7 @@ public class RankingFragment extends Fragment {
                         mSumBvs[i] = response.substring(2, response.indexOf("</"));
 
                         // 如果不是进步页面，则排名升降的数据在最后面
-                        if(!orderRanking.getMenu().equals("Grow")){
+                        if (!orderRanking.getMenu().equals("Grow")) {
                             // 如果有排名升降的数据
                             int index = response.indexOf("\"cursor");
                             if (index != -1) {
