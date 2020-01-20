@@ -245,9 +245,10 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
                 resetPage();
             }
 
-            // 重置指示方块的位置，防止屏幕旋转导致指示方块位置错误
-            // onConfigurationChanged方法内获取的宽度是旋转之前的，无法进行计算
-            if (flOrder.getVisibility() == View.VISIBLE) {
+            // 如果rlOrder可见，则说明已经打开过排序筛选菜单，需要重新设置各元素位置
+            if (rlOrder.getVisibility() == View.VISIBLE) {
+                // 重置指示方块的位置，防止屏幕旋转导致指示方块位置错误
+                // onConfigurationChanged方法内获取的宽度是旋转之前的，无法进行计算
                 // 排行榜页面
                 if (mViewPager.getCurrentItem() == 2) {
                     OrderMenuRankingAdapter orderMenuRankingAdapter = (OrderMenuRankingAdapter) rvOrderMenu.getAdapter();
@@ -260,6 +261,13 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
                     if (orderMenuAdapter != null) {
                         orderMenuAdapter.moveIndicate(-1);
                     }
+                }
+                // 如果没有显示排序筛选菜单，横屏时收回菜单后切换为竖屏可能导致部分重新显示，如全部录像页面的BV筛选
+                // 如果有显示排序筛选菜单则不用进行任何处理，界面会自动适应
+                if (!menuDrop) {
+                    // 取消收回菜单的动画
+                    if (orderAnimatorSet != null) orderAnimatorSet.cancel();
+                    lyOrder.setTranslationY(-lyOrder.getHeight());
                 }
             }
         }
