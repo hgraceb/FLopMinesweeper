@@ -57,13 +57,13 @@ import android.widget.TextView;
 import com.flop.minesweeper.Adapter.OrderMenuAdapter;
 import com.flop.minesweeper.Adapter.OrderMenuRankingAdapter;
 import com.flop.minesweeper.Adapter.OrderOptionAdapter;
+import com.flop.minesweeper.Fragment.LatestFragment;
+import com.flop.minesweeper.Fragment.NewsFragment;
+import com.flop.minesweeper.Fragment.RankingFragment;
 import com.flop.minesweeper.Util.KeyboardHeightObserver;
 import com.flop.minesweeper.Util.KeyboardHeightProvider;
 import com.flop.minesweeper.Util.SDCardUtil;
 import com.flop.minesweeper.Util.ToastUtil;
-import com.flop.minesweeper.Fragment.LatestFragment;
-import com.flop.minesweeper.Fragment.NewsFragment;
-import com.flop.minesweeper.Fragment.RankingFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -131,6 +131,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
     private KeyboardHeightProvider keyboardHeightProvider;
 
     @BindView(R.id.drawer_layout) DrawerLayout drawer;//抽屉根布局
+    @BindView(R.id.toolbar) Toolbar toolbar;//顶部导航栏
 
     @BindView(R.id.rlVideosBottom) RelativeLayout rlVideosBottom;//底部导航栏根布局
     @BindView(R.id.lvVideosBottom) LinearLayout lvVideosBottom;//底部导航容器
@@ -216,16 +217,19 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
         String or = orientation == Configuration.ORIENTATION_PORTRAIT ? "portrait" : "landscape";
         // 键盘高度大于0则认为软键盘弹出
         if (height > 0) {
-            // 设置光标选择按钮可点击
-            btnFrontCursor.setClickable(true);
-            btnBehindCursor.setClickable(true);
+            // 如果是点击底部页面输入框弹出的软键盘
+            if (etPage.isFocused()) {
+                // 设置光标选择按钮可点击
+                btnFrontCursor.setClickable(true);
+                btnBehindCursor.setClickable(true);
 
-            // 设置页码输入框样式
-            etPage.setCursorVisible(true);
-            etPage.setBackgroundResource(R.color.editView);
+                // 设置页码输入框样式
+                etPage.setCursorVisible(true);
+                etPage.setBackgroundResource(R.color.editView);
 
-            // 设置和键盘高度相同的底边距
-            setPaddingBottom(height, rlVideosBottom, mViewPager);
+                // 设置和键盘高度相同的底边距
+                setPaddingBottom(height, rlVideosBottom, mViewPager);
+            }
         } else {
             // 设置光标选择按钮不可点击
             btnFrontCursor.setClickable(false);
@@ -627,8 +631,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
 
         ButterKnife.bind(this);
 
-        //状态栏
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        // 设置顶部导航栏
         setSupportActionBar(toolbar);
 
         //侧边栏
