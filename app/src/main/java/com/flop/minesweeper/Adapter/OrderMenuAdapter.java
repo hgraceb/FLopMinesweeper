@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.flop.minesweeper.R;
 import com.flop.minesweeper.Util.ToastUtil;
 import com.flop.minesweeper.Variable.OrderOption;
-import com.flop.minesweeper.VideosFragment.LatestFragment;
+import com.flop.minesweeper.Fragment.LatestFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

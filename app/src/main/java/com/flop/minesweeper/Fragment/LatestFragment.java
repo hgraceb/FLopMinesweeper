@@ -1,4 +1,4 @@
-package com.flop.minesweeper.VideosFragment;
+package com.flop.minesweeper.Fragment;
 
 import android.app.Activity;
 import android.content.Context;

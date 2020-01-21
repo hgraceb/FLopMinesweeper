@@ -18,9 +18,9 @@ import android.widget.TextView;
 
 import com.flop.minesweeper.R;
 import com.flop.minesweeper.VideosActivity;
-import com.flop.minesweeper.VideosFragment.LatestFragment;
-import com.flop.minesweeper.VideosFragment.NewsFragment;
-import com.flop.minesweeper.VideosFragment.RankingFragment;
+import com.flop.minesweeper.Fragment.LatestFragment;
+import com.flop.minesweeper.Fragment.NewsFragment;
+import com.flop.minesweeper.Fragment.RankingFragment;
 
 import java.util.Arrays;
 

@@ -61,9 +61,9 @@ import com.flop.minesweeper.Util.KeyboardHeightObserver;
 import com.flop.minesweeper.Util.KeyboardHeightProvider;
 import com.flop.minesweeper.Util.SDCardUtil;
 import com.flop.minesweeper.Util.ToastUtil;
-import com.flop.minesweeper.VideosFragment.LatestFragment;
-import com.flop.minesweeper.VideosFragment.NewsFragment;
-import com.flop.minesweeper.VideosFragment.RankingFragment;
+import com.flop.minesweeper.Fragment.LatestFragment;
+import com.flop.minesweeper.Fragment.NewsFragment;
+import com.flop.minesweeper.Fragment.RankingFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
