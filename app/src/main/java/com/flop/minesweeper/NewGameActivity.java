@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.flop.minesweeper.Util.ToastUtil;
 
@@ -133,12 +134,7 @@ public class NewGameActivity extends AppCompatActivity implements View.OnClickLi
         getUserData();
         rlTop.setVisibility(View.VISIBLE);
         //等待页面布局完成后才能获取坐标位置，并初始化游戏
-        lyBottom.post(new Runnable() {
-            @Override
-            public void run() {
-                initGame(gameLevel);
-            }
-        });
+        lyBottom.post(() -> initGame(gameLevel));
     }
 
     //回到界面继续上次时间计时

@@ -31,7 +31,7 @@
                 android:layout_height="40dp"
                 android:visibility="visible">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvOrderMenu"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -46,7 +46,7 @@
 
             </FrameLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvOrderOption"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

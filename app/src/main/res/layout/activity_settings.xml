@@ -5,7 +5,7 @@
     android:background="@color/settingsBackground"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_setting"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -21,7 +21,7 @@
             android:textColor="@android:color/white"
             android:textSize="24sp"
             android:textStyle="normal" />
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"

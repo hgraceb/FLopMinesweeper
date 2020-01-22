@@ -20,24 +20,6 @@ import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,6 +36,22 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
 import com.flop.minesweeper.Adapter.OrderMenuAdapter;
 import com.flop.minesweeper.Adapter.OrderMenuRankingAdapter;
 import com.flop.minesweeper.Adapter.OrderOptionAdapter;
@@ -64,6 +62,8 @@ import com.flop.minesweeper.Util.KeyboardHeightObserver;
 import com.flop.minesweeper.Util.KeyboardHeightProvider;
 import com.flop.minesweeper.Util.SDCardUtil;
 import com.flop.minesweeper.Util.ToastUtil;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -709,7 +709,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
                 //隐藏菜单选项
                 flOrder.setVisibility(View.GONE);
                 //设置排序选项布局管理器
-                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, OrientationHelper.VERTICAL, false));
+                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, RecyclerView.VERTICAL, false));
                 //设置排序选项适配器
                 rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderMenuWorld, newsFragment));
                 break;
@@ -717,31 +717,31 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
                 //隐藏菜单选项
                 flOrder.setVisibility(View.GONE);
                 //设置排序选项布局管理器
-                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, OrientationHelper.VERTICAL, false));
+                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, RecyclerView.VERTICAL, false));
                 //设置排序选项适配器
                 rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderMenuWorld, latestFragment));
                 break;
             case 2:
                 flOrder.setVisibility(View.VISIBLE);
                 //设置排序菜单布局管理器
-                rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuRanking.length, OrientationHelper.VERTICAL, false));
+                rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuRanking.length, RecyclerView.VERTICAL, false));
                 //设置排序菜单适配器
                 rvOrderMenu.setAdapter(new OrderMenuRankingAdapter(mActivity, rankingFragment));
 
                 //设置排序选项布局管理器
-                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
+                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, RecyclerView.VERTICAL, false));
                 //设置排序选项适配器
                 rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderRankingFirst, rankingFragment));
                 break;
             case 3:
                 flOrder.setVisibility(View.VISIBLE);
                 //设置排序菜单布局管理器
-                rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, OrientationHelper.VERTICAL, false));
+                rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length, RecyclerView.VERTICAL, false));
                 //设置排序菜单适配器
                 rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, allFragment));
 
                 //设置排序选项布局管理器
-                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
+                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, RecyclerView.VERTICAL, false));
                 //设置排序选项适配器
                 rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, allFragment));
                 break;
@@ -755,12 +755,12 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
 
                 flOrder.setVisibility(View.VISIBLE);
                 //设置排序菜单布局管理器，我的地盘页面暂不支持指定BV
-                rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length - 1, OrientationHelper.VERTICAL, false));
+                rvOrderMenu.setLayoutManager(new GridLayoutManager(mActivity, orderMenuLevel.length - 1, RecyclerView.VERTICAL, false));
                 //设置排序菜单适配器
                 rvOrderMenu.setAdapter(new OrderMenuAdapter(mActivity, domainFragment));
 
                 //设置排序选项布局管理器
-                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, OrientationHelper.VERTICAL, false));
+                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 4, RecyclerView.VERTICAL, false));
                 //设置排序选项适配器
                 rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, domainFragment));
                 break;
@@ -775,7 +775,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
                 //隐藏菜单选项
                 flOrder.setVisibility(View.GONE);
                 //设置排序选项布局管理器
-                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, OrientationHelper.VERTICAL, false));
+                rvOrderOption.setLayoutManager(new GridLayoutManager(mActivity, 1, RecyclerView.VERTICAL, false));
                 //设置排序选项适配器
                 rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionFirst, progressFragment));
                 break;

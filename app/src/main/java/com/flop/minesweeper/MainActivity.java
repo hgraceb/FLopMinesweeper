@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -27,6 +25,9 @@ import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.flop.minesweeper.Util.NetWorkUtil;
 import com.flop.minesweeper.Util.ToastUtil;
@@ -120,22 +121,19 @@ public class MainActivity extends AppCompatActivity {
     DecimalFormat df = new DecimalFormat("#0.00");//格式化两位小数
 
     //定义Handler句柄
-    Handler handler = new Handler(new Handler.Callback(){
-        @Override
-        public boolean handleMessage(Message msg) {
-            if (msg.what == 1) {
-                playEvents();
-            } else if (msg.what == 200 && bean != null) {
-                initVideos();
-            } else if (msg.what == -1) {
-                ToastUtil.showShort(MainActivity.this, "网络错误");
-                finish();
-            } else if (msg.what == -2) {
-                ToastUtil.showShort(MainActivity.this, "录像不存在");
-                finish();
-            }
-            return false;
+    Handler handler = new Handler(msg -> {
+        if (msg.what == 1) {
+            playEvents();
+        } else if (msg.what == 200 && bean != null) {
+            initVideos();
+        } else if (msg.what == -1) {
+            ToastUtil.showShort(MainActivity.this, "网络错误");
+            finish();
+        } else if (msg.what == -2) {
+            ToastUtil.showShort(MainActivity.this, "录像不存在");
+            finish();
         }
+        return false;
     });
 
     @BindView(R.id.hsMinesweeper) HorizontalScrollView hsMinesweeper;//水平滑动框架

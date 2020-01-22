@@ -4,9 +4,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +13,15 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.flop.minesweeper.R;
-import com.flop.minesweeper.VideosActivity;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
 import com.flop.minesweeper.Fragment.LatestFragment;
 import com.flop.minesweeper.Fragment.NewsFragment;
 import com.flop.minesweeper.Fragment.RankingFragment;
+import com.flop.minesweeper.R;
+import com.flop.minesweeper.VideosActivity;
 
 import java.util.Arrays;
 

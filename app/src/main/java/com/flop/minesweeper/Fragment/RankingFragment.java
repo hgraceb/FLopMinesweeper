@@ -5,16 +5,17 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.flop.minesweeper.Adapter.RankingAdapter;
 import com.flop.minesweeper.Constant;
@@ -23,7 +24,6 @@ import com.flop.minesweeper.Util.LogUtil;
 import com.flop.minesweeper.Util.ToastUtil;
 import com.flop.minesweeper.VideosActivity;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -83,10 +83,10 @@ public class RankingFragment extends Fragment {
 
     private int playerId;
     //mData定义为static类型，保证用户按返回键之后onPause时数据不被销毁
-    public List<Map<String, String>> mData;
+    private List<Map<String, String>> mData;
 
-    Context mContext;
-    Activity mActivity;
+    private Context mContext;
+    private Activity mActivity;
 
     @BindView(R.id.rvVideos)
     RecyclerView mRecyclerView;
@@ -146,14 +146,11 @@ public class RankingFragment extends Fragment {
         VideosActivity videosActivity = new VideosActivity();
         handlerRefresh = videosActivity.handlerVideos;
 
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshlayout) {
-                if (mThread != null && !mThread.isAlive()) {
-                    refreshVideos();
-                } else {
-                    refreshlayout.finishRefresh(false);//传入false表示刷新失败
-                }
+        refreshLayout.setOnRefreshListener(refreshlayout -> {
+            if (mThread != null && !mThread.isAlive()) {
+                refreshVideos();
+            } else {
+                refreshlayout.finishRefresh(false);//传入false表示刷新失败
             }
         });
 

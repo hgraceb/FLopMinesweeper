@@ -1,52 +1,58 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.flop.minesweeper"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            //混淆代码
-            minifyEnabled true
-            //压缩
-            shrinkResources true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildTypes {
+            release {
+                //混淆代码
+                minifyEnabled true
+                //压缩
+                shrinkResources true
 
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
         }
+
+        //HttpClient
+        useLibrary 'org.apache.http.legacy'
+
     }
 
-    //HttpClient
-    useLibrary 'org.apache.http.legacy'
+    // Java 8
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
-}
+    dependencies {
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation 'androidx.appcompat:appcompat:1.1.0'
+        implementation 'com.google.android.material:material:1.0.0'
+        implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+        implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+        testImplementation 'junit:junit:4.12'
+        androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+        androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:support-v4:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+        //ButterKnife
+        implementation 'com.jakewharton:butterknife:10.2.1'
+        annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
-    //ButterKnife
-    implementation 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+        //Jsoup
+        implementation 'org.jsoup:jsoup:1.10.2'
 
-    //Jsoup
-    implementation 'org.jsoup:jsoup:1.10.2'
+        //下拉刷新
+        implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
 
-    //下拉刷新
-    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+        // 内存泄漏检测，debugImplementation because LeakCanary should only run in debug builds.
+        // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.1'
 
-    // 内存泄漏检测，debugImplementation because LeakCanary should only run in debug builds.
-    // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.1'
-
+    }
 }

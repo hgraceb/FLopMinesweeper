@@ -3,14 +3,15 @@ package com.flop.minesweeper.Adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.flop.minesweeper.Constant;
 import com.flop.minesweeper.MainActivity;
@@ -38,32 +39,32 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.MyViewHo
     private List<Map<String, String>> mData;
     private ViewPager mViewPager;
     //默认显示顺序为初级、中级、高级、总计，第一行为当前排序依据，剩下的三项按默认排序显示，并依据相应键值获取
-    private String optionSum[] = {
+    private String[] optionSum = {
             "总计：", "初级：", "中级：", "高级：",
             "Sum_Time", "Beg_Time", "Int_Time", "Exp_Time",
             " | ", " | ", " | ", " | ",
             "Sum_3BVS", "Beg_3BVS", "Int_3BVS", "Exp_3BVS"};
-    private String optionBeg[] = {
+    private String[] optionBeg = {
             "初级：", "中级：", "高级：", "总计：",
             "Beg_Time", "Int_Time", "Exp_Time", "Sum_Time",
             " | ", " | ", " | ", " | ",
             "Beg_3BVS", "Int_3BVS", "Exp_3BVS", "Sum_3BVS"};
-    private String optionInt[] = {
+    private String[] optionInt = {
             "中级：", "初级：", "高级：", "总计：",
             "Int_Time", "Beg_Time", "Exp_Time", "Sum_Time",
             " | ", " | ", " | ", " | ",
             "Int_3BVS", "Beg_3BVS", "Exp_3BVS", "Sum_3BVS"};
-    private String optionExp[] = {
+    private String[] optionExp = {
             "高级：", "初级：", "中级：", "总计：",
             "Exp_Time", "Beg_Time", "Int_Time", "Sum_Time",
             " | ", " | ", " | ", " | ",
             "Exp_3BVS", "Beg_3BVS", "Int_3BVS", "Sum_3BVS"};
-    private String optionNull[] = {//无可用信息
+    private String[] optionNull = {//无可用信息
             "", "", "", "",
             "", "", "", "",
             "", "", "", "",
             "", "", "", ""};
-    private String optionCurrent[] = {};//当前item内信息排版
+    private String[] optionCurrent = {};//当前item内信息排版
 
     public RankingAdapter(Activity activity, List<Map<String, String>> data) {
         this.mActivity = activity;
@@ -93,7 +94,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Map<String, String> keyValuePair = mData.get(position);
 
-        String current[] = this.optionCurrent;
+        String[] current = this.optionCurrent;
 
         if (keyValuePair.get("mName") != null) {//判断当前item是否有信息
             //排名和姓名重新显示
@@ -195,7 +196,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.MyViewHo
                 R.id.tvLevelFirst, R.id.tvLevelSecond, R.id.tvLevelThird, R.id.tvLevelFourth,
                 R.id.tvTimeFirst, R.id.tvTimeSecond, R.id.tvTimeThird, R.id.tvTimeFourth,
                 R.id.tvBvsFirst, R.id.tvBvsSecond, R.id.tvBvsThird, R.id.tvBvsFourth})
-        public void bindViewOnClick(View v) {
+        void bindViewOnClick(View v) {
             switch (v.getId()) {
                 case R.id.lyVideo:
                     playVideo(0);//传入0获取空数据
