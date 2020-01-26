@@ -13,6 +13,9 @@ import com.flop.minesweeper.zhangye.bean.VideoDisplayBean;
 public class Constant {
     public static final String TAG = "FLOP";//日志TAG
 
+    // 更新信息请求地址
+    public static final String UPDATE_URL = "https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/update.json";
+
     public static RawVideoBean rawVideo;//录像事件
     public static VideoDisplayBean bean;//录像信息
 

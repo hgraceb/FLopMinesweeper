@@ -7,7 +7,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildTypes {
             release {
@@ -23,6 +23,21 @@ android {
         //HttpClient
         useLibrary 'org.apache.http.legacy'
 
+    }
+
+    // 自定义APK名称
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            // 获取时间
+            def date = new Date().format("yyMMdd", TimeZone.getTimeZone("GMT+08"))
+            // Release版本
+            if (':app:assembleRelease' in gradle.startParameter.taskNames) {
+                outputFileName = "FlopMine_${variant.versionName}.${date}_Alpha.apk"
+                // Debug版本
+            } else if (':app:assembleDebug' in gradle.startParameter.taskNames) {
+                outputFileName = "FlopMine_${variant.versionName}.${date}_Debug.apk"
+            }
+        }
     }
 
     // Java 8

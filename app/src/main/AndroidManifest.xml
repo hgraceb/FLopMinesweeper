@@ -5,10 +5,12 @@
 
     <!--网络请求-->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--网络信息-->
+    <!--查看网络连接-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--设备震动-->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!--请求安装文件包-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <!--以下权限还需要通过代码动态申请-->
     <!--读写内存-->
@@ -79,6 +81,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--适配Android7.0打开安装包-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
 
     </application>
 

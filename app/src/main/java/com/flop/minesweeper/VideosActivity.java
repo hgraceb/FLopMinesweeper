@@ -62,6 +62,7 @@ import com.flop.minesweeper.Util.KeyboardHeightObserver;
 import com.flop.minesweeper.Util.KeyboardHeightProvider;
 import com.flop.minesweeper.Util.SDCardUtil;
 import com.flop.minesweeper.Util.ToastUtil;
+import com.flop.minesweeper.update.UpdateManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -88,6 +89,7 @@ import static com.flop.minesweeper.Constant.RANKING_ITEM;
 import static com.flop.minesweeper.Constant.RANKING_PAGE;
 import static com.flop.minesweeper.Constant.REQUEST_EXTERNAL_STORAGE_CODE;
 import static com.flop.minesweeper.Constant.STORAGE_PERMISSION_REQUEST_CODE;
+import static com.flop.minesweeper.Constant.UPDATE_URL;
 import static com.flop.minesweeper.Constant.VIDEO_REQUEST_CODE_LOCAL;
 import static com.flop.minesweeper.Constant.orderAnimatorSet;
 import static com.flop.minesweeper.Constant.orderMenuLevel;
@@ -621,6 +623,10 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
             // 没有读写的权限，去申请读写的权限，会弹出对话框
             ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE_CODE);
         }
+
+        // 检查应用更新
+        // UpdateUtil.clean(this);
+        UpdateManager.create(this).setUrl(UPDATE_URL).check();
 
         //检测日志文件是否超过10M
         String logPath = "FlopMine/ErrorLog.txt";

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--fileProvider对应的路径-->
+<resources>
+    <paths>
+        <!--缓存文件路径，path可以填""、"."、".."、"../.."等等-->
+        <external-cache-path name="cache" path="." />
+    </paths>
+</resources>
