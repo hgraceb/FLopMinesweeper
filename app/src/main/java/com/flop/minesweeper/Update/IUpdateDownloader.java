@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
-public interface OnFailureListener {
-    void onFailure(UpdateError error);
+import java.io.File;
+
+public interface IUpdateDownloader {
+    void download(IDownloadAgent agent, String url, File temp);
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
 import org.json.JSONException;
 import org.json.JSONObject;

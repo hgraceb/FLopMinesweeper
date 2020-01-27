@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
-public interface IUpdateAgent {
-    UpdateInfo getInfo();
-
-    void update();
-
-    void ignore();
+public interface OnFailureListener {
+    void onFailure(UpdateError error);
 }

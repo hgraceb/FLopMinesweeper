@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
-import java.io.File;
+import androidx.core.content.FileProvider;
 
-public interface IUpdateDownloader {
-    void download(IDownloadAgent agent, String url, File temp);
+public class UpdateFileProvider extends FileProvider {
 }

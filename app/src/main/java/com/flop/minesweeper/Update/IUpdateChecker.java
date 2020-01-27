@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
-public interface IDownloadAgent extends OnDownloadListener {
-    UpdateInfo getInfo();
-
-    void setError(UpdateError error);
+public interface IUpdateChecker {
+    void check(ICheckAgent agent, String url);
 }

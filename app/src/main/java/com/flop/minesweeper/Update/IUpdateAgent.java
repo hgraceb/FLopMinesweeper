@@ -14,21 +14,12 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
-public class DefaultDownloadListener implements OnDownloadListener {
-    @Override
-    public void onStart() {
+public interface IUpdateAgent {
+    UpdateInfo getInfo();
 
-    }
+    void update();
 
-    @Override
-    public void onFinish() {
-
-    }
-
-    @Override
-    public void onProgress(int progress) {
-
-    }
+    void ignore();
 }

@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
-public interface IUpdateParser {
-    UpdateInfo parse(String source) throws Exception;
+public interface ICheckAgent {
+    void setInfo(String info);
+
+    void setError(UpdateError error);
 }

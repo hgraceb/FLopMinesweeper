@@ -15,7 +15,7 @@
  * along with Siebe Projects samples.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.flop.minesweeper.Util;
+package com.flop.minesweeper.Util.Keyboard;
 
 import android.app.Activity;
 import android.content.res.Configuration;

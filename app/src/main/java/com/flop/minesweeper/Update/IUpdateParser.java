@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
-import androidx.core.content.FileProvider;
-
-public class UpdateFileProvider extends FileProvider {
+public interface IUpdateParser {
+    UpdateInfo parse(String source) throws Exception;
 }

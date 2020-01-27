@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
-public interface IUpdateChecker {
-    void check(ICheckAgent agent, String url);
+public interface OnDownloadListener {
+
+    void onStart();
+
+    void onProgress(int progress);
+
+    void onFinish();
 }

@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.flop.minesweeper.update;
+package com.flop.minesweeper.Update;
 
-public interface ICheckAgent {
-    void setInfo(String info);
-
-    void setError(UpdateError error);
+public interface IUpdatePrompter {
+    void prompt(IUpdateAgent agent);
 }
