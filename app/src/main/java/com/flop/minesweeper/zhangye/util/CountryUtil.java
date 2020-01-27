@@ -15,7 +15,7 @@ public class CountryUtil {
         return index;
     }
 
-    public static String strCountryName[][] = {
+    public static String[][] strCountryName = {
             //默认采用中文字符编码
             {"未设定", "(N/A)", "0", "gb2312"},
             {"阿富汗", "Afghanistan", "2d", ""},
@@ -95,7 +95,7 @@ public class CountryUtil {
             {"瑞士", "Switzerland", "24", ""},
             {"中国", "Taiwan", "25", ""},
             {"泰国", "Thailand", "26", ""},
-            {"火鸡", "Turkey", "27", ""},
+            {"土耳其", "Turkey", "27", ""},
             {"阿联酋", "UAE", "52", ""},
             {"乌克兰", "Ukraine", "28", ""},
             {"美国", "USA", "29", ""},
