@@ -91,6 +91,7 @@ import static com.flop.minesweeper.Constant.orderMenuWorld;
 import static com.flop.minesweeper.Constant.orderOptionFirst;
 import static com.flop.minesweeper.Constant.orderRankingFirst;
 import static com.flop.minesweeper.Constant.playerId;
+import static com.flop.minesweeper.Util.EdgeUtil.setMarginsTop;
 import static com.flop.minesweeper.Util.EdgeUtil.setPaddingBottom;
 import static com.flop.minesweeper.Util.SDCardUtil.loadFileFromSDCard;
 
@@ -631,6 +632,11 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
 
         // 设置顶部导航栏
         setSupportActionBar(toolbar);
+
+        toolbar.post(() -> {
+            // 设置排序菜单位置在顶部导航栏下面
+            setMarginsTop(toolbar.getBottom(), rlOrder);
+        });
 
         //侧边栏
         drawer = findViewById(R.id.drawer_layout);

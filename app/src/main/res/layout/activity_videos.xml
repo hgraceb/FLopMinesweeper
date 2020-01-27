@@ -5,8 +5,9 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     tools:openDrawer="start">
+    <!--如果DrawerLayout根布局设置 android:fitsSystemWindows="true" 则状态栏会为半透明-->
 
     <!--顶部导航栏和翻页控制页面-->
     <include layout="@layout/videos_app_bar" />

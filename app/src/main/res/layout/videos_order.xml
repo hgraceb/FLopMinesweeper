@@ -1,60 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlOrder"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:visibility="invisible">
 
-    <RelativeLayout
-        android:id="@+id/rlOrder"
+    <!--半透明遮罩-->
+    <View
+        android:id="@+id/maskOrder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:visibility="invisible">
+        android:background="@color/translucent"
+        android:clickable="true"
+        android:focusable="true" />
 
-        <!--半透明遮罩-->
-        <View
-            android:id="@+id/maskOrder"
+    <LinearLayout
+        android:id="@+id/lyOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/flOrder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/translucent"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <LinearLayout
-            android:id="@+id/lyOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:id="@+id/flOrder"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:visibility="visible">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvOrderMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:overScrollMode="never" />
-
-                <ImageView
-                    android:id="@+id/ivOrderIndicate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/triangle_up"
-                    android:contentDescription="@null" />
-
-            </FrameLayout>
+            android:layout_height="40dp"
+            android:visibility="visible">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvOrderOption"
+                android:id="@+id/rvOrderMenu"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/orderBackground"
+                android:layout_height="40dp"
                 android:overScrollMode="never" />
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/ivOrderIndicate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/triangle_up"
+                android:contentDescription="@null" />
 
-    </RelativeLayout>
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOrderOption"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/orderBackground"
+            android:overScrollMode="never" />
+
+    </LinearLayout>
 
 </RelativeLayout>
