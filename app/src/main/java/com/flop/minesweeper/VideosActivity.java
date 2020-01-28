@@ -16,6 +16,7 @@ import android.provider.Settings;
 import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,11 +52,11 @@ import com.flop.minesweeper.Adapter.OrderOptionAdapter;
 import com.flop.minesweeper.Fragment.LatestFragment;
 import com.flop.minesweeper.Fragment.NewsFragment;
 import com.flop.minesweeper.Fragment.RankingFragment;
+import com.flop.minesweeper.Update.UpdateManager;
 import com.flop.minesweeper.Util.Keyboard.KeyboardHeightObserver;
 import com.flop.minesweeper.Util.Keyboard.KeyboardHeightProvider;
 import com.flop.minesweeper.Util.SDCardUtil;
 import com.flop.minesweeper.Util.ToastUtil;
-import com.flop.minesweeper.Update.UpdateManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -302,7 +303,7 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
     }
 
     //绑定按钮单击事件
-    @OnClick({R.id.btnLastPage, R.id.btnNextPage, R.id.btnFrontCursor, R.id.btnBehindCursor, R.id.ivOrder})
+    @OnClick({R.id.btnLastPage, R.id.btnNextPage, R.id.btnFrontCursor, R.id.btnBehindCursor})
     public void bindViewOnClick(View v) {
         switch (v.getId()) {
             case R.id.btnLastPage:
@@ -318,11 +319,6 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
             case R.id.btnBehindCursor:
                 etPage.requestFocus();
                 etPage.setSelection(etPage.length());
-                break;
-            case R.id.ivOrder:
-                // 收起软键盘
-                closeKeyBoard();
-                toggleOrderVideosMenu();
                 break;
         }
     }
@@ -804,29 +800,29 @@ public class VideosActivity extends AppCompatActivity implements KeyboardHeightO
         }
     }
 
-//    //创建菜单栏
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    //主界面菜单项点击事件
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    //创建菜单栏
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // 加载菜单布局文件
+        getMenuInflater().inflate(R.menu.activity_main_toolbar, menu);
+        return true;
+    }
+
+    //主界面菜单项点击事件
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        // 点击筛选按钮
+        if (id == R.id.action_filter) {
+            // 收起软键盘
+            closeKeyBoard();
+            // 切换筛选菜单
+            toggleOrderVideosMenu();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     //侧边栏点击事件
     @Override

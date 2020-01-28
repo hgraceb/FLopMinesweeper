@@ -25,33 +25,19 @@
             android:background="@drawable/bar_tool"
             android:fitsSystemWindows="true"
             app:contentInsetStartWithNavigation="0dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title=" ">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvOrder"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="10"
-                    android:gravity="center"
-                    android:text="全部"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/small_text" />
-
-                <ImageView
-                    android:id="@+id/ivOrder"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@drawable/menu_three_point"
-                    android:clickable="true"
-                    android:contentDescription="@null"
-                    android:focusable="true" />
-
-            </LinearLayout>
+            <!--隐藏Toolbar原有标题（显示为空格），自定义标题实现居中-->
+            <TextView
+                android:id="@+id/tvOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="全部"
+                android:textColor="@color/white"
+                android:textSize="@dimen/small_text" />
 
         </androidx.appcompat.widget.Toolbar>
 

@@ -33,5 +33,7 @@
     <string name="nav_header_title">Flop Mine</string>
     <string name="nav_header_subtitle">android.flop.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+
+    <!--顶部导航栏-->
+    <string name="action_filter">筛选</string>
 </resources>
