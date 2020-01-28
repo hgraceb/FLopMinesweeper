@@ -1,12 +1,8 @@
 package com.flop.minesweeper.zhangye.util;
 
 
-import android.util.Log;
-
 import com.flop.minesweeper.zhangye.bean.BoardBean;
 import com.flop.minesweeper.zhangye.bean.CellBean;
-
-import static com.flop.minesweeper.Constant.TAG;
 
 /**
  * board解析

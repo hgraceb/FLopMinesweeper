@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rlVideosBottom"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <!--消费点击事件，防止点击事件穿透-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lvVideosBottom"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bar_videos_page"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnLastPage"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:text="上一页"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/middle_text" />
+
+        <Button
+            android:id="@+id/btnFrontCursor"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="第"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/middle_text" />
+
+        <!--imeOptions属性设置输入框横屏时半屏显示-->
+        <EditText
+            android:id="@+id/etPage"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:imeOptions="flagNoFullscreen|flagNoExtractUi"
+            android:inputType="number"
+            android:maxLength="5"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/middle_text" />
+
+
+        <Button
+            android:id="@+id/btnBehindCursor"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="页"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/middle_text" />
+
+        <Button
+            android:id="@+id/btnNextPage"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:text="下一页"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/middle_text" />
+
+    </LinearLayout>
+
+</RelativeLayout>

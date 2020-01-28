@@ -13,7 +13,7 @@ import com.flop.minesweeper.zhangye.bean.VideoDisplayBean;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.flop.minesweeper.Constant.rawVideo;
+import static com.flop.minesweeper.variable.Constant.rawVideo;
 
 /**
  * 拆分方法该方法主要内容为对mvf文件解析

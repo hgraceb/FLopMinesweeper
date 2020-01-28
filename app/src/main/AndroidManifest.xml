@@ -26,7 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".ErrorLogInfo.InitApplication"
+        android:name=".errorLogInfo.InitApplication"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
 
@@ -38,7 +38,7 @@
 
         <!-- 录像播放 -->
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.VideoPlayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="sensorLandscape"
@@ -48,7 +48,7 @@
 
         <!-- 设置 -->
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activity.GameSettingsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="设置"
             android:theme="@style/AppTheme.FullScreen">
@@ -57,7 +57,7 @@
 
         <!-- 新游戏 -->
         <activity
-            android:name=".NewGameActivity"
+            android:name=".activity.NewGameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="新游戏"
             android:screenOrientation="portrait"
@@ -69,7 +69,7 @@
         <!--需要用Toolbar，主题必须为NoActionBar-->
         <!--windowSoftInputMode属性选择adjustNothing，手动调整输入框显示高度-->
         <activity
-            android:name=".VideosActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="user"

@@ -3,17 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <!--操作-->
     <group
-        android:id="@+id/groupFirst"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/navHome"
-            android:icon="@drawable/ic_menu_home"
-            android:title="首页" />
-    </group>
-
-    <group
-        android:id="@+id/groupSecond">
+        android:id="@+id/groupOperation">
         <item
             android:id="@+id/navNew"
             android:icon="@drawable/ic_menu_gallery"
@@ -24,8 +16,9 @@
             android:title="本地录像" />
     </group>
 
+    <!--其他-->
     <group
-        android:id="@+id/groupThird"
+        android:id="@+id/groupOther"
         android:checkableBehavior="single">
         <item
             android:id="@+id/navSettings"

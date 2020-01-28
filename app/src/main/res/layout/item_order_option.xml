@@ -14,8 +14,4 @@
         android:focusable="true"
         android:gravity="center" />
 
-    <!--android:background="@drawable/ripple_divider_bottom"-->
-    <!--android:textColor="@color/text_color_white"-->
-    <!--android:background="@drawable/order_option_background"-->
-
 </LinearLayout>

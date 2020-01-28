@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.flop.minesweeper.Constant.rawVideo;
+import static com.flop.minesweeper.variable.Constant.rawVideo;
 
 /**
  * 拆分方法该方法主要内容为对avf文件解析 关于avf 介绍
