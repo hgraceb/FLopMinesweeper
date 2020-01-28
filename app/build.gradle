@@ -56,6 +56,9 @@ android {
         androidTestImplementation 'androidx.test.ext:junit:1.1.1'
         androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+        // 用户偏好设置
+        implementation 'androidx.preference:preference:1.1.0'
+
         //ButterKnife
         implementation 'com.jakewharton:butterknife:10.2.1'
         annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!--顶部导航栏容器，用于设置主题和底部阴影-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <!--避免Toolbar设置fitSystemWindows="true"，当软键盘弹出时Toolbar被拉伸-->
+        <com.flop.minesweeper.fragment.ImmerseGroup
+            android:id="@+id/immerseGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bar_tool"
+            android:fitsSystemWindows="true">
+
+            <!--contentInsetStartWithNavigation属性解决Support包24以上Home键右边距留白问题-->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentInsetStartWithNavigation="0dp">
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.flop.minesweeper.fragment.ImmerseGroup>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--设置选项页面-->
+    <FrameLayout
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

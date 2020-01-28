@@ -3,71 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.flop.minesweeper">
 
-    <!--网络请求-->
+    <!-- 网络请求 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--查看网络连接-->
+    <!-- 查看网络连接 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--设备震动-->
+    <!-- 设备震动 -->
     <uses-permission android:name="android.permission.VIBRATE" />
-    <!--请求安装文件包-->
+    <!-- 请求安装文件包 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
-    <!--以下权限还需要通过代码动态申请-->
-    <!--读写内存-->
+    <!-- 以下权限还需要通过代码动态申请 -->
+    <!-- 读写内存 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!--.ErrorLogInfo.InitApplication为全局异常捕获-->
-    <!--Android9.0 默认是禁止所有的http,usesCleartextTraffic属性为true才可以正常进行网络请求-->
     <application
+        android:name=".errorLogInfo.InitApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".errorLogInfo.InitApplication"
-        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
 
         <!-- 每个activity都要加上configChanges -->
         <!-- 按电源键之后的生命周期是onDestroy再onCreate???(黑人问号脸) -->
-        <!-- 可能导致莫名其妙的BUG，如：定时器偷吃炫迈 -->
-
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-
-        <!-- 录像播放 -->
-        <activity
-            android:name=".activity.VideoPlayActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/AppTheme.FullScreen">
-
-        </activity>
-
-        <!-- 设置 -->
-        <activity
-            android:name=".activity.GameSettingsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="设置"
-            android:theme="@style/AppTheme.FullScreen">
-
-        </activity>
-
-        <!-- 新游戏 -->
-        <activity
-            android:name=".activity.NewGameActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="新游戏"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FullScreen">
-
-        </activity>
+        <!-- 不加可能导致莫名其妙的BUG -->
+        <!-- 如：录像播放页面的定时器偷吃炫迈，设置页面的EditText唤出软键盘在转屏后页面崩溃 -->
 
         <!-- 主界面 -->
-        <!--需要用Toolbar，主题必须为NoActionBar-->
-        <!--windowSoftInputMode属性选择adjustNothing，手动调整输入框显示高度-->
+        <!-- 需要用Toolbar，主题必须为NoActionBar -->
+        <!-- windowSoftInputMode属性选择adjustNothing，手动调整输入框显示高度 -->
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -82,7 +49,38 @@
             </intent-filter>
         </activity>
 
-        <!--适配Android7.0打开安装包-->
+        <!--设置页面-->
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="user"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 录像播放 -->
+        <activity
+            android:name=".activity.VideoPlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/AppTheme.FullScreen" />
+
+        <!-- 游戏设置 -->
+        <activity
+            android:name=".activity.GameSettingsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="设置"
+            android:theme="@style/AppTheme.FullScreen" />
+
+        <!-- 新游戏 -->
+        <activity
+            android:name=".activity.NewGameActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="新游戏"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen" />
+
+        <!-- 适配Android7.0打开安装包 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
@@ -90,9 +88,8 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
-
     </application>
 
 </manifest>

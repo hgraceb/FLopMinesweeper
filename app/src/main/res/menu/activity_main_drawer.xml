@@ -4,8 +4,7 @@
     tools:showIn="navigation_view">
 
     <!--操作-->
-    <group
-        android:id="@+id/groupOperation">
+    <group android:id="@+id/groupOperation">
         <item
             android:id="@+id/navNew"
             android:icon="@drawable/ic_menu_gallery"
@@ -17,9 +16,7 @@
     </group>
 
     <!--其他-->
-    <group
-        android:id="@+id/groupOther"
-        android:checkableBehavior="single">
+    <group android:id="@+id/groupOther">
         <item
             android:id="@+id/navSettings"
             android:icon="@drawable/ic_menu_settings"

@@ -46,13 +46,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.flop.minesweeper.R;
 import com.flop.minesweeper.adapter.OrderMenuAdapter;
 import com.flop.minesweeper.adapter.OrderMenuRankingAdapter;
 import com.flop.minesweeper.adapter.OrderOptionAdapter;
 import com.flop.minesweeper.fragment.LatestFragment;
 import com.flop.minesweeper.fragment.NewsFragment;
 import com.flop.minesweeper.fragment.RankingFragment;
-import com.flop.minesweeper.R;
 import com.flop.minesweeper.update.UpdateManager;
 import com.flop.minesweeper.util.Keyboard.KeyboardHeightObserver;
 import com.flop.minesweeper.util.Keyboard.KeyboardHeightProvider;
@@ -67,6 +67,9 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import butterknife.OnTouch;
 
+import static com.flop.minesweeper.util.EdgeUtil.setMarginsTop;
+import static com.flop.minesweeper.util.EdgeUtil.setPaddingBottom;
+import static com.flop.minesweeper.util.SDCardUtil.loadFileFromSDCard;
 import static com.flop.minesweeper.variable.Constant.ALL_ITEM;
 import static com.flop.minesweeper.variable.Constant.ALL_PAGE;
 import static com.flop.minesweeper.variable.Constant.DOMAIN_ITEM;
@@ -93,9 +96,6 @@ import static com.flop.minesweeper.variable.Constant.orderMenuWorld;
 import static com.flop.minesweeper.variable.Constant.orderOptionFirst;
 import static com.flop.minesweeper.variable.Constant.orderRankingFirst;
 import static com.flop.minesweeper.variable.Constant.playerId;
-import static com.flop.minesweeper.util.EdgeUtil.setMarginsTop;
-import static com.flop.minesweeper.util.EdgeUtil.setPaddingBottom;
-import static com.flop.minesweeper.util.SDCardUtil.loadFileFromSDCard;
 
 /**
  * 主界面
@@ -828,19 +828,19 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
     //侧边栏点击事件
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.navNew) {
+            // 打开新游戏页面
             startActivity(new Intent(this, NewGameActivity.class));
         } else if (id == R.id.navLocal) {
+            // 选择本地录像文件
             chooseLocalVideo();
         } else if (id == R.id.navSettings) {
-            ToastUtil.showShort(this, "设置");
+            // 打开设置页面
+            startActivity(new Intent(this, SettingsActivity.class));
         }
 
-        //关闭侧边栏
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
