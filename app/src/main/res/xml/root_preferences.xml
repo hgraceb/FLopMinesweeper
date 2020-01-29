@@ -17,9 +17,29 @@
 <!--用户设置-->
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header">
+    <!--app:iconSpaceReserved：没有图标时是否保留图标的位置-->
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="我的地盘 / 进步历程">
+
+        <!--app:useSimpleSummaryProvider：是否显示摘要-->
+        <EditTextPreference
+            app:defaultValue="14512"
+            app:iconSpaceReserved="false"
+            app:key="ID"
+            app:title="默认ID"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <!--以下为测试代码，记得删除-->
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false"
+        app:title="@string/messages_header">
 
         <EditTextPreference
+            app:iconSpaceReserved="false"
             app:key="signature"
             app:title="@string/signature_title"
             app:useSimpleSummaryProvider="true" />
@@ -28,20 +48,26 @@
             app:defaultValue="reply"
             app:entries="@array/reply_entries"
             app:entryValues="@array/reply_values"
+            app:iconSpaceReserved="false"
             app:key="reply"
             app:title="@string/reply_title"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/sync_header">
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false"
+        app:title="@string/sync_header">
 
         <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
             app:key="sync"
             app:title="@string/sync_title" />
 
         <SwitchPreferenceCompat
             app:dependency="sync"
+            app:iconSpaceReserved="false"
             app:key="attachment"
             app:summaryOff="@string/attachment_summary_off"
             app:summaryOn="@string/attachment_summary_on"

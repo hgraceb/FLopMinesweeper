@@ -13,12 +13,11 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <!--避免Toolbar设置fitSystemWindows="true"，当软键盘弹出时Toolbar被拉伸-->
-        <com.flop.minesweeper.fragment.ImmerseGroup
-            android:id="@+id/immerseGroup"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bar_tool"
-            android:fitsSystemWindows="true">
+            app:titleEnabled="false">
 
             <!--contentInsetStartWithNavigation属性解决Support包24以上Home键右边距留白问题-->
             <androidx.appcompat.widget.Toolbar
@@ -28,7 +27,7 @@
                 app:contentInsetStartWithNavigation="0dp">
 
             </androidx.appcompat.widget.Toolbar>
-        </com.flop.minesweeper.fragment.ImmerseGroup>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
