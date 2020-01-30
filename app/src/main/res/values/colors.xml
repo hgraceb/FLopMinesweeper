@@ -34,4 +34,9 @@
 
     <color name="DialogInfo">#F0F0F0</color>
     <color name="itemClicked">#80E0E0E0</color>
+
+    <!--渐变色-->
+    <color name="startColor">#3DA4FD</color>
+    <color name="centerColor">#31B3FB</color>
+    <color name="endColor">#24C2FB</color>
 </resources>

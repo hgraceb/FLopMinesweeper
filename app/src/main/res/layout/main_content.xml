@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bar_videos_page"
+        android:background="@drawable/gradient_color_linear"
         android:gravity="center"
         android:orientation="horizontal">
 

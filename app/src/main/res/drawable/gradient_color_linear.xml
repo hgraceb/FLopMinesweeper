@@ -1,0 +1,9 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!--线性渐变色-->
+    <gradient
+        android:startColor="@color/startColor"
+        android:centerColor="@color/centerColor"
+        android:endColor="@color/endColor"
+        android:type="linear" />
+</shape>
