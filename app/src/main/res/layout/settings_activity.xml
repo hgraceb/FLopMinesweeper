@@ -6,36 +6,31 @@
     android:fitsSystemWindows="true">
 
     <!--顶部导航栏容器，用于设置主题和底部阴影-->
+    <!--app:liftOnScroll设置底部阴影-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:liftOnScroll="true">
 
-        <!--避免Toolbar设置fitSystemWindows="true"，当软键盘弹出时Toolbar被拉伸-->
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <!--contentInsetStartWithNavigation属性解决Support包24以上Home键右边距留白问题-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bar_tool"
-            app:titleEnabled="false">
+            app:contentInsetStartWithNavigation="0dp">
 
-            <!--contentInsetStartWithNavigation属性解决Support包24以上Home键右边距留白问题-->
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:contentInsetStartWithNavigation="0dp">
-
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <!--设置选项页面-->
+    <!--app:layout_behavior设置视图位置-->
     <FrameLayout
         android:id="@+id/settings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
