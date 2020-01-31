@@ -31,7 +31,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Flop Mine</string>
-    <string name="nav_header_subtitle">android.flop.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
     <!--顶部导航栏-->
