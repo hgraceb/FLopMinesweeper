@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:clipChildren="false"
     android:paddingBottom="?attr/actionBarSize">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -13,86 +12,93 @@
         android:background="@drawable/divider_bottom"
         android:fitsSystemWindows="true"
         android:gravity="center_horizontal"
-        android:clipChildren="false"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
 
-        <!--contentInsetStartWithNavigation属性解决Support包24以上Home键右边距留白问题-->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <!--设置 app:layout_scrollFlags="scroll|enterAlways" 可实现导航栏收缩-->
+        <!--不过会导致排序菜单、下拉刷新等控件错位，暂不使用-->
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/gradient_color_linear"
             android:fitsSystemWindows="true"
-            app:contentInsetStartWithNavigation="0dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title=" ">
+            app:statusBarScrim="@drawable/gradient_color_linear">
 
-            <!--隐藏Toolbar原有标题（显示为空格），自定义标题实现居中-->
-            <TextView
+            <!--contentInsetStartWithNavigation属性解决Support包24以上Home键右边距留白问题-->
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:contentInsetStartWithNavigation="0dp"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <!--自定义标题实现居中-->
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvOrder"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:text="全部"
                 android:textColor="@color/white"
                 android:textSize="@dimen/small_text" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        </androidx.appcompat.widget.Toolbar>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:fitsSystemWindows="true"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="@color/tabItem">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabNews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_text_1"
+                android:textSize="@dimen/little_text" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabLatest"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:fitsSystemWindows="true"
-                app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/colorAccent"
-                app:tabTextColor="@color/tabItem">
+                android:layout_height="wrap_content"
+                android:text="@string/tab_text_2"
+                android:textSize="@dimen/little_text" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabNews"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_text_1"
-                    android:textSize="@dimen/little_text" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_text_3"
+                android:textSize="@dimen/little_text" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabLatest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_text_2"
-                    android:textSize="@dimen/little_text" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_text_4"
+                android:textSize="@dimen/little_text" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabRank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_text_3"
-                    android:textSize="@dimen/little_text" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabDomain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_text_5"
+                android:textSize="@dimen/little_text" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabStar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_text_4"
-                    android:textSize="@dimen/little_text" />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_text_6"
+                android:textSize="@dimen/little_text" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabDomain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_text_5"
-                    android:textSize="@dimen/little_text" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tabProgress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_text_6"
-                    android:textSize="@dimen/little_text" />
-
-            </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
