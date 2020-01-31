@@ -28,4 +28,9 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <!--圆形头像-->
+    <style name="ShapeAppearanceImageCircle" parent="">
+        <item name="cornerSize">@dimen/avatar_corner_size</item>
+    </style>
+
 </resources>

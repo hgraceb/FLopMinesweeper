@@ -22,4 +22,9 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!--头像大小-->
+    <dimen name="avatar_size">64dp</dimen>
+    <!--头像圆角大小-->
+    <dimen name="avatar_corner_size">32dp</dimen>
 </resources>
