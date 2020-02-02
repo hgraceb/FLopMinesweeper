@@ -124,6 +124,9 @@ public class Constant {
     public static final int SETTINGS_RESULT_CODE = 13512;
     public static final int SETTINGS_REQUEST_CODE = 13512;
 
+    // 请求修改用户偏好设置
+    public static final int PREFERENCES_REQUEST_CODE = 14513;
+
     //排序菜单下拉和关闭动画，static修饰防止动画之间发生冲突
     public static AnimatorSet orderAnimatorSet;
     public static AnimatorSet indicateAnimatorSet;

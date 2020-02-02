@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--用户设置页面主页面-->
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--app:iconSpaceReserved：没有图标时是否保留图标的位置-->
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/settings_domain_progress_header">
+
+        <!--app:useSimpleSummaryProvider：是否显示摘要-->
+        <!--使用自定义TextPreference，自定义对话框-->
+        <com.flop.minesweeper.widget.TextPreference
+            app:defaultValue="@string/settings_domain_progress_id_default"
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/settings_domain_progress_id_key"
+            app:title="@string/settings_domain_progress_id_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <!--以下为测试代码，记得修改或删除-->
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false"
+        app:title="@string/settings_other_header">
+
+        <Preference
+            app:enableCopying="true"
+            app:fragment="com.flop.minesweeper.activity.SettingsActivity$AdvancedFragment"
+            app:iconSpaceReserved="false"
+            app:summary="高级设置"
+            app:title="查看高级设置" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

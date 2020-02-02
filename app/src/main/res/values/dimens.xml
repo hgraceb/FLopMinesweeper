@@ -27,4 +27,7 @@
     <dimen name="avatar_size">64dp</dimen>
     <!--头像圆角大小-->
     <dimen name="avatar_corner_size">32dp</dimen>
+
+    <!--设置页面对话框水平方向边距-->
+    <dimen name="dialog_vertical_margin">20dp</dimen>
 </resources>

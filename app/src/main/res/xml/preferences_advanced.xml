@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--高级设置页面-->
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        app:title="@string/messages_header">
+
+        <EditTextPreference
+            app:key="signature"
+            app:title="@string/signature_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="reply"
+            app:entries="@array/reply_entries"
+            app:entryValues="@array/reply_values"
+            app:key="reply"
+            app:title="@string/reply_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/sync_header">
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="@string/sync_title" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="attachment"
+            app:summaryOff="@string/attachment_summary_off"
+            app:summaryOn="@string/attachment_summary_on"
+            app:title="@string/attachment_title" />
+
+    </PreferenceCategory>
+
+    <!--app:initialExpandedChildrenCount控制默认显示的数量-->
+    <PreferenceCategory
+        app:key="advanced"
+        app:title="advanced_attributes"
+        app:initialExpandedChildrenCount="1">
+
+        <Preference
+            app:key="expandable"
+            app:title="title_expandable_preference"
+            app:summary="summary_expandable_preference"/>
+
+        <Preference
+            app:title="title_intent_preference"
+            app:summary="summary_intent_preference">
+
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="http://www.android.com"/>
+
+        </Preference>
+
+        <SwitchPreferenceCompat
+            app:key="parent"
+            app:title="title_parent_preference"
+            app:summary="summary_parent_preference"/>
+
+        <SwitchPreferenceCompat
+            app:key="child"
+            app:dependency="parent"
+            app:title="title_child_preference"
+            app:summary="summary_child_preference"/>
+
+        <SwitchPreferenceCompat
+            app:key="toggle_summary"
+            app:title="title_toggle_summary_preference"
+            app:summaryOn="summary_on_toggle_summary_preference"
+            app:summaryOff="summary_off_toggle_summary_preference"/>
+
+        <Preference
+            app:key="copyable"
+            app:title="title_copyable_preference"
+            app:summary="summary_copyable_preference"
+            app:selectable="false"
+            app:enableCopying="true"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

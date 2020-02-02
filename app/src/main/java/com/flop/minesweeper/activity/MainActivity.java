@@ -56,6 +56,7 @@ import com.flop.minesweeper.fragment.RankingFragment;
 import com.flop.minesweeper.update.UpdateManager;
 import com.flop.minesweeper.util.Keyboard.KeyboardHeightObserver;
 import com.flop.minesweeper.util.Keyboard.KeyboardHeightProvider;
+import com.flop.minesweeper.util.PreferencesHelper;
 import com.flop.minesweeper.util.SDCardUtil;
 import com.flop.minesweeper.util.ToastUtil;
 import com.google.android.material.navigation.NavigationView;
@@ -81,6 +82,7 @@ import static com.flop.minesweeper.variable.Constant.NEWS_PAGE;
 import static com.flop.minesweeper.variable.Constant.PAGE_MAX;
 import static com.flop.minesweeper.variable.Constant.PAGE_MIN;
 import static com.flop.minesweeper.variable.Constant.PERMISSIONS_STORAGE;
+import static com.flop.minesweeper.variable.Constant.PREFERENCES_REQUEST_CODE;
 import static com.flop.minesweeper.variable.Constant.PROGRESS_ITEM;
 import static com.flop.minesweeper.variable.Constant.PROGRESS_PAGE;
 import static com.flop.minesweeper.variable.Constant.RANKING_ITEM;
@@ -686,6 +688,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
             }
         });
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        // 设置我的地盘/进步历程”页面的用户ID
+        playerId = PreferencesHelper.getDomainProgressId(this);
     }
 
     /**
@@ -830,6 +835,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
+        // 延时关闭侧边栏，优化动画效果
+        new Handler().postDelayed(() -> drawer.closeDrawers(), 100);
+
         if (id == R.id.navNew) {
             // 打开新游戏页面
             startActivity(new Intent(this, NewGameActivity.class));
@@ -838,7 +846,7 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
             chooseLocalVideo();
         } else if (id == R.id.navSettings) {
             // 打开设置页面
-            startActivity(new Intent(this, SettingsActivity.class));
+            startActivityForResult(new Intent(this, SettingsActivity.class), PREFERENCES_REQUEST_CODE);
         }
 
         return true;
@@ -857,10 +865,6 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            Log.i(TAG, "onActivityResult: data.toString(): " + data.toString());
-            Log.i(TAG, "onActivityResult: data.getData()(): " + data.getData());
-        }
         if (requestCode == VIDEO_REQUEST_CODE_LOCAL && resultCode == Activity.RESULT_OK && data != null) {
             Uri uri = data.getData();
             String filepath = "";
@@ -908,6 +912,27 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
                     || permissionRead != PackageManager.PERMISSION_GRANTED) {
                 // 没有读写的权限，去申请读写的权限，会弹出对话框
                 ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE_CODE);
+            }
+            // 如果是从设置页面返回
+        } else if (requestCode == PREFERENCES_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // 获取设置后的默认用户ID
+            int domainProgressId = PreferencesHelper.getDomainProgressId(this);
+            // 如果当前页面的用户ID和设置的用户ID不同
+            if (playerId != domainProgressId) {
+                // 更新默认ID
+                playerId = domainProgressId;
+                // 如果当前页面是“我的地盘”或“进步历程”,而且当前页显示的用户与设置用户不同，则重置并刷新当前页面
+                if (mViewPager.getCurrentItem() == 4) {
+                    domainFragment.setPlayerId(playerId);
+                    DOMAIN_PAGE = 1;
+                    domainFragment.initVideos();
+                    etPage.setText("1");
+                } else if (mViewPager.getCurrentItem() == 5) {
+                    progressFragment.setPlayerId(playerId);
+                    PROGRESS_PAGE = 1;
+                    progressFragment.initVideos();
+                    etPage.setText("1");
+                }
             }
         }
     }
