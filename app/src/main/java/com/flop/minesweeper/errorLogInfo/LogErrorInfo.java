@@ -11,6 +11,12 @@ public class LogErrorInfo {
     //输出日志到本地文件，方便其他手机无法查看Logcat时在代码行中直接调用调试
     private static String info = "";
 
+    /**
+     * 追加日志信息到本地日志文件
+     *
+     * @param error     错误信息
+     * @param throwable 堆栈信息
+     */
     public static void append(String error, Throwable throwable) {
         info = "时间: " + TimeUtil.getCurrentTime() + "\n";
         info += "位置: " + ((throwable.getStackTrace()[0])).getFileName() + "  ";
