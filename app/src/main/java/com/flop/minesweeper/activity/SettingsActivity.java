@@ -21,8 +21,12 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import com.flop.minesweeper.BuildConfig;
 import com.flop.minesweeper.R;
+import com.flop.minesweeper.update.UpdateManager;
 import com.flop.minesweeper.util.EdgeUtil;
+
+import static com.flop.minesweeper.variable.Constant.UPDATE_URL;
 
 public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
@@ -99,17 +103,33 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.preferences_root, rootKey);
 
-            Preference preference = findPreference(getString(R.string.settings_domain_progress_id_key));
-            if (preference != null) {
-                preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        // 创建并显示设置“我的地盘/进步历程”默认ID的对话框
-                        showDomainProgressIdDialog();
+            // 初始化设置页面
+            init();
+        }
 
-                        // 返回 true 屏蔽原生事件
-                        return true;
-                    }
+        private void init() {
+            // 初始化“我的地盘/进步历程”的默认ID设置
+            Preference prefDomainProgressId = findPreference(getString(R.string.settings_domain_progress_id_key));
+            if (prefDomainProgressId != null) {
+                prefDomainProgressId.setOnPreferenceClickListener(preference -> {
+                    // 创建并显示设置“我的地盘/进步历程”默认ID的对话框
+                    showDomainProgressIdDialog();
+
+                    // 返回 true 屏蔽原生事件
+                    return true;
+                });
+            }
+
+            // 初始化“检查更新”设置
+            Preference prefUpdate = findPreference(getString(R.string.settings_update_check_key));
+            if (prefUpdate != null) {
+                // 设置版本信息
+                prefUpdate.setSummary(BuildConfig.VERSION_NAME);
+                // 设置监听器
+                prefUpdate.setOnPreferenceClickListener(preference -> {
+                    // 检查应用更新
+                    UpdateManager.create(mActivity).setManual(true).setUrl(UPDATE_URL).check();
+                    return false;
                 });
             }
         }

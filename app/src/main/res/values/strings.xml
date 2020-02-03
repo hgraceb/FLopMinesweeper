@@ -46,13 +46,17 @@
     <string name="reply_title">Default reply action</string>
 
     <!-- 个性化设置 -->
+    <!--我的地盘 / 进步历程-->
     <string name="settings_domain_progress_header">我的地盘 / 进步历程</string>
-    <string name="settings_domain_progress_id_key" translatable="false">domain_progress_id_key</string>
+    <!--默认ID-->
+    <string name="settings_domain_progress_id_key" translatable="false">settings_domain_progress_id_key</string>
     <string name="settings_domain_progress_id_title">默认ID</string>
-    <!--我的地盘/进步历程设置项默认用户ID-->
     <string name="settings_domain_progress_id_default" translatable="false">14512</string>
-
+    <!--其他-->
     <string name="settings_other_header">其他</string>
+    <!--检查更新-->
+    <string name="settings_update_check_key" translatable="false">settings_update_check_key</string>
+    <string name="settings_update_check_title">检查更新</string>
 
     <string name="sync_title">Sync email periodically</string>
     <string name="attachment_title">Download incoming attachments</string>

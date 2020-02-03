@@ -61,7 +61,8 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
         mIsManual = isManual;
         mIsWifiOnly = isWifiOnly;
         mDownloader = new DefaultUpdateDownloader(mContext);
-        mPrompter = new DefaultUpdatePrompter(context);
+        // FLOP修改：添加构造参数，用于判断时是否为手动更新
+        mPrompter = new DefaultUpdatePrompter(context, mIsManual);
         mOnFailureListener = new DefaultFailureListener(context);
         mOnDownloadListener = new DefaultDialogDownloadListener(context);
         if (notifyId > 0) {
@@ -71,6 +72,9 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
         }
     }
 
+    public boolean getIsManual() {
+        return mIsManual;
+    }
 
     public void setParser(IUpdateParser parser) {
         mParser = parser;
@@ -224,7 +228,8 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
                 doFailure(new UpdateError(UpdateError.CHECK_UNKNOWN));
             } else if (UpdateUtil.getVersionCode(mContext) >= info.versionCode || !info.hasUpdate) {
                 doFailure(new UpdateError(UpdateError.UPDATE_NO_NEWER));
-            } else if (UpdateUtil.isIgnore(mContext, info.md5)) {
+                // FLOP修改：添加判断是否是手动更新，手动更新时不检查是否已忽略该版
+            } else if (UpdateUtil.isIgnore(mContext, info.md5) && !mIsManual) {
                 doFailure(new UpdateError(UpdateError.UPDATE_IGNORED));
             } else {
                 UpdateUtil.log("update md5" + mInfo.md5);
@@ -286,9 +291,12 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
     private static class DefaultUpdatePrompter implements IUpdatePrompter {
 
         private Context mContext;
+        // FLOP修改：添加是否为手动更新
+        private boolean mIsManual = false;
 
-        public DefaultUpdatePrompter(Context context) {
+        public DefaultUpdatePrompter(Context context, boolean isManual) {
             mContext = context;
+            mIsManual = isManual;
         }
 
         @Override
@@ -326,7 +334,8 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
                 tv.setText(content);
                 dialog.setButton(DialogInterface.BUTTON_POSITIVE, "立即更新", listener);
                 dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "以后再说", listener);
-                if (info.isIgnorable) {
+                // FLOP修改：添加判断是否手动更新，手动更新时不显示忽略该版
+                if (info.isIgnorable && !mIsManual) {
                     dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "忽略该版", listener);
                 }
             }

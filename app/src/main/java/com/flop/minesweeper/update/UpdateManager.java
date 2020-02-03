@@ -147,7 +147,8 @@ public class UpdateManager {
 
         public void check() {
             long now = System.currentTimeMillis();
-            if (now - sLastTime < 3000) {
+            // FLOP修改：如果是手动更新则不设置时间间隔
+            if (now - sLastTime < 3000 && !mIsManual) {
                 return;
             }
             sLastTime = now;

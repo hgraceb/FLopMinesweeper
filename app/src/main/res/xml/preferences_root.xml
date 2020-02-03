@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--用户设置页面主页面-->
+<?xml version="1.0" encoding="utf-8"?><!--用户设置页面主页面-->
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--app:iconSpaceReserved：没有图标时是否保留图标的位置-->
@@ -18,17 +17,24 @@
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
-
-    <!--以下为测试代码，记得修改或删除-->
     <PreferenceCategory
         app:iconSpaceReserved="false"
-        app:isPreferenceVisible="false"
         app:title="@string/settings_other_header">
 
+        <!--检查更新-->
+        <Preference
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/settings_update_check_key"
+            app:title="@string/settings_update_check_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <!--以下为测试代码，记得修改或删除-->
         <Preference
             app:enableCopying="true"
             app:fragment="com.flop.minesweeper.activity.SettingsActivity$AdvancedFragment"
             app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
             app:summary="高级设置"
             app:title="查看高级设置" />
 
