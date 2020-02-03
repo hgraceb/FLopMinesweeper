@@ -37,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+        setContentView(R.layout.activity_settings);
 
         mActivity = this;
 
@@ -107,6 +107,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             init();
         }
 
+        /**
+         * 初始化设置页面
+         */
         private void init() {
             // 初始化“我的地盘/进步历程”的默认ID设置
             Preference prefDomainProgressId = findPreference(getString(R.string.settings_domain_progress_id_key));
