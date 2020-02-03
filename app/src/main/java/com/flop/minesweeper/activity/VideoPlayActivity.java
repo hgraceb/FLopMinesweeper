@@ -58,10 +58,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.flop.minesweeper.util.EdgeUtil.setMargins;
 import static com.flop.minesweeper.variable.Constant.VIDEO_INFO;
 import static com.flop.minesweeper.variable.Constant.bean;
 import static com.flop.minesweeper.variable.Constant.rawVideo;
-import static com.flop.minesweeper.util.EdgeUtil.setMargins;
 
 /***
  * 录像播放页面
@@ -346,15 +346,22 @@ public class VideoPlayActivity extends AppCompatActivity {
         }
     }
 
-    //暂停录像
+    //暂停播放录像
     private void pausePlayVideos() {
         if (timer != null) {
             timer.cancel();
             timer = null;
         } else {
-            passTime = (events.get(plan).getSec() * 1000 + events.get(plan).getHun() * 10);
-            setVideoTimer();
+            //播放暂停录像
+            playPauseVideos();
         }
+    }
+
+    //播放暂停录像
+    private void playPauseVideos() {
+        // mvf 格式录像的 RawEventDetailBean 对象没有 Sec 和 Hun 信息，不能使用 getSec() 和 getHun() 获取时间信息
+        passTime = events.get(plan).getEventTime() * 1000;
+        setVideoTimer();
     }
 
     //重新开始播放录像
@@ -576,10 +583,10 @@ public class VideoPlayActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // 如果离开界面之前录像处于播放状态
         if (timer != null) {
-            timer.cancel();
-            passTime = (events.get(plan).getSec() * 1000 + events.get(plan).getHun() * 10);
-            setVideoTimer();
+            // 播放暂停录像
+            playPauseVideos();
             Log.i(TAG, "onResume: resetTimer() timer = " + timer);
         }
         // 回复录像播放
@@ -787,7 +794,11 @@ public class VideoPlayActivity extends AppCompatActivity {
     private void playEvents() {
         // 如果需要暂停录像播放
         if (videoPause) {
-            pausePlayVideos();
+            // 此处使用 pausePlayVideos 函数会将定时器置为 null，会导致 onResume 函数内无法判断是否需要继续播放录像
+            if (timer != null) {
+                // 只取消定时器，不置为 null
+                timer.cancel();
+            }
             return;
         }
 
