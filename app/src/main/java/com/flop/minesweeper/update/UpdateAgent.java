@@ -305,7 +305,8 @@ class UpdateAgent implements ICheckAgent, IUpdateAgent, IDownloadAgent {
                 return;
             }
             final UpdateInfo info = agent.getInfo();
-            String size = Formatter.formatShortFileSize(mContext, info.size);
+            // FLOP修改：计算文件大小，格式化为详细信息
+            String size = Formatter.formatFileSize(mContext, info.size);
             String content = String.format("最新版本：%1$s\n新版本大小：%2$s\n\n更新内容\n%3$s", info.versionName, size, info.updateContent);
 
             final AlertDialog dialog = new AlertDialog.Builder(mContext).create();
