@@ -19,3 +19,20 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Jsoup 混淆规则，搜索直达：xhtml("entities-xhtml.properties", 4),
+-keepnames class org.jsoup.nodes.Entities { public enum *; }
+
+# 录像解析混淆规则，搜索直达：AvfUtil、MvfUtil
+-keep class com.flop.minesweeper.zhangye.util.AvfUtil { public *; }
+-keep class com.flop.minesweeper.zhangye.util.MvfUtil { public *; }
+
+# 删除代码中Log相关的代码
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
+}

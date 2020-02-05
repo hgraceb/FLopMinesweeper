@@ -7,22 +7,48 @@ android {
         minSdkVersion 14
         targetSdkVersion 29
         versionCode 4
-        versionName "v0.0.4"
+        versionName "0.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildTypes {
-            release {
-                //混淆代码
-                minifyEnabled true
-                //压缩
-                shrinkResources true
-
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            }
-        }
 
         //HttpClient
         useLibrary 'org.apache.http.legacy'
 
+    }
+
+    // 签名配置
+    signingConfigs {
+        debug {
+            // 签名文件路径
+            storeFile file('release.keystore')
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+
+        release {
+            storeFile file('release.keystore')
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+    // 打包配置
+    buildTypes {
+        debug {
+            //签名配置
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            //签名配置
+            signingConfig signingConfigs.release
+            //是否混淆代码
+            minifyEnabled true
+            //是否压缩
+            shrinkResources true
+            //混淆规则
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 
     // 自定义APK名称
@@ -32,7 +58,7 @@ android {
             def date = new Date().format("yyMMdd", TimeZone.getTimeZone("GMT+08"))
             // Release版本
             if (':app:assembleRelease' in gradle.startParameter.taskNames) {
-                outputFileName = "FlopMine_${variant.versionName}.${date}_Alpha.apk"
+                outputFileName = "FlopMine_${variant.versionName}.${date}_Release.apk"
                 // Debug版本
             } else if (':app:assembleDebug' in gradle.startParameter.taskNames) {
                 outputFileName = "FlopMine_${variant.versionName}.${date}_Debug.apk"
@@ -42,8 +68,8 @@ android {
 
     // Java 8
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     dependencies {
@@ -64,7 +90,7 @@ android {
         annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
         //Jsoup
-        implementation 'org.jsoup:jsoup:1.10.2'
+        implementation 'org.jsoup:jsoup:1.11.3'
 
         //下拉刷新
         implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'

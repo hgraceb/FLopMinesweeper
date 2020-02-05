@@ -127,7 +127,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             Preference prefUpdate = findPreference(getString(R.string.settings_update_check_key));
             if (prefUpdate != null) {
                 // 设置版本信息
-                prefUpdate.setSummary(BuildConfig.VERSION_NAME);
+                prefUpdate.setSummary(String.format(mActivity.getResources().getString(R.string.settings_update_check_summary),
+                        BuildConfig.VERSION_NAME, BuildConfig.BUILD_TYPE));
                 // 设置监听器
                 prefUpdate.setOnPreferenceClickListener(preference -> {
                     // 检查应用更新
