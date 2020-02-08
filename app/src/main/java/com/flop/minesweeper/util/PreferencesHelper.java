@@ -18,7 +18,7 @@ public class PreferencesHelper {
      * @return “我的地盘/进步历程”页面的默认ID
      */
     public static int getDomainProgressId(Context context) {
-        return getIntFromResources(context, R.string.settings_domain_progress_id_key, R.string.settings_domain_progress_id_default);
+        return getIntFromResources(context, R.string.prefs_domain_progress_id_key, R.string.prefs_domain_progress_id_default);
     }
 
     public static int getIntFromResources(Context context, int resKeyId, int resDefValueId) {

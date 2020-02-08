@@ -4,29 +4,29 @@
     <!--app:iconSpaceReserved：没有图标时是否保留图标的位置-->
     <PreferenceCategory
         app:iconSpaceReserved="false"
-        app:title="@string/settings_domain_progress_header">
+        app:title="@string/prefs_domain_progress_header">
 
         <!--app:useSimpleSummaryProvider：是否显示摘要-->
         <!--使用自定义TextPreference，自定义对话框-->
         <com.flop.minesweeper.widget.TextPreference
-            app:defaultValue="@string/settings_domain_progress_id_default"
+            app:defaultValue="@string/prefs_domain_progress_id_default"
             app:enableCopying="true"
             app:iconSpaceReserved="false"
-            app:key="@string/settings_domain_progress_id_key"
-            app:title="@string/settings_domain_progress_id_title"
+            app:key="@string/prefs_domain_progress_id_key"
+            app:title="@string/prefs_domain_progress_id_title"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
     <PreferenceCategory
         app:iconSpaceReserved="false"
-        app:title="@string/settings_other_header">
+        app:title="@string/prefs_other_header">
 
         <!--检查更新-->
         <Preference
             app:enableCopying="true"
             app:iconSpaceReserved="false"
-            app:key="@string/settings_update_check_key"
-            app:title="@string/settings_update_check_title"
+            app:key="@string/prefs_update_check_key"
+            app:title="@string/prefs_update_check_title"
             app:useSimpleSummaryProvider="true" />
 
         <!--以下为测试代码，记得修改或删除-->

@@ -25,6 +25,7 @@ import com.flop.minesweeper.BuildConfig;
 import com.flop.minesweeper.R;
 import com.flop.minesweeper.update.UpdateManager;
 import com.flop.minesweeper.util.EdgeUtil;
+import com.flop.minesweeper.widget.TextPreference;
 
 import static com.flop.minesweeper.variable.Constant.UPDATE_URL;
 
@@ -112,7 +113,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
          */
         private void init() {
             // 初始化“我的地盘/进步历程”的默认ID设置
-            Preference prefDomainProgressId = findPreference(getString(R.string.settings_domain_progress_id_key));
+            TextPreference prefDomainProgressId = findPreference(getString(R.string.prefs_domain_progress_id_key));
             if (prefDomainProgressId != null) {
                 prefDomainProgressId.setOnPreferenceClickListener(preference -> {
                     // 创建并显示设置“我的地盘/进步历程”默认ID的对话框
@@ -124,10 +125,10 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             }
 
             // 初始化“检查更新”设置
-            Preference prefUpdate = findPreference(getString(R.string.settings_update_check_key));
+            Preference prefUpdate = findPreference(getString(R.string.prefs_update_check_key));
             if (prefUpdate != null) {
                 // 设置版本信息
-                prefUpdate.setSummary(String.format(mActivity.getResources().getString(R.string.settings_update_check_summary),
+                prefUpdate.setSummary(String.format(mActivity.getResources().getString(R.string.prefs_update_check_summary),
                         BuildConfig.VERSION_NAME, BuildConfig.BUILD_TYPE));
                 // 设置监听器
                 prefUpdate.setOnPreferenceClickListener(preference -> {
@@ -143,13 +144,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
          */
         private void showDomainProgressIdDialog() {
             // 创建输入框布局
-            LinearLayout linearLayout = buildTextLinearLayout(mActivity, R.string.settings_domain_progress_id_key);
+            LinearLayout linearLayout = buildTextLinearLayout(mActivity, R.string.prefs_domain_progress_id_key);
 
             // 创建对话框
             AlertDialog alertDialog = new AlertDialog.Builder(mActivity)
-                    .setTitle(getString(R.string.settings_domain_progress_id_title))
+                    .setTitle(getString(R.string.prefs_domain_progress_id_title))
                     .setPositiveButton("确定", (dialog, which) -> {
-                        EditTextPreference editTextPreference = findPreference(getString(R.string.settings_domain_progress_id_key));
+                        EditTextPreference editTextPreference = findPreference(getString(R.string.prefs_domain_progress_id_key));
                         EditText editText = linearLayout.findViewById(R.id.settings_dialog_tv);
                         // 更新设置
                         if (editTextPreference != null && editText != null) {
@@ -192,10 +193,10 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             EdgeUtil.setMarginsRight(verticalMargin, editText);
 
             // 如果是设置“我的地盘/进步历程”页面的默认ID
-            if (resId == R.string.settings_domain_progress_id_key) {
+            if (resId == R.string.prefs_domain_progress_id_key) {
                 // 获取偏好设置内容
                 editText.setText(PreferenceManager.getDefaultSharedPreferences(mActivity)
-                        .getString(mActivity.getString(R.string.settings_domain_progress_id_key), getString(R.string.settings_domain_progress_id_default)));
+                        .getString(mActivity.getString(R.string.prefs_domain_progress_id_key), getString(R.string.prefs_domain_progress_id_default)));
                 // 设置输入类型为数字
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 // 设置过滤器，限制输入长度最长为6位
