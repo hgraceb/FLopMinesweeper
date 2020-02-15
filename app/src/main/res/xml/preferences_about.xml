@@ -43,8 +43,8 @@
         <Preference
             app:enableCopying="true"
             app:iconSpaceReserved="false"
-            app:key="@string/prefs_update_check_key"
-            app:title="@string/prefs_update_check_title"
+            app:key="@string/about_update_check_key"
+            app:title="@string/about_update_check_title"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
@@ -52,6 +52,15 @@
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/about_feedback_header">
+
+        <!--QQ交流群-->
+        <Preference
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/about_qq_group_key"
+            app:summary="@string/about_qq_group_number"
+            app:title="@string/about_qq_group" />
+
         <!--issues-->
         <Preference
             app:enableCopying="true"
@@ -62,14 +71,6 @@
                 android:action="android.intent.action.VIEW"
                 android:data="@string/about_issues_url" />
         </Preference>
-
-        <!--QQ交流群-->
-        <Preference
-            app:enableCopying="true"
-            app:iconSpaceReserved="false"
-            app:key="@string/about_qq_group_key"
-            app:summary="@string/about_qq_group_number"
-            app:title="@string/about_qq_group" />
 
     </PreferenceCategory>
 

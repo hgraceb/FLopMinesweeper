@@ -68,10 +68,6 @@
     <string name="prefs_domain_progress_id_default" translatable="false">14512</string>
     <!--其他-->
     <string name="prefs_other_header">其他</string>
-    <!--检查更新-->
-    <string name="prefs_update_check_key" translatable="false">settings_update_check_key</string>
-    <string name="prefs_update_check_title">检查更新</string>
-    <string name="prefs_update_check_summary">当前版本：%1$s&#160;&#160;(%2$s)</string>
 
     <!-- 关于页面 -->
     <string name="activity_about_title">关于</string>
@@ -85,6 +81,10 @@
     <string name="about_data_url" translatable="false"><u>http://www.saolei.wang/Main/Index.asp</u></string>
     <string name="about_author_blog">作者博客</string>
     <string name="about_author_blog_url" translatable="false"><u>https://hgraceb.github.io/</u></string>
+    <!--检查更新-->
+    <string name="about_update_check_key" translatable="false">settings_update_check_key</string>
+    <string name="about_update_check_title">检查更新</string>
+    <string name="about_update_check_summary">当前版本：%1$s&#160;&#160;(%2$s)</string>
     <!--反馈相关-->
     <string name="about_feedback_header">反馈</string>
     <string name="about_qq_group">QQ交流群</string>

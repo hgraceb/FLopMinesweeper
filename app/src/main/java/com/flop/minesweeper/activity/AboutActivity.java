@@ -90,10 +90,10 @@ public class AboutActivity extends BasePrefsActivity {
         @Override
         public void init() {
             // 初始化“检查更新”设置
-            Preference prefUpdate = findPreference(getString(R.string.prefs_update_check_key));
+            Preference prefUpdate = findPreference(getString(R.string.about_update_check_key));
             if (prefUpdate != null) {
                 // 设置版本信息
-                prefUpdate.setSummary(String.format(mActivity.getResources().getString(R.string.prefs_update_check_summary),
+                prefUpdate.setSummary(String.format(mActivity.getResources().getString(R.string.about_update_check_summary),
                         BuildConfig.VERSION_NAME, BuildConfig.BUILD_TYPE));
                 // 设置监听器
                 prefUpdate.setOnPreferenceClickListener(preference -> {
