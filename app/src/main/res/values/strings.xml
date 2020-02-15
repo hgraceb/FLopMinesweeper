@@ -3,7 +3,7 @@
 
     <string name="settings">设置</string>
 
-    <string name="back_twice_toast">再按一次返回</string>
+    <string name="back_twice_toast">再按一次退出</string>
 
     <!--新游戏界面级别设置-->
     <string name="settingsLevel">级别</string>

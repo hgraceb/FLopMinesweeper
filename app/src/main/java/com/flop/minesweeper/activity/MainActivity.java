@@ -825,14 +825,20 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
      */
     @Override
     public void onBackPressed() {
+        // 如果侧边栏处于显示装填则隐藏侧边栏
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+            // 如果排序菜单处于显示装填则隐藏排序菜单
         } else if (menuDrop) {
             closeOrderMenu();
+            // 如果两次返回点击时间大于 2000 毫秒则提示
         } else if (System.currentTimeMillis() - exitTime > 2000) {
+            // 保存当前事件点击时间
+            exitTime = System.currentTimeMillis();
             ToastUtil.showShort(getString(R.string.back_twice_toast));
+        } else {
+            super.onBackPressed();
         }
-        super.onBackPressed();
     }
 
     /**
