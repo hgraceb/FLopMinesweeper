@@ -207,7 +207,7 @@ public class NewsFragment extends Fragment {
             else if (msg.what == -1) {
                 mRecyclerView.setVisibility(View.INVISIBLE);
                 mProgressBar.setVisibility(View.INVISIBLE);
-                ToastUtil.showShort(mActivity, "网络错误");
+                ToastUtil.showShort("网络错误");
                 refreshLayout.finishRefresh(false);
                 refreshLayout.setEnableRefresh(true);
                 // 设置Item为空，保证其他操作可以正常执行，如：翻页

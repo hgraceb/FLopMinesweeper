@@ -19,7 +19,7 @@
 
     <!--android:usesCleartextTraffic="true" 适配Android 9.0，指示应用程序是否打算使用明文网络流量，例如明文HTTP-->
     <application
-        android:name=".errorLogInfo.InitApplication"
+        android:name=".errorLogInfo.FlopApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -60,6 +60,16 @@
         <!--设置页面-->
         <activity
             android:name=".activity.SettingsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="user"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <!--关于页面-->
+        <activity
+            android:name=".activity.AboutActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_settings"
             android:screenOrientation="user"

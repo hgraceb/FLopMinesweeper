@@ -129,10 +129,10 @@ public class VideoPlayActivity extends AppCompatActivity {
         } else if (msg.what == 200 && bean != null) {
             initVideos();
         } else if (msg.what == -1) {
-            ToastUtil.showShort(VideoPlayActivity.this, "网络错误");
+            ToastUtil.showShort("网络错误");
             finish();
         } else if (msg.what == -2) {
-            ToastUtil.showShort(VideoPlayActivity.this, "录像不存在");
+            ToastUtil.showShort("录像不存在");
             finish();
         }
         return false;
@@ -721,7 +721,7 @@ public class VideoPlayActivity extends AppCompatActivity {
         String function = "initVideos";
 
         if (bean.getLevel() == null) {//bean内没有解析自定义录像的代码段，有需要时需自行添加
-            ToastUtil.showShort(this, "录像读取出错");
+            ToastUtil.showShort("录像读取出错");
             finish();
             return;
         }
@@ -736,7 +736,7 @@ public class VideoPlayActivity extends AppCompatActivity {
                 initGame(3);
                 break;
             default:
-                ToastUtil.showShort(this, "录像读取出错");
+                ToastUtil.showShort("录像读取出错");
                 finish();
                 return;
         }
@@ -960,7 +960,7 @@ public class VideoPlayActivity extends AppCompatActivity {
             //未重复测试是否每次超时都会使plan越界
             if (events.get(size).getEventTime() >= 999) {
                 //判断游戏是否超时
-                ToastUtil.showShort(this, "游戏超时");
+                ToastUtil.showShort("游戏超时");
                 gameLose();
 
             }
@@ -1066,7 +1066,7 @@ public class VideoPlayActivity extends AppCompatActivity {
         if (winVibration) {
             vibrationDevice();
         }
-        ToastUtil.showShort(this, "游戏胜利");
+        ToastUtil.showShort("游戏胜利");
         gameOver = true;
         flagMineCell();
     }
@@ -1103,7 +1103,7 @@ public class VideoPlayActivity extends AppCompatActivity {
         if (loseVibration) {
             vibrationDevice();
         }
-        ToastUtil.showShort(this, "游戏失败");
+        ToastUtil.showShort("游戏失败");
         gameOver = true;
         openMineCell();
     }

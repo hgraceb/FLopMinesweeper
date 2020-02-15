@@ -1,4 +1,4 @@
-package com.flop.minesweeper.widget;
+package com.flop.minesweeper.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;

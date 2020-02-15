@@ -129,7 +129,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
                     break;
                 case 1:
                     if (mOrderOption.getMenu().equals(ORDER_MENU[0])) {
-                        ToastUtil.showShort(mActivity, "请先选择游戏级别");
+                        ToastUtil.showShort("请先选择游戏级别");
                     } else {
                         moveIndicate(getLayoutPosition());
                         rvOrderOption.setAdapter(new OrderOptionAdapter(mActivity, orderOptionSecond, latestFragment));
@@ -137,7 +137,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
                     break;
                 case 2:
                     if (mOrderOption.getMenu().equals(ORDER_MENU[0])) {
-                        ToastUtil.showShort(mActivity, "请先选择游戏级别");
+                        ToastUtil.showShort("请先选择游戏级别");
                     } else if (mOrderOption.getMenu().equals(ORDER_MENU[1])) {
                         //初级BV
                         String[] data = new String[53];

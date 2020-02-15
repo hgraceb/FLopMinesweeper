@@ -28,7 +28,7 @@
     <!--设置选项页面-->
     <!--app:layout_behavior设置视图位置-->
     <FrameLayout
-        android:id="@+id/settings"
+        android:id="@+id/prefs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

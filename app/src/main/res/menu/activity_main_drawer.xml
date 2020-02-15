@@ -8,11 +8,11 @@
         <item
             android:id="@+id/navNew"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="新游戏" />
+            android:title="@string/menu_gallery_title" />
         <item
             android:id="@+id/navLocal"
             android:icon="@drawable/ic_menu_file"
-            android:title="本地录像" />
+            android:title="@string/menu_file_title" />
     </group>
 
     <!--其他-->
@@ -20,7 +20,11 @@
         <item
             android:id="@+id/navSettings"
             android:icon="@drawable/ic_menu_settings"
-            android:title="设置" />
+            android:title="@string/menu_settings_title" />
+        <item
+            android:id="@+id/navAbout"
+            android:icon="@drawable/ic_menu_about"
+            android:title="@string/menu_about_title" />
     </group>
 
 </menu>

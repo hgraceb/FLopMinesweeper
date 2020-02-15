@@ -3,11 +3,14 @@
 
     <string name="settings">设置</string>
 
+    <string name="back_twice_toast">再按一次返回</string>
+
+    <!--新游戏界面级别设置-->
     <string name="settingsLevel">级别</string>
     <string name="levelBeg">初级</string>
     <string name="levelInt">中级</string>
     <string name="levelExp">高级</string>
-
+    <!--新游戏界面震动设置-->
     <string name="settingsVibration">震动</string>
     <string name="longClickVibration">长按</string>
     <string name="winVibration">胜利</string>
@@ -33,6 +36,12 @@
     <string name="nav_header_title">Flop Mine</string>
     <string name="nav_header_desc">Navigation header</string>
 
+    <!--侧边栏标题-->
+    <string name="menu_gallery_title">新游戏</string>
+    <string name="menu_file_title">本地录像</string>
+    <string name="menu_settings_title">设置</string>
+    <string name="menu_about_title">关于</string>
+
     <!--顶部导航栏-->
     <string name="action_filter">筛选</string>
     <string name="title_activity_settings">设置</string>
@@ -45,7 +54,12 @@
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>
 
-    <!-- 个性化设置 -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- 设置页面 -->
     <!--我的地盘 / 进步历程-->
     <string name="prefs_domain_progress_header">我的地盘 / 进步历程</string>
     <!--默认ID-->
@@ -59,8 +73,7 @@
     <string name="prefs_update_check_title">检查更新</string>
     <string name="prefs_update_check_summary">当前版本：%1$s&#160;&#160;(%2$s)</string>
 
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- 关于页面 -->
+    <!--开放源代码-->
+    <string name="prefs_open_source_header">开放源代码</string>
 </resources>

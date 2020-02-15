@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--用户设置页面主页面-->
+<!--用户设置页面主页面-->
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--app:iconSpaceReserved：没有图标时是否保留图标的位置-->
@@ -8,7 +8,7 @@
 
         <!--app:useSimpleSummaryProvider：是否显示摘要-->
         <!--使用自定义TextPreference，自定义对话框-->
-        <com.flop.minesweeper.widget.TextPreference
+        <com.flop.minesweeper.ui.TextPreference
             app:defaultValue="@string/prefs_domain_progress_id_default"
             app:enableCopying="true"
             app:iconSpaceReserved="false"

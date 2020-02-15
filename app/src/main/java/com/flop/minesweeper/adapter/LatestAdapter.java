@@ -97,7 +97,7 @@ public class LatestAdapter extends RecyclerView.Adapter<LatestAdapter.MyViewHold
                 intent.putExtras(bundle);
                 mActivity.startActivity(intent);
             } else {
-                ToastUtil.showShort(mActivity, "此时无声胜有声");
+                ToastUtil.showShort("此时无声胜有声");
             }
         }
 

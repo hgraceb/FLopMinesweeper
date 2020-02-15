@@ -258,7 +258,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.MyViewHo
                 mActivity.startActivity(intent);
             } else if (keyValuePair.get("mName") == null) {
                 //当录像地址为空并且姓名为空时判断当前item为空，否则为总计Time或总计Bvs
-                ToastUtil.showShort(mActivity, "此时无声胜有声");
+                ToastUtil.showShort("此时无声胜有声");
             }
         }
 

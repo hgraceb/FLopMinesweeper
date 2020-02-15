@@ -74,7 +74,7 @@ public class NewGameActivity extends AppCompatActivity implements View.OnClickLi
     private Timer timer;//定时器
 
     //定义Handler句柄
-    Handler handler = new Handler(new Handler.Callback(){
+    Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 1) {
@@ -401,8 +401,8 @@ public class NewGameActivity extends AppCompatActivity implements View.OnClickLi
             setImageCount(ivBombHun, 11);
             setImageCount(ivBombTen, 12);
             setImageCount(ivBombBit, 13);
-            if (mineNumber == -100) ToastUtil.showShort(this, "干哈呢？好好扫雷！");
-            else if (mineNumber == -381) ToastUtil.showShort(this, "傻呢吗...");
+            if (mineNumber == -100) ToastUtil.showShort("干哈呢？好好扫雷！");
+            else if (mineNumber == -381) ToastUtil.showShort("傻呢吗...");
             return;
         }
 
@@ -423,7 +423,7 @@ public class NewGameActivity extends AppCompatActivity implements View.OnClickLi
         //时间超过999秒自动判负
         if (second > 999) {
             gameLose();
-            ToastUtil.showShort(this, "游戏超时");
+            ToastUtil.showShort("游戏超时");
             return;
         }
         int bit = Math.abs(second % 10);
@@ -725,7 +725,7 @@ public class NewGameActivity extends AppCompatActivity implements View.OnClickLi
         gameOver = true;
         flagMineCell();
         setImageButton(ivPlay, "face_jiujiu");
-        ToastUtil.showShort(this, "游戏胜利");
+        ToastUtil.showShort("游戏胜利");
     }
 
     //游戏胜利后标记所有雷
@@ -758,7 +758,7 @@ public class NewGameActivity extends AppCompatActivity implements View.OnClickLi
         gameOver = true;
         openMineCell();
         setImageButton(ivPlay, "face_luelue");
-        ToastUtil.showShort(this, "游戏失败");
+        ToastUtil.showShort("游戏失败");
     }
 
     //游戏失败后翻开所有雷

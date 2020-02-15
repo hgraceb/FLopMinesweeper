@@ -1,6 +1,5 @@
 package com.flop.minesweeper.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -14,7 +13,6 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
@@ -23,39 +21,35 @@ import androidx.preference.PreferenceManager;
 
 import com.flop.minesweeper.BuildConfig;
 import com.flop.minesweeper.R;
+import com.flop.minesweeper.base.BasePrefsActivity;
 import com.flop.minesweeper.update.UpdateManager;
 import com.flop.minesweeper.util.EdgeUtil;
-import com.flop.minesweeper.widget.TextPreference;
+import com.flop.minesweeper.ui.TextPreference;
 
 import static com.flop.minesweeper.variable.Constant.UPDATE_URL;
 
-public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
-
-    private static final String TAG = "FLOP";
-
-    private static AppCompatActivity mActivity;
+public class SettingsActivity extends BasePrefsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+    }
 
-        mActivity = this;
+    /**
+     * 设置布局layout
+     *
+     * @return 布局ID
+     */
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_prefs;
+    }
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings, new SettingsFragment())
-                .commit();
-
-        // 设置返回栈事件监听
-        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-            // 如果是栈底，即设置页面的主页面
-            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                // 设置主页面标题
-                setTitle(getString(R.string.title_activity_settings));
-            }
-        });
-
+    /**
+     * 初始化 Toolbar
+     */
+    @Override
+    public void initToolBar() {
         // 设置顶部导航栏
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,35 +62,24 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     }
 
     /**
-     * 点击Toolbar返回按钮
+     * 初始化fragment
      */
     @Override
-    public boolean onSupportNavigateUp() {
-        // 模拟返回事件
-        this.onBackPressed();
+    public void initFragment() {
+        // 设置Fragment
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.prefs, new SettingsFragment())
+                .commit();
 
-        return super.onSupportNavigateUp();
-    }
-
-    /**
-     * 点击返回按钮
-     */
-    @Override
-    public void onBackPressed() {
-        // 返回结果码，需要在执行onBackPressed父函数之前设置
-        setResult(Activity.RESULT_OK);
-
-        super.onBackPressed();
-    }
-
-    /**
-     * 监听设置页面的Fragment跳转
-     */
-    @Override
-    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
-        // Fragment跳转后重新设置标题
-        setTitle(pref.getTitle());
-        return false;
+        // 设置返回栈事件监听
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+            // 如果是栈底，即设置页面的主页面
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                // 设置主页面标题
+                setTitle(getString(R.string.title_activity_settings));
+            }
+        });
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
@@ -178,11 +161,11 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
          */
         private LinearLayout buildTextLinearLayout(Context context, int resId) {
             // 定义LinearLayout布局作为editText的容器
-            LinearLayout linearLayout = new LinearLayout(mActivity);
-            // linearLayout的父容器是mActivity中的 FrameLayout
+            LinearLayout linearLayout = new LinearLayout(context);
+            // linearLayout的父容器是context中的 FrameLayout
             linearLayout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             // 定义editText
-            EditText editText = new EditText(mActivity);
+            EditText editText = new EditText(context);
             // 设置editText的ID
             editText.setId(R.id.settings_dialog_tv);
             // editText的父容器是LinearLayout
@@ -195,8 +178,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             // 如果是设置“我的地盘/进步历程”页面的默认ID
             if (resId == R.string.prefs_domain_progress_id_key) {
                 // 获取偏好设置内容
-                editText.setText(PreferenceManager.getDefaultSharedPreferences(mActivity)
-                        .getString(mActivity.getString(R.string.prefs_domain_progress_id_key), getString(R.string.prefs_domain_progress_id_default)));
+                editText.setText(PreferenceManager.getDefaultSharedPreferences(context)
+                        .getString(context.getString(R.string.prefs_domain_progress_id_key), getString(R.string.prefs_domain_progress_id_default)));
                 // 设置输入类型为数字
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 // 设置过滤器，限制输入长度最长为6位

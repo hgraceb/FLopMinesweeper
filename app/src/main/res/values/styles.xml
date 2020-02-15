@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -10,6 +10,10 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <!--API>=21，需要statusBar颜色透明fitsSystemWindows属性才会生效，从而实现沉浸式状态栏-->
+        <!--设置 android:windowTranslucentStatus 属性为 true 会导致对话框无法自动调整位置-->
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme.FullScreen">

@@ -113,7 +113,7 @@ public class OrderMenuRankingAdapter extends RecyclerView.Adapter<OrderMenuRanki
                 case 1:
                     // 如果是进步排行榜页面
                     if ("Grow".equals(orderRanking.getMenu())) {
-                        ToastUtil.showShort(mActivity, "进步排行榜页面暂不支持条件排序");
+                        ToastUtil.showShort("进步排行榜页面暂不支持条件排序");
                         return;
                     } else {
                         moveIndicate(getLayoutPosition());

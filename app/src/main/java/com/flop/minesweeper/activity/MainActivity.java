@@ -112,9 +112,15 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
     private LatestFragment allFragment;//全部录像
     private LatestFragment domainFragment;//我的地盘
 
+    private static long exitTime;// 记录返回键点击时间
+
     private Activity mActivity = this;
 
     private Context mContext = this;
+
+    private SectionsPagerAdapter mSectionsPagerAdapter;//声明适配器
+
+    private ViewPager mViewPager;//声明ViewPager
 
     //静态变量，保证handler内有效修改变量
     public static boolean refreshingNews = true;//雷界快讯页面正在刷新
@@ -150,8 +156,11 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
     @BindView(R.id.rvOrderOption) RecyclerView rvOrderOption;//排序选项，点击进行排序
     @BindView(R.id.rvOrderMenu) RecyclerView rvOrderMenu;//排序菜单，点击进行选择
     @BindView(R.id.tvOrder) TextView tvOrder;//顶部信息栏显示当前排序依据
+    public static boolean menuDrop = false;//排序菜单是否显示
 
-    //定义Handler句柄,接收页面刷新信息
+    /**
+     * 定义Handler句柄,接收页面刷新信息
+     */
     public Handler handlerVideos = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -199,10 +208,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         }
     });
 
-    //排序菜单是否显示
-    public static boolean menuDrop = false;
-
-    //获取用户用软键盘键入的页面数
+    /**
+     * 获取用户用软键盘键入的页面数
+     */
     @OnTextChanged(value = R.id.etPage, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void afterTextChanged(Editable s) {
         //将输入框中的内容转换为字符串并去掉字符串前面多余的0
@@ -277,7 +285,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         }
     }
 
-    //重置当前页面数,需要在AdapterOrderOption中二次声明
+    /**
+     * 重置当前页面数,需要在AdapterOrderOption中二次声明
+     */
     private void resetPage() {
         switch (mViewPager.getCurrentItem()) {
             case 0:
@@ -305,7 +315,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         etPage.setText(videoPage);
     }
 
-    //绑定按钮单击事件
+    /**
+     * 绑定按钮单击事件
+     */
     @OnClick({R.id.btnLastPage, R.id.btnNextPage, R.id.btnFrontCursor, R.id.btnBehindCursor})
     public void bindViewOnClick(View v) {
         switch (v.getId()) {
@@ -326,7 +338,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         }
     }
 
-    //点击遮罩收回菜单
+    /**
+     * 点击遮罩收回菜单
+     */
     @OnTouch(R.id.maskOrder)
     public boolean maskOrderTouch(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -335,7 +349,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         return false;
     }
 
-    //关闭排序菜单,需要在OrderOptionAdapter中二次声明
+    /**
+     * 关闭排序菜单,需要在OrderOptionAdapter中二次声明
+     */
     public void closeOrderMenu() {
         // 如果排序菜单已经关闭
         if (!menuDrop) return;
@@ -365,7 +381,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         orderAnimatorSet.start();
     }
 
-    //打开排序菜单
+    /**
+     * 打开排序菜单
+     */
     private void dropOrderMenu() {
         // 如果排序菜单已经打开
         if (menuDrop) return;
@@ -410,7 +428,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         orderAnimatorSet.start();
     }
 
-    // 切换排序信息框的显示和隐藏
+    /**
+     * 切换排序信息框的显示和隐藏
+     */
     private void toggleOrderVideosMenu() {
         if (menuDrop) {
             closeOrderMenu();
@@ -419,7 +439,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         }
     }
 
-    //输入完成后跳转到指定的页面
+    /**
+     * 输入完成后跳转到指定的页面
+     */
     private void skipEditPage() {
         switch (mViewPager.getCurrentItem()) {
             case 0:
@@ -486,7 +508,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         etPage.setText(videoPage);
     }
 
-    //下一页面
+    /**
+     * 下一页面
+     */
     private void skipNextPage() {
         switch (mViewPager.getCurrentItem()) {
             case 0:
@@ -529,7 +553,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         resetPage();
     }
 
-    //上一页面
+    /**
+     * 上一页面
+     */
     private void skipLastPage() {
         switch (mViewPager.getCurrentItem()) {
             case 0:
@@ -572,6 +598,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         resetPage();
     }
 
+    /**
+     * 页面暂停
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -579,6 +608,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         keyboardHeightProvider.setKeyboardHeightObserver(null);
     }
 
+    /**
+     * 页面恢复
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -586,7 +618,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         keyboardHeightProvider.setKeyboardHeightObserver(this);
     }
 
-    //退出程序
+    /**
+     * 页面销毁
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -594,13 +628,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         keyboardHeightProvider.close();
     }
 
-    //声明适配器
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    //声明ViewPager
-    private ViewPager mViewPager;
-
-    //初始化界面数据
+    /**
+     * 页面创建
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -624,7 +654,7 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         String logPath = "FlopMine/ErrorLog.txt";
         if (SDCardUtil.getFileSize(logPath) > 10 * 1024 * 1024) {
             SDCardUtil.removeFileFromSDCard(logPath);
-            ToastUtil.showShort(this, "日志文件超过10M已删除");
+            ToastUtil.showShort("日志文件超过10M已删除");
         }
 
         ButterKnife.bind(this);
@@ -703,7 +733,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         }
     }
 
-    //重置排序菜单
+    /**
+     * 重置排序菜单
+     */
     private void resetOrderMenu() {
         //隐藏排序菜单，防止重置adapter时高度变化更新不及时导致的排序菜单位置越界，dropOrderMenu()时重新显示
         lyOrder.setVisibility(View.INVISIBLE);
@@ -788,25 +820,24 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         }
     }
 
-    //用户点击返回键关闭侧边栏
+    /**
+     * 用户点击返回键关闭侧边栏
+     */
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (menuDrop) {
             closeOrderMenu();
-        } else {
-            //模拟Home键，避免数据销毁而重新加载
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            startActivity(intent);
-            //调用父类返回键默认方法会销毁当前页面数据
-            //super.onBackPressed();
+        } else if (System.currentTimeMillis() - exitTime > 2000) {
+            ToastUtil.showShort(getString(R.string.back_twice_toast));
         }
+        super.onBackPressed();
     }
 
-    //创建菜单栏
+    /**
+     * 创建菜单栏
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // 加载菜单布局文件
@@ -814,8 +845,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         return true;
     }
 
-    //主界面菜单项点击事件
-    @Override
+    /**
+     * 主界面菜单项点击事件
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -830,7 +862,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         return super.onOptionsItemSelected(item);
     }
 
-    //侧边栏点击事件
+    /**
+     * 侧边栏点击事件
+     */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -845,14 +879,19 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
             // 选择本地录像文件
             chooseLocalVideo();
         } else if (id == R.id.navSettings) {
-            // 打开设置页面
+            // 打开设置页面并返回结果
             startActivityForResult(new Intent(this, SettingsActivity.class), PREFERENCES_REQUEST_CODE);
+        } else if (id == R.id.navAbout) {
+            // 打开关于页面
+            startActivity(new Intent(this, AboutActivity.class));
         }
 
         return true;
     }
 
-    //打开本地文件管理器并选择相应文件
+    /**
+     * 打开本地文件管理器并选择相应文件
+     */
     private void chooseLocalVideo() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("application/*");//类型限制，MimeType不提供.avf或.mvf格式，使用application/*限制简单筛选
@@ -861,7 +900,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         startActivityForResult(intent, VIDEO_REQUEST_CODE_LOCAL);
     }
 
-    //其他页面返回数据
+    /**
+     * 其他页面返回数据
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -880,14 +921,14 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
             Log.i(TAG, "文件路径: " + filepath);
 
             if (filepath == null) {
-                ToastUtil.showShort(this, "请选择avf或mvf格式文件!");
+                ToastUtil.showShort("请选择avf或mvf格式文件!");
                 return;
             } else if (filepath.endsWith(".avf")) {
                 videoType = "Avf";
             } else if (filepath.endsWith(".mvf")) {
                 videoType = "Mvf";
             } else {
-                ToastUtil.showShort(this, "请选择avf或mvf格式文件");
+                ToastUtil.showShort("请选择avf或mvf格式文件");
                 return;
             }
 
@@ -901,7 +942,7 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
                 intent.putExtras(bundle);
                 startActivity(intent);
             } else {
-                ToastUtil.showShort(this, "录像信息提取出错");
+                ToastUtil.showShort("录像信息提取出错");
             }
         } else if (requestCode == STORAGE_PERMISSION_REQUEST_CODE) {
             int permissionWrite = ActivityCompat.checkSelfPermission(this,
@@ -937,7 +978,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         }
     }
 
-    //检测权限请求结果
+    /**
+     * 检测权限请求结果
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -995,7 +1038,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         }
     }
 
-    //默认返回的Fragment类
+    /**
+     * 默认返回的Fragment类
+     */
     public static class PlaceholderFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
@@ -1028,7 +1073,9 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         }
     }
 
-    //定义适配器类
+    /**
+     * 定义适配器类
+     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
