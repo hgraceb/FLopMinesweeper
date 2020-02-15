@@ -130,4 +130,7 @@ public class Constant {
     //排序菜单下拉和关闭动画，static修饰防止动画之间发生冲突
     public static AnimatorSet orderAnimatorSet;
     public static AnimatorSet indicateAnimatorSet;
+
+    // 群号：相厌(456580260) 由官网生成的key，官网地址：https://qun.qq.com/join.html
+    public static String QQ_GROUP_KEY = "7LH-3Zb7WaeslPQn8Ie8XhXgDb8WfBst";
 }

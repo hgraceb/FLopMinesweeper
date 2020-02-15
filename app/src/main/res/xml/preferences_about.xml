@@ -1,11 +1,90 @@
 <!--关于页面-->
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--应用-->
     <PreferenceCategory
-        app:selectable="true"
         app:iconSpaceReserved="false"
-        app:title="@string/prefs_open_source_header">
+        app:title="@string/about_app_header">
+        <!--项目开源主页-->
+        <Preference
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:summary="@string/about_source_url"
+            app:title="@string/about_source">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/about_source_url" />
+        </Preference>
 
+        <!--数据来源网站-->
+        <Preference
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:summary="@string/about_data_url"
+            app:title="@string/about_data">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/about_data_url" />
+        </Preference>
+
+        <!--作者博客-->
+        <Preference
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:summary="@string/about_author_blog_url"
+            app:title="@string/about_author_blog">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/about_author_blog_url" />
+        </Preference>
+
+        <!--检查更新-->
+        <Preference
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/prefs_update_check_key"
+            app:title="@string/prefs_update_check_title"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <!--反馈-->
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/about_feedback_header">
+        <!--issues-->
+        <Preference
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:summary="@string/about_issues_url"
+            app:title="@string/about_issues">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/about_issues_url" />
+        </Preference>
+
+        <!--QQ交流群-->
+        <Preference
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:key="@string/about_qq_group_key"
+            app:summary="@string/about_qq_group_number"
+            app:title="@string/about_qq_group" />
+
+    </PreferenceCategory>
+
+    <!--其他-->
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/about_other_header">
+
+        <!--开放源代码-->
+        <Preference
+            app:enableCopying="true"
+            app:fragment="com.flop.minesweeper.activity.AboutActivity$OpenSourcePrefFragment"
+            app:iconSpaceReserved="false"
+            app:summary="@string/about_other_summary"
+            app:title="@string/about_open_source_header" />
     </PreferenceCategory>
 
 </PreferenceScreen>

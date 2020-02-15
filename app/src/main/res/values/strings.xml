@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Flop Mine</string>
 
-    <string name="settings">设置</string>
-
     <string name="back_twice_toast">再按一次退出</string>
 
+    <!--新游戏页面标题-->
+    <string name="settings">设置</string>
     <!--新游戏界面级别设置-->
     <string name="settingsLevel">级别</string>
     <string name="levelBeg">初级</string>
@@ -44,7 +44,6 @@
 
     <!--顶部导航栏-->
     <string name="action_filter">筛选</string>
-    <string name="title_activity_settings">设置</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -60,6 +59,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
     <!-- 设置页面 -->
+    <string name="activity_settings_title">设置</string>
     <!--我的地盘 / 进步历程-->
     <string name="prefs_domain_progress_header">我的地盘 / 进步历程</string>
     <!--默认ID-->
@@ -74,6 +74,43 @@
     <string name="prefs_update_check_summary">当前版本：%1$s&#160;&#160;(%2$s)</string>
 
     <!-- 关于页面 -->
-    <!--开放源代码-->
-    <string name="prefs_open_source_header">开放源代码</string>
+    <string name="activity_about_title">关于</string>
+    <string name="about_other_header">其他</string>
+    <string name="about_other_summary">查看本项目使用的开源库和资源</string>
+    <!--应用相关-->
+    <string name="about_app_header">应用</string>
+    <string name="about_source">项目开源主页</string>
+    <string name="about_source_url" translatable="false"><u>https://github.com/hgraceb/FLopMinesweeper</u></string>
+    <string name="about_data">数据来源网站</string>
+    <string name="about_data_url" translatable="false"><u>http://www.saolei.wang/Main/Index.asp</u></string>
+    <string name="about_author_blog">作者博客</string>
+    <string name="about_author_blog_url" translatable="false"><u>https://hgraceb.github.io/</u></string>
+    <!--反馈相关-->
+    <string name="about_feedback_header">反馈</string>
+    <string name="about_qq_group">QQ交流群</string>
+    <string name="about_qq_group_number" translatable="false">823364726</string>
+    <string name="about_qq_group_key" translatable="false">about_qq_group_key</string>
+    <string name="about_qq_group_wrong_toast">未安装手机QQ或安装的版本不支持</string>
+    <string name="about_issues" translatable="false">Github issues</string>
+    <string name="about_issues_url" translatable="false"><u>https://github.com/hgraceb/FLopMinesweeper/issues</u></string>
+    <!--开放源代码相关-->
+    <string name="about_open_source_header">开放源代码</string>
+    <string name="about_androidx" translatable="false">AndroidX</string>
+    <string name="about_androidx_url" translatable="false"><u>https://developer.android.com/jetpack/androidx</u></string>
+    <string name="about_butter_knife" translatable="false">Butter Knife</string>
+    <string name="about_butter_knife_url" translatable="false"><u>https://github.com/JakeWharton/butterknife</u></string>
+    <string name="about_jsoup" translatable="false">jsoup</string>
+    <string name="about_jsoup_url" translatable="false"><u>https://github.com/jhy/jsoup</u></string>
+    <string name="about_junit4" translatable="false">JUnit 4</string>
+    <string name="about_junit4_url" translatable="false"><u>https://github.com/junit-team/junit4</u></string>
+    <string name="about_leak_canary" translatable="false">LeakCanary</string>
+    <string name="about_leak_canary_url" translatable="false"><u>https://github.com/square/leakcanary</u></string>
+    <string name="about_material_components" translatable="false">Material Components for Android</string>
+    <string name="about_material_components_url" translatable="false"><u>https://github.com/material-components/material-components-android</u></string>
+    <string name="about_Material_design_icons" translatable="false">Material design icons</string>
+    <string name="about_Material_design_icons_url" translatable="false"><u>https://github.com/google/material-design-icons</u></string>
+    <string name="about_smart_refresh_layout" translatable="false">SmartRefreshLayout</string>
+    <string name="about_smart_refresh_layout_url" translatable="false"><u>https://github.com/scwang90/SmartRefreshLayout</u></string>
+    <string name="about_update" translatable="false">update</string>
+    <string name="about_update_url" translatable="false"><u>https://github.com/czy1121/update</u></string>
 </resources>

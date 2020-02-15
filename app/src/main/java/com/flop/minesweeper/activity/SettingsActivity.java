@@ -30,11 +30,6 @@ import static com.flop.minesweeper.variable.Constant.UPDATE_URL;
 
 public class SettingsActivity extends BasePrefsActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     /**
      * 设置布局layout
      *
@@ -77,11 +72,14 @@ public class SettingsActivity extends BasePrefsActivity {
             // 如果是栈底，即设置页面的主页面
             if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
                 // 设置主页面标题
-                setTitle(getString(R.string.title_activity_settings));
+                setTitle(getString(R.string.activity_settings_title));
             }
         });
     }
 
+    /**
+     * 设置主页面
+     */
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -104,20 +102,6 @@ public class SettingsActivity extends BasePrefsActivity {
 
                     // 返回 true 屏蔽原生事件
                     return true;
-                });
-            }
-
-            // 初始化“检查更新”设置
-            Preference prefUpdate = findPreference(getString(R.string.prefs_update_check_key));
-            if (prefUpdate != null) {
-                // 设置版本信息
-                prefUpdate.setSummary(String.format(mActivity.getResources().getString(R.string.prefs_update_check_summary),
-                        BuildConfig.VERSION_NAME, BuildConfig.BUILD_TYPE));
-                // 设置监听器
-                prefUpdate.setOnPreferenceClickListener(preference -> {
-                    // 检查应用更新
-                    UpdateManager.create(mActivity).setManual(true).setUrl(UPDATE_URL).check();
-                    return false;
                 });
             }
         }
@@ -194,6 +178,9 @@ public class SettingsActivity extends BasePrefsActivity {
         }
     }
 
+    /**
+     * 高级设置页面
+     */
     public static class AdvancedFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

@@ -1,0 +1,113 @@
+<!--开放源代码页面-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--A-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:summary="@string/about_androidx_url"
+        app:title="@string/about_androidx">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_androidx_url" />
+    </Preference>
+
+    <!--B-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:summary="@string/about_butter_knife_url"
+        app:title="@string/about_butter_knife">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_butter_knife_url" />
+    </Preference>
+
+    <!--C--><!--D--><!--E--><!--F--><!--G--><!--H--><!--I-->
+
+    <!--J-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:summary="@string/about_jsoup_url"
+        app:title="@string/about_jsoup">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_jsoup_url" />
+    </Preference>
+
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:summary="@string/about_junit4_url"
+        app:title="@string/about_junit4">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_junit4_url" />
+    </Preference>
+
+    <!--K-->
+
+    <!--L-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:summary="@string/about_leak_canary_url"
+        app:title="@string/about_leak_canary">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_leak_canary_url" />
+    </Preference>
+
+    <!--M-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:summary="@string/about_material_components_url"
+        app:title="@string/about_material_components">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_material_components_url" />
+    </Preference>
+
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:summary="@string/about_Material_design_icons_url"
+        app:title="@string/about_Material_design_icons">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_Material_design_icons_url" />
+    </Preference>
+
+    <!--N--><!--O--><!--P--><!--Q--><!--R-->
+
+    <!--S-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:summary="@string/about_smart_refresh_layout_url"
+        app:title="@string/about_smart_refresh_layout">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_smart_refresh_layout_url" />
+    </Preference>
+
+    <!--T-->
+
+    <!--U-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:summary="@string/about_update_url"
+        app:title="@string/about_update">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_update_url" />
+    </Preference>
+
+    <!--V--><!--W--><!--X--><!--Y--><!--Z-->
+
+</PreferenceScreen>
+
+

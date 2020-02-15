@@ -9,7 +9,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 /**
- * 用好偏好设置基类
+ * 用好偏好设置Activity基类
  * <p>
  * Created by Flop on 2020/2/15.
  */
