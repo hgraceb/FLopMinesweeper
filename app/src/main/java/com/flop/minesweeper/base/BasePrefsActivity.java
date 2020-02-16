@@ -63,6 +63,16 @@ public abstract class BasePrefsActivity extends AppCompatActivity implements Pre
     }
 
     /**
+     * 清理数据
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 回收内存，防止内存泄漏
+        mActivity = null;
+    }
+
+    /**
      * 获取布局ID
      *
      * @return 布局ID

@@ -62,12 +62,10 @@ public class NewsFragment extends Fragment {
     private String[] mDown;//录像地址
     private String[] mPlayerId;//用户ID
     private String[] mVideoId;//录像ID
+    private Thread mThread;
     private int playerId;
-    private static Thread mThread;
     //mData定义为static类型，保证用户按返回键之后onPause时数据不被销毁
     private List<Map<String, String>> mData;
-
-//    private int mItem = NEWS_ITEM;//Item数目
 
     private Context mContext;
     private Activity mActivity;
@@ -200,7 +198,7 @@ public class NewsFragment extends Fragment {
     }
 
     //定义Handler句柄
-    Handler handler = new Handler(new Handler.Callback(){
+    Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == 200) setVideoItem();
@@ -342,13 +340,6 @@ public class NewsFragment extends Fragment {
             }
         };
         mThread.start();
-    }
-
-    public static boolean getNewsThreadAlive() {
-        if (mThread != null) {
-            return mThread.isAlive();
-        }
-        return true;
     }
 
     //将获取的网页内容显示到当前Fragment中
