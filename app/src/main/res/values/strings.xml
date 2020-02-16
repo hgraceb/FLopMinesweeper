@@ -107,8 +107,10 @@
     <string name="about_leak_canary_url" translatable="false"><u>https://github.com/square/leakcanary</u></string>
     <string name="about_material_components" translatable="false">Material Components for Android</string>
     <string name="about_material_components_url" translatable="false"><u>https://github.com/material-components/material-components-android</u></string>
-    <string name="about_Material_design_icons" translatable="false">Material design icons</string>
-    <string name="about_Material_design_icons_url" translatable="false"><u>https://github.com/google/material-design-icons</u></string>
+    <string name="about_material_design_icons" translatable="false">Material design icons</string>
+    <string name="about_material_design_icons_url" translatable="false"><u>https://github.com/google/material-design-icons</u></string>
+    <string name="about_video_format" translatable="false">Open, human-readable minesweeper video format</string>
+    <string name="about_video_format_url" translatable="false"><u>https://minesweepergame.com/forum/viewtopic.php?t=86</u></string>
     <string name="about_smart_refresh_layout" translatable="false">SmartRefreshLayout</string>
     <string name="about_smart_refresh_layout_url" translatable="false"><u>https://github.com/scwang90/SmartRefreshLayout</u></string>
     <string name="about_update" translatable="false">update</string>

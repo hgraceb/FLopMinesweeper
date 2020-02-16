@@ -5,6 +5,7 @@
     <Preference
         app:enableCopying="true"
         app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
         app:summary="@string/about_androidx_url"
         app:title="@string/about_androidx">
         <intent
@@ -16,6 +17,7 @@
     <Preference
         app:enableCopying="true"
         app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
         app:summary="@string/about_butter_knife_url"
         app:title="@string/about_butter_knife">
         <intent
@@ -29,6 +31,7 @@
     <Preference
         app:enableCopying="true"
         app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
         app:summary="@string/about_jsoup_url"
         app:title="@string/about_jsoup">
         <intent
@@ -39,6 +42,7 @@
     <Preference
         app:enableCopying="true"
         app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
         app:summary="@string/about_junit4_url"
         app:title="@string/about_junit4">
         <intent
@@ -52,6 +56,7 @@
     <Preference
         app:enableCopying="true"
         app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
         app:summary="@string/about_leak_canary_url"
         app:title="@string/about_leak_canary">
         <intent
@@ -63,6 +68,7 @@
     <Preference
         app:enableCopying="true"
         app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
         app:summary="@string/about_material_components_url"
         app:title="@string/about_material_components">
         <intent
@@ -73,19 +79,35 @@
     <Preference
         app:enableCopying="true"
         app:iconSpaceReserved="false"
-        app:summary="@string/about_Material_design_icons_url"
-        app:title="@string/about_Material_design_icons">
+        app:singleLineTitle="true"
+        app:summary="@string/about_material_design_icons_url"
+        app:title="@string/about_material_design_icons">
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="@string/about_Material_design_icons_url" />
+            android:data="@string/about_material_design_icons_url" />
     </Preference>
 
-    <!--N--><!--O--><!--P--><!--Q--><!--R-->
+    <!--N-->
+
+    <!--O-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
+        app:summary="@string/about_video_format_url"
+        app:title="@string/about_video_format">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_video_format_url" />
+    </Preference>
+
+    <!--P--><!--Q--><!--R-->
 
     <!--S-->
     <Preference
         app:enableCopying="true"
         app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
         app:summary="@string/about_smart_refresh_layout_url"
         app:title="@string/about_smart_refresh_layout">
         <intent
@@ -99,6 +121,7 @@
     <Preference
         app:enableCopying="true"
         app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
         app:summary="@string/about_update_url"
         app:title="@string/about_update">
         <intent
