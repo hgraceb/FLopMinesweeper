@@ -98,5 +98,11 @@ android {
         // 内存泄漏检测，debugImplementation because LeakCanary should only run in debug builds.
         debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.1'
 
+        // volley网络请求
+        implementation 'com.android.volley:volley:1.1.1'
+
+        // key-value储存
+        implementation "com.orhanobut:hawk:2.0.1"
+
     }
 }

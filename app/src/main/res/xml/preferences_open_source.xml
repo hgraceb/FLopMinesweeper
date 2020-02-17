@@ -25,7 +25,21 @@
             android:data="@string/about_butter_knife_url" />
     </Preference>
 
-    <!--C--><!--D--><!--E--><!--F--><!--G--><!--H--><!--I-->
+    <!--C--><!--D--><!--E--><!--F--><!--G-->
+
+    <!--H-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
+        app:summary="@string/about_hawk_url"
+        app:title="@string/about_hawk">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_hawk_url" />
+    </Preference>
+
+    <!--I-->
 
     <!--J-->
     <Preference
@@ -129,7 +143,19 @@
             android:data="@string/about_update_url" />
     </Preference>
 
-    <!--V--><!--W--><!--X--><!--Y--><!--Z-->
+    <!--V-->
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
+        app:summary="@string/about_volley_url"
+        app:title="@string/about_volley">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_volley_url" />
+    </Preference>
+
+    <!--W--><!--X--><!--Y--><!--Z-->
 
 </PreferenceScreen>
 

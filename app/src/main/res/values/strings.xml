@@ -99,6 +99,8 @@
     <string name="about_androidx_url" translatable="false"><u>https://developer.android.com/jetpack/androidx</u></string>
     <string name="about_butter_knife" translatable="false">Butter Knife</string>
     <string name="about_butter_knife_url" translatable="false"><u>https://github.com/JakeWharton/butterknife</u></string>
+    <string name="about_hawk" translatable="false">Hawk</string>
+    <string name="about_hawk_url" translatable="false"><u>https://github.com/orhanobut/hawk</u></string>
     <string name="about_jsoup" translatable="false">jsoup</string>
     <string name="about_jsoup_url" translatable="false"><u>https://github.com/jhy/jsoup</u></string>
     <string name="about_junit4" translatable="false">JUnit 4</string>
@@ -115,4 +117,6 @@
     <string name="about_smart_refresh_layout_url" translatable="false"><u>https://github.com/scwang90/SmartRefreshLayout</u></string>
     <string name="about_update" translatable="false">update</string>
     <string name="about_update_url" translatable="false"><u>https://github.com/czy1121/update</u></string>
+    <string name="about_volley" translatable="false">Volley</string>
+    <string name="about_volley_url" translatable="false"><u>https://github.com/google/volley</u></string>
 </resources>
