@@ -1,7 +1,7 @@
 # FLop Mine
 
 ## 下载
-[FlopMine_v0.0.4.200203_Debug.apk](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/APK/Debug/FlopMine_v0.0.4.200203_Debug.apk)
+[FlopMine_1.0.0.200219_Release.apk](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/APK/Release/FlopMine_1.0.0.200219_Release.apk)
 
 ## 介绍
 Flop Mine是 [扫雷网](http://www.saolei.wang/Main/Index.asp) 的 Android 端应用（非官方），录像及用户数据均来自[扫雷网](http://www.saolei.wang/Main/Index.asp)。
