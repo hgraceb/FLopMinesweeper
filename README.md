@@ -1,14 +1,55 @@
-# FLopMine
-录像及用户数据来自[扫雷网](http://www.saolei.wang/Main/Index.asp)
+# FLop Mine
 
-主要功能：
+## 下载
+[FlopMine_v0.0.4.200203_Debug.apk](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/APK/Debug/FlopMine_v0.0.4.200203_Debug.apk)
 
-1、扫雷网数据爬取、排版
+## 介绍
+Flop Mine是[扫雷网](http://www.saolei.wang/Main/Index.asp) 的 Android 端应用（非官方），录像及用户数据均来自[扫雷网](http://www.saolei.wang/Main/Index.asp)。
 
-2、扫雷网录像播放
+### 截图
+<img alt="主页" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/home.png" width=160>
+<img alt="页面跳转" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/page_skip.png" width=160>
+<img alt="简单筛选" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/filter_simple.png" width=160>
+<img alt="多条件筛选" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/filter_complex.png" width=160>
+<img alt="菜单栏" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/drawer.png" width=160>
+<img alt="偏好设置" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/settings.png" width=160>
+<img alt="关于" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/about.png" width=160>
+<img alt="开放源代码" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/open_source.png" width=160>
+<img alt="新游戏" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/new_game.png" width=160>
+<img alt="游戏设置" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/new_game_settings.png" width=160>
+<img alt="录像播放" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/video_play.jpg" width=405>
+<img alt="查看录像信息" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/video_info.jpg" width=405>
 
-3、选择本地录像进行播放
+### 主要功能
 
-4、开始新游戏
+* 扫雷网数据爬取、排版
+* 扫雷网录像播放
+* 选择本地录像进行播放
+* 开始新游戏
+* 排序筛选（不同页面可根据神界、人界、初级、高级、Bv等作为筛选排序依据）
+* 自定义部分页面的默认用户ID
 
-5、排序筛选（不同页面可根据神界、人界、初级、高级、Bv等作为筛选排序依据）
+### 待完成
+* 登录
+* 评论
+* 自定义文件选择界面
+* ......
+
+## 关于作者
+> 欢迎访问我的 [雷网主页](http://www.saolei.wang/Player/Index.asp?Id=14512) 和 ~~万年不更~~[博客](https://hgraceb.github.io/)，关注我的 [Github](https://github.com/hgraceb/)
+
+## License
+
+    Copyright 2020 Flop
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+        http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
