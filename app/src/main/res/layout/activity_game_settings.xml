@@ -44,40 +44,40 @@
                     android:id="@+id/tvLevel"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="12dp"
                     android:background="@drawable/settings_press"
                     android:clickable="true"
                     android:focusable="true"
+                    android:padding="12dp"
                     android:text="@string/settingsLevel"
                     android:textColor="@color/settingsTitle"
-                    android:textSize="@dimen/large_text"/>
+                    android:textSize="@dimen/large_text" />
 
                 <TextView
                     android:id="@+id/tvBeg"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/settings_item_height"
                     android:layout_below="@+id/tvLevel"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
-                    android:gravity="center_vertical"
                     android:background="@drawable/settings_press_divider"
                     android:clickable="true"
                     android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="@string/levelBeg"
                     android:textColor="@color/settingsText"
-                    android:textSize="@dimen/small_text"/>
+                    android:textSize="@dimen/small_text" />
 
                 <TextView
                     android:id="@+id/tvInt"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/settings_item_height"
                     android:layout_below="@+id/tvBeg"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
-                    android:gravity="center_vertical"
                     android:background="@drawable/settings_press_divider"
                     android:clickable="true"
                     android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="@string/levelInt"
                     android:textColor="@color/settingsText"
                     android:textSize="@dimen/small_text" />
@@ -87,12 +87,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/settings_item_height"
                     android:layout_below="@+id/tvInt"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
-                    android:gravity="center_vertical"
                     android:background="@drawable/settings_press"
                     android:clickable="true"
                     android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="@string/levelExp"
                     android:textColor="@color/settingsText"
                     android:textSize="@dimen/small_text" />
@@ -104,10 +104,10 @@
                     android:layout_below="@id/tvLevel"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
                     android:checked="true"
                     android:clickable="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:thumb="@drawable/switch_thumb"
                     android:track="@drawable/switch_track" />
 
@@ -118,9 +118,9 @@
                     android:layout_below="@id/tvBeg"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
                     android:clickable="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:thumb="@drawable/switch_thumb"
                     android:track="@drawable/switch_track" />
 
@@ -131,9 +131,9 @@
                     android:layout_below="@id/tvInt"
                     android:layout_alignEnd="@id/tvExp"
                     android:layout_alignRight="@id/tvExp"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
                     android:clickable="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:thumb="@drawable/switch_thumb"
                     android:track="@drawable/switch_track" />
 
@@ -149,10 +149,10 @@
                     android:id="@+id/tvVibration"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="12dp"
                     android:background="@drawable/settings_press"
                     android:clickable="true"
                     android:focusable="true"
+                    android:padding="12dp"
                     android:text="@string/settingsVibration"
                     android:textColor="@color/settingsTitle"
                     android:textSize="@dimen/large_text" />
@@ -162,12 +162,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/settings_item_height"
                     android:layout_below="@+id/tvVibration"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
                     android:background="@drawable/settings_press_divider"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="@string/longClickVibration"
                     android:textColor="@color/settingsText"
                     android:textSize="@dimen/small_text" />
@@ -177,12 +177,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/settings_item_height"
                     android:layout_below="@+id/tvLongClickVibration"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
                     android:background="@drawable/settings_press_divider"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="@string/winVibration"
                     android:textColor="@color/settingsText"
                     android:textSize="@dimen/small_text" />
@@ -192,12 +192,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/settings_item_height"
                     android:layout_below="@+id/tvWinVibration"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
                     android:background="@drawable/settings_press"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="@string/loseVibration"
                     android:textColor="@color/settingsText"
                     android:textSize="@dimen/small_text" />
@@ -209,10 +209,10 @@
                     android:layout_below="@id/tvVibration"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
                     android:checked="true"
                     android:clickable="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:thumb="@drawable/switch_thumb"
                     android:track="@drawable/switch_track" />
 
@@ -223,9 +223,9 @@
                     android:layout_below="@id/tvLongClickVibration"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
                     android:clickable="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:thumb="@drawable/switch_thumb"
                     android:track="@drawable/switch_track" />
 
@@ -236,9 +236,9 @@
                     android:layout_below="@id/tvWinVibration"
                     android:layout_alignEnd="@id/tvLongClickVibration"
                     android:layout_alignRight="@id/tvLongClickVibration"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
                     android:clickable="false"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:thumb="@drawable/switch_thumb"
                     android:track="@drawable/switch_track" />
 
@@ -248,16 +248,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                android:background="@color/settingsItemBackground">
+                android:background="@color/settingsItemBackground"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tvShare"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="12dp"
                     android:background="@drawable/settings_press"
                     android:clickable="true"
                     android:focusable="true"
+                    android:padding="12dp"
                     android:text="@string/shareMinesweeper"
                     android:textColor="@color/settingsTitle"
                     android:textSize="@dimen/large_text" />
