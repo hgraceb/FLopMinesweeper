@@ -35,6 +35,9 @@ Flop Mine是 [扫雷网](http://www.saolei.wang/Main/Index.asp) 的 Android 端�
 * 自定义文件选择界面
 * ......
 
+## QQ群
+<a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=43837614132f2c754d48296bb500ef5c7cd0b22468ca68927dd6a160d0ea636d"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="Flop Mine" title="Flop Mine"></a>
+
 ## 关于作者
 > 欢迎访问我的 [雷网主页](http://www.saolei.wang/Player/Index.asp?Id=14512) 和 ~~万年不更~~[博客](https://hgraceb.github.io/)，关注我的 [Github](https://github.com/hgraceb/)
 
