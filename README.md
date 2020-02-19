@@ -4,21 +4,21 @@
 [FlopMine_v0.0.4.200203_Debug.apk](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/APK/Debug/FlopMine_v0.0.4.200203_Debug.apk)
 
 ## 介绍
-Flop Mine是[扫雷网](http://www.saolei.wang/Main/Index.asp) 的 Android 端应用（非官方），录像及用户数据均来自[扫雷网](http://www.saolei.wang/Main/Index.asp)。
+Flop Mine是 [扫雷网](http://www.saolei.wang/Main/Index.asp) 的 Android 端应用（非官方），录像及用户数据均来自[扫雷网](http://www.saolei.wang/Main/Index.asp)。
 
 ### 截图
-<img alt="主页" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/home.png" width=160>
-<img alt="页面跳转" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/page_skip.png" width=160>
-<img alt="简单筛选" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/filter_simple.png" width=160>
-<img alt="多条件筛选" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/filter_complex.png" width=160>
-<img alt="菜单栏" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/drawer.png" width=160>
-<img alt="偏好设置" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/settings.png" width=160>
-<img alt="关于" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/about.png" width=160>
-<img alt="开放源代码" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/open_source.png" width=160>
-<img alt="新游戏" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/new_game.png" width=160>
-<img alt="游戏设置" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/new_game_settings.png" width=160>
-<img alt="录像播放" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/video_play.jpg" width=405>
-<img alt="查看录像信息" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/video_info.jpg" width=405>
+[<img alt="主页" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/home.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/home.png)
+[<img alt="页面跳转" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/page_skip.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/page_skip.png)
+[<img alt="简单筛选" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/filter_simple.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/filter_simple.png)
+[<img alt="多条件筛选" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/filter_complex.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/filter_complex.png)
+[<img alt="菜单栏" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/drawer.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/drawer.png)
+[<img alt="偏好设置" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/settings.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/settings.png)
+[<img alt="关于" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/about.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/about.png)
+[<img alt="开放源代码" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/open_source.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/open_source.png)
+[<img alt="新游戏" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/new_game.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/new_game.png)
+[<img alt="游戏设置" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/new_game_settings.png" width=160>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/new_game_settings.png)
+[<img alt="录像播放" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/video_play.jpg" width=405>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/video_play.jpg)
+[<img alt="查看录像信息" src="https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/video_info.jpg" width=405>](https://flop.coding.net/p/Raw/d/Raw/git/raw/master/FlopMine/Screenshot/video_info.jpg)
 
 ### 主要功能
 
