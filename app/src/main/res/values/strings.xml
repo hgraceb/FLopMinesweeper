@@ -79,6 +79,8 @@
     <string name="about_source_url" translatable="false"><u>https://github.com/hgraceb/FLopMinesweeper</u></string>
     <string name="about_data">数据来源网站</string>
     <string name="about_data_url" translatable="false"><u>http://www.saolei.wang/Main/Index.asp</u></string>
+    <string name="about_author_domain">作者雷网主页</string>
+    <string name="about_author_domain_url" translatable="false"><u>http://www.saolei.wang/Player/Index.asp?Id=14512</u></string>
     <string name="about_author_blog">作者博客</string>
     <string name="about_author_blog_url" translatable="false"><u>https://hgraceb.github.io/</u></string>
     <!--检查更新-->

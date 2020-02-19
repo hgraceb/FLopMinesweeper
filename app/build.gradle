@@ -19,14 +19,14 @@ android {
     signingConfigs {
         debug {
             // 签名文件路径
-            storeFile file('release.keystore')
+            storeFile file('C:\\Users\\Flop\\.android\\release.keystore')
             storePassword RELEASE_STORE_PASSWORD
             keyAlias RELEASE_KEY_ALIAS
             keyPassword RELEASE_KEY_PASSWORD
         }
 
         release {
-            storeFile file('release.keystore')
+            storeFile file('C:\\Users\\Flop\\.android\\release.keystore')
             storePassword RELEASE_STORE_PASSWORD
             keyAlias RELEASE_KEY_ALIAS
             keyPassword RELEASE_KEY_PASSWORD
