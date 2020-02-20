@@ -66,6 +66,16 @@
     <string name="prefs_domain_progress_id_key" translatable="false">prefs_domain_progress_id_key</string>
     <string name="prefs_domain_progress_id_title">默认ID</string>
     <string name="prefs_domain_progress_id_default" translatable="false">14512</string>
+    <!--本地录像-->
+    <string name="prefs_local_video_header">本地录像</string>
+    <!--是否记住录像路径-->
+    <string name="prefs_remember_path_key" translatable="false">prefs_remember_path_key</string>
+    <string name="prefs_remember_path_off">从根目录开始选择录像文件</string>
+    <string name="prefs_remember_path_on">记住上次选择录像文件时的路径</string>
+    <string name="prefs_remember_path_title">记住路径</string>
+    <!--默认路径-->
+    <string name="prefs_default_path_key">prefs_default_path_key</string>
+    <string name="prefs_default_path_title" translatable="false">当前默认路径</string>
     <!--其他-->
     <string name="prefs_other_header">其他</string>
 
@@ -113,6 +123,8 @@
     <string name="about_material_components_url" translatable="false"><u>https://github.com/material-components/material-components-android</u></string>
     <string name="about_material_design_icons" translatable="false">Material design icons</string>
     <string name="about_material_design_icons_url" translatable="false"><u>https://github.com/google/material-design-icons</u></string>
+    <string name="about_material_file_picker" translatable="false">Material File Picker</string>
+    <string name="about_material_file_picker_url" translatable="false"><u>https://github.com/nbsp-team/MaterialFilePicker</u></string>
     <string name="about_video_format" translatable="false">Open, human-readable minesweeper video format</string>
     <string name="about_video_format_url" translatable="false"><u>https://minesweepergame.com/forum/viewtopic.php?t=86</u></string>
     <string name="about_smart_refresh_layout" translatable="false">SmartRefreshLayout</string>
@@ -121,4 +133,24 @@
     <string name="about_update_url" translatable="false"><u>https://github.com/czy1121/update</u></string>
     <string name="about_volley" translatable="false">Volley</string>
     <string name="about_volley_url" translatable="false"><u>https://github.com/google/volley</u></string>
+
+    <!--文件选择-->
+    <string name="activity_file_title">选择文件</string>
+    <string name="type_video">视频</string>
+    <string name="empty_directory_hint">无可选文件</string>
+    <string name="action_close">关闭</string>
+    <string name="type_archive">压缩包</string>
+    <string name="type_certificate">证书</string>
+    <string name="type_directory">目录</string>
+    <string name="type_document">文件</string>
+    <string name="type_drawing">图片</string>
+    <string name="type_excel">EXCEL</string>
+    <string name="type_image">照片</string>
+    <string name="type_music">音乐</string>
+    <string name="type_pdf">PDF</string>
+    <string name="type_power_point">PPT</string>
+    <string name="type_word">WORD</string>
+    <string name="type_apk">APK</string>
+    <!--选择本地录像时的标题-->
+    <string name="activity_local_video_title">本地录像</string>
 </resources>

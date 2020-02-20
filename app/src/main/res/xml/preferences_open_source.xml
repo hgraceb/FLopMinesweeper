@@ -101,6 +101,17 @@
             android:data="@string/about_material_design_icons_url" />
     </Preference>
 
+    <Preference
+        app:enableCopying="true"
+        app:iconSpaceReserved="false"
+        app:singleLineTitle="true"
+        app:summary="@string/about_material_file_picker_url"
+        app:title="@string/about_material_file_picker">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/about_material_file_picker_url" />
+    </Preference>
+
     <!--N-->
 
     <!--O-->

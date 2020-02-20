@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.flop.minesweeper.BuildConfig;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +55,26 @@ public class LogUtil {
             mInfo = new StringBuilder(info);
             mThrowable = throwable;
             printLog();
+        }
+    }
+
+    /**
+     * 打印变量的所有字段值
+     */
+    public static void f(String info, Object object, Throwable throwable) {
+        if (BuildConfig.DEBUG) {
+            Class<?> aClass = object.getClass();
+            Field[] declaredFields = aClass.getDeclaredFields();
+            mInfo = new StringBuilder(info).append(" 的所有字段值：\n");
+            for (Field field : declaredFields) {
+                field.setAccessible(true);
+                try {
+                    mInfo.append(field.getName()).append(": ").append(field.get(object)).append("\n");
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            LogUtil.i(mInfo, throwable);
         }
     }
 

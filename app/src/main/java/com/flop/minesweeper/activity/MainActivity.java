@@ -50,6 +50,8 @@ import com.flop.minesweeper.R;
 import com.flop.minesweeper.adapter.OrderMenuAdapter;
 import com.flop.minesweeper.adapter.OrderMenuRankingAdapter;
 import com.flop.minesweeper.adapter.OrderOptionAdapter;
+import com.flop.minesweeper.filepicker.MaterialFilePicker;
+import com.flop.minesweeper.filepicker.ui.FilePickerActivity;
 import com.flop.minesweeper.fragment.LatestFragment;
 import com.flop.minesweeper.fragment.NewsFragment;
 import com.flop.minesweeper.fragment.RankingFragment;
@@ -62,6 +64,8 @@ import com.flop.minesweeper.util.ToastUtil;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.regex.Pattern;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -70,7 +74,6 @@ import butterknife.OnTouch;
 
 import static com.flop.minesweeper.util.EdgeUtil.setMarginsTop;
 import static com.flop.minesweeper.util.EdgeUtil.setPaddingBottom;
-import static com.flop.minesweeper.util.SDCardUtil.loadFileFromSDCard;
 import static com.flop.minesweeper.variable.Constant.ALL_ITEM;
 import static com.flop.minesweeper.variable.Constant.ALL_PAGE;
 import static com.flop.minesweeper.variable.Constant.DOMAIN_ITEM;
@@ -720,7 +723,7 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         // 设置我的地盘/进步历程”页面的用户ID
-        playerId = PreferencesHelper.getDomainProgressId(this);
+        playerId = PreferencesHelper.getDomainProgressId();
     }
 
     /**
@@ -899,11 +902,22 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
      * 打开本地文件管理器并选择相应文件
      */
     private void chooseLocalVideo() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("application/*");//类型限制，MimeType不提供.avf或.mvf格式，使用application/*限制简单筛选
-//        intent.setType("*/*");//类型限制
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(intent, VIDEO_REQUEST_CODE_LOCAL);
+        // 初始化文件选择设置
+        MaterialFilePicker materialFilePicker = new MaterialFilePicker()
+                .withActivity(this)
+                .withRequestCode(VIDEO_REQUEST_CODE_LOCAL)
+                .withFilter(Pattern.compile(".*\\.[a|m]vf$"))
+                .withHiddenFiles(true)
+                .withTitle(getString(R.string.activity_local_video_title));
+        // 设置选择本地录像时的默认路径
+        if (PreferencesHelper.isRememberPath()) {
+            String defaultPath = PreferencesHelper.getDefaultPath();
+            if (defaultPath != null) {
+                materialFilePicker.withPath(defaultPath);
+            }
+        }
+        // 打开文件选择页面
+        materialFilePicker.start();
     }
 
     /**
@@ -913,21 +927,13 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == VIDEO_REQUEST_CODE_LOCAL && resultCode == Activity.RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            String filepath = "";
+            // 获取文件路径
+            String filepath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+            // 文件类型
             String videoType = "";
-            if ("file".equalsIgnoreCase(uri.getScheme())) {//使用第三方应用打开
-                Log.i(TAG, "其他应用的路径:--" + uri.getPath() + "--");
-                filepath = uri.getPath();
-            } else {
-                filepath = SDCardUtil.getPathByUri4kitkat(this, uri);
-                Log.i(TAG, "4.4以后的路径:--" + filepath + "--");
-            }
-
-            Log.i(TAG, "文件路径: " + filepath);
 
             if (filepath == null) {
-                ToastUtil.showShort("请选择avf或mvf格式文件!");
+                ToastUtil.showShort("文件路径为空!");
                 return;
             } else if (filepath.endsWith(".avf")) {
                 videoType = "Avf";
@@ -938,8 +944,15 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
                 return;
             }
 
-            byte[] byteStream = loadFileFromSDCard(filepath);
+            byte[] byteStream = SDCardUtil.loadFileFromSDCard(filepath);
             if (byteStream != null) {
+                // 如果用户选择记住文件路径
+                if (PreferencesHelper.isRememberPath()) {
+                    // 获取当前文件父路径
+                    String fileParent = data.getStringExtra(FilePickerActivity.RESULT_FILE_PARENT);
+                    // 保存当前文件父路径为默认文件路径
+                    PreferencesHelper.setDefaultPath(fileParent);
+                }
                 Intent intent = new Intent(this, VideoPlayActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("request", VIDEO_REQUEST_CODE_LOCAL);
@@ -963,7 +976,7 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
             // 如果是从设置页面返回
         } else if (requestCode == PREFERENCES_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // 获取设置后的默认用户ID
-            int domainProgressId = PreferencesHelper.getDomainProgressId(this);
+            int domainProgressId = PreferencesHelper.getDomainProgressId();
             // 如果当前页面的用户ID和设置的用户ID不同
             if (playerId != domainProgressId) {
                 // 更新默认ID

@@ -57,6 +57,16 @@
             </intent-filter>
         </activity>
 
+        <!--文件选择页面-->
+        <activity
+            android:name=".filepicker.ui.FilePickerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/activity_file_title"
+            android:screenOrientation="user"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
         <!--设置页面-->
         <activity
             android:name=".activity.SettingsActivity"

@@ -19,14 +19,12 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import com.flop.minesweeper.BuildConfig;
 import com.flop.minesweeper.R;
 import com.flop.minesweeper.base.BasePrefsActivity;
-import com.flop.minesweeper.update.UpdateManager;
-import com.flop.minesweeper.util.EdgeUtil;
 import com.flop.minesweeper.ui.TextPreference;
-
-import static com.flop.minesweeper.variable.Constant.UPDATE_URL;
+import com.flop.minesweeper.util.EdgeUtil;
+import com.flop.minesweeper.util.PreferencesHelper;
+import com.flop.minesweeper.util.SDCardUtil;
 
 public class SettingsActivity extends BasePrefsActivity {
 
@@ -104,6 +102,16 @@ public class SettingsActivity extends BasePrefsActivity {
                     return true;
                 });
             }
+
+            // 初始化“本地录像”的默认路径设置项
+            Preference prefDefaultPath = findPreference(getString(R.string.prefs_default_path_key));
+            if (prefDefaultPath != null) {
+                // 获取本地录像默认路径
+                String defaultPath = PreferencesHelper.getDefaultPath();
+                // 显示本地录像默认路径
+                prefDefaultPath.setSummary(defaultPath == null ? SDCardUtil.getSDCardBaseDir() : defaultPath);
+            }
+
         }
 
         /**
