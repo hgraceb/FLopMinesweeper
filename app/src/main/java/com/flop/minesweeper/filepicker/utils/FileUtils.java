@@ -1,10 +1,13 @@
 package com.flop.minesweeper.filepicker.utils;
 
+import org.apache.http.impl.cookie.DateUtils;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,5 +43,29 @@ public class FileUtils {
         final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
         int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
         return new DecimalFormat("#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
+
+    /**
+     * 获取格式化后的文件/目录创建或最后修改时间
+     */
+    public static String getDateTime(String path) {
+        return getDateTime(path, "yyyy-MM-dd HH:mm");
+    }
+
+    /**
+     * 获取格式化后的文件/目录创建或最后修改时间
+     */
+    public static String getDateTime(String path, String format) {
+        File file = new File(path);
+        return getDateTime(file, format);
+    }
+
+    /**
+     * 获取格式化后的文件/目录创建或最后修改时间
+     */
+    public static String getDateTime(File file, String format) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(file.lastModified());
+        return DateUtils.formatDate(cal.getTime(), format);
     }
 }

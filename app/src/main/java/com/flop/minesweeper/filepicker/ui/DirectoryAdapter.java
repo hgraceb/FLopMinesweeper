@@ -10,7 +10,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.flop.minesweeper.R;
+import com.flop.minesweeper.errorLogInfo.FlopApplication;
+import com.flop.minesweeper.filepicker.utils.FileSizeUtil;
 import com.flop.minesweeper.filepicker.utils.FileTypeUtils;
+import com.flop.minesweeper.filepicker.utils.FileUtils;
 
 import java.io.File;
 import java.util.List;
@@ -73,7 +76,19 @@ public class DirectoryAdapter extends RecyclerView.Adapter<DirectoryAdapter.Dire
 
         FileTypeUtils.FileType fileType = FileTypeUtils.getFileType(currentFile);
         holder.mFileImage.setImageResource(fileType.getIcon());
-        holder.mFileSubtitle.setText(fileType.getDescription());
+        String string = FlopApplication.getInstance().getString(R.string.type_directory);
+        // FLOP修改：修改文件描述
+        // 如果是文件夹
+        if (currentFile.isDirectory()) {
+            // 只显示是文件夹
+            holder.mFileSubtitle.setText(fileType.getDescription());
+        } else {
+            // 如果是文件
+            String dateTime = FileUtils.getDateTime(currentFile.getAbsolutePath());
+            String filesSize = FileSizeUtil.getAutoFileOrFilesSize(currentFile);
+            // 显示文件大小和最后修改时间
+            holder.mFileSubtitle.setText(String.format(mContext.getString(R.string.file_desc), filesSize, dateTime));
+        }
         holder.mFileTitle.setText(currentFile.getName());
     }
 

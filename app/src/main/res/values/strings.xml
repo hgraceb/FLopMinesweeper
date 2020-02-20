@@ -151,6 +151,7 @@
     <string name="type_power_point">PPT</string>
     <string name="type_word">WORD</string>
     <string name="type_apk">APK</string>
+    <string name="file_desc">%1$s&#160;&#160;|&#160;&#160;%2$s</string>
     <!--选择本地录像时的标题-->
     <string name="activity_local_video_title">本地录像</string>
 </resources>
