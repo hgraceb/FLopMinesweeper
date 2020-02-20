@@ -70,7 +70,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.MyViewHo
         this.mActivity = activity;
         this.mData = data;
 
-        this.mViewPager = activity.findViewById(R.id.container);
+        this.mViewPager = activity.findViewById(R.id.frame_layout);
 
         if (orderRanking.getSort().contains("Sum")) {
             optionCurrent = optionSum;

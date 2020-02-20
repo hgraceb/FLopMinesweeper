@@ -57,7 +57,7 @@ public class FilePickerActivity extends AppCompatActivity implements DirectoryFr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_file_picker);
+        setContentView(R.layout.activity_frame_layout);
 
         initArguments(savedInstanceState);
         initViews();
@@ -143,7 +143,7 @@ public class FilePickerActivity extends AppCompatActivity implements DirectoryFr
 
     private void initFragment() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, DirectoryFragment.getInstance(
+                .replace(R.id.frame_layout, DirectoryFragment.getInstance(
                         mCurrentPath, mFilter))
                 .addToBackStack(null)
                 .commit();
@@ -178,7 +178,7 @@ public class FilePickerActivity extends AppCompatActivity implements DirectoryFr
 
     private void addFragmentToBackStack(String path) {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, DirectoryFragment.getInstance(
+                .replace(R.id.frame_layout, DirectoryFragment.getInstance(
                         path, mFilter))
                 .addToBackStack(null)
                 .commit();

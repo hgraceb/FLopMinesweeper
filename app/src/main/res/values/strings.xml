@@ -70,8 +70,8 @@
     <string name="prefs_local_video_header">本地录像</string>
     <!--是否记住录像路径-->
     <string name="prefs_remember_path_key" translatable="false">prefs_remember_path_key</string>
-    <string name="prefs_remember_path_off">从根目录开始选择录像文件</string>
-    <string name="prefs_remember_path_on">记住上次选择录像文件时的路径</string>
+    <string name="prefs_remember_path_off">从根目录开始选择本地录像文件</string>
+    <string name="prefs_remember_path_on">记住上次选择本地录像文件时的路径</string>
     <string name="prefs_remember_path_title">记住路径</string>
     <!--默认路径-->
     <string name="prefs_default_path_key">prefs_default_path_key</string>

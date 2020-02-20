@@ -29,7 +29,7 @@ public class AboutActivity extends BasePrefsActivity {
      */
     @Override
     public int getLayoutId() {
-        return R.layout.activity_prefs;
+        return R.layout.activity_frame_layout;
     }
 
     /**
@@ -56,7 +56,7 @@ public class AboutActivity extends BasePrefsActivity {
         // 设置Fragment
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.prefs, new AboutPrefFragment())
+                .replace(R.id.frame_layout, new AboutPrefFragment())
                 .commit();
 
         // 设置返回栈事件监听

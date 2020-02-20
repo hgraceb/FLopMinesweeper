@@ -702,7 +702,7 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById(R.id.container);
+        mViewPager = findViewById(R.id.frame_layout);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         //最多同时显示相邻的其他10(左右各5个)个Fragment界面,防止Fragment被销毁

@@ -98,7 +98,7 @@ public class OrderOptionAdapter extends RecyclerView.Adapter<OrderOptionAdapter.
     private void initLayout() {
         this.maskOrder = mActivity.findViewById(R.id.maskOrder);
         this.lyOrder = mActivity.findViewById(R.id.lyOrder);
-        this.mViewPager = mActivity.findViewById(R.id.container);
+        this.mViewPager = mActivity.findViewById(R.id.frame_layout);
         this.tvOrderTop = mActivity.findViewById(R.id.tvOrder);
         this.etPage = mActivity.findViewById(R.id.etPage);
         this.rvOrderOption = mActivity.findViewById(R.id.rvOrderOption);

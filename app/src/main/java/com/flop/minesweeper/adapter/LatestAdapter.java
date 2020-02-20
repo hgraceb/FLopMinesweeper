@@ -38,7 +38,7 @@ public class LatestAdapter extends RecyclerView.Adapter<LatestAdapter.MyViewHold
         this.mActivity = activity;
         this.mData = data;
 
-        this.mViewPager = activity.findViewById(R.id.container);
+        this.mViewPager = activity.findViewById(R.id.frame_layout);
     }
 
     @NonNull

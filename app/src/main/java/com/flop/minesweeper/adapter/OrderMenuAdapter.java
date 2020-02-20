@@ -54,7 +54,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.MyVi
         this.mActivity = activity;
         this.rvOrderOption = activity.findViewById(R.id.rvOrderOption);
         this.rvOrderMenu = activity.findViewById(R.id.rvOrderMenu);
-        this.mViewPager = activity.findViewById(R.id.container);
+        this.mViewPager = activity.findViewById(R.id.frame_layout);
         this.latestFragment = latestFragment;
         this.tvOrderTop = mActivity.findViewById(R.id.tvOrder);
         this.ivOrderIndicate = mActivity.findViewById(R.id.ivOrderIndicate);

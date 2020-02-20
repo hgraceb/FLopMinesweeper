@@ -37,7 +37,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         this.mActivity = activity;
         this.mData = data;
 
-        this.mViewPager = activity.findViewById(R.id.container);
+        this.mViewPager = activity.findViewById(R.id.frame_layout);
     }
 
     @NonNull

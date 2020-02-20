@@ -35,7 +35,7 @@ public class SettingsActivity extends BasePrefsActivity {
      */
     @Override
     public int getLayoutId() {
-        return R.layout.activity_prefs;
+        return R.layout.activity_frame_layout;
     }
 
     /**
@@ -62,7 +62,7 @@ public class SettingsActivity extends BasePrefsActivity {
         // 设置Fragment
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.prefs, new SettingsFragment())
+                .replace(R.id.frame_layout, new SettingsFragment())
                 .commit();
 
         // 设置返回栈事件监听
