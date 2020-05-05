@@ -848,7 +848,9 @@ public class VideoPlayActivity extends AppCompatActivity {
             //横竖方向是个大坑......注意前面是getY(),后面才是getX()
             current = cellArray[(events.get(plan).getY() / 16)][(events.get(plan).getX() / 16)];
 
-            if (events.get(plan).getMouseType() == 1) {//mv
+            // 不需要判断 events.get(plan).getMouseType() == 1，只要前后两个方块位置不同即认为有进行移动
+            // 如 0.00 时间内的移动事件（mv）没有被记录在录像信息当中，但是可能进行过移动
+            if (!current.equals(front)) {//mv
                 if (front != null) {
                     if (leftClick && !rightClick) {
                         //判断条件不需要添加getStyle(current).equals("blank")，因为并无"blank"的style
@@ -865,6 +867,10 @@ public class VideoPlayActivity extends AppCompatActivity {
                 } else if ((leftClick && rightClick) || middleClick) {
                     changeAroundBlank(current);
                 }
+            }
+
+            if (events.get(plan).getMouseType() == 1) {//mv
+                // 空语句，移动事件在前面已经处理过，如果是移动事件则无需进行后面的判断
             } else if (events.get(plan).getMouseType() == 3) {//lc
                 leftClick = true;
 
