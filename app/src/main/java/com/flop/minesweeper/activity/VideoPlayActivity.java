@@ -505,7 +505,7 @@ public class VideoPlayActivity extends AppCompatActivity {
             public void run() {
                 super.run();
                 try {
-                    String videoPageContent = Jsoup.connect(videoPage).get().toString();
+                    String videoPageContent = Jsoup.connect(videoPage).get().getElementsByAttributeValueMatching("onclick", "/Video/").toString();
 
                     //录像被删除或被冻结都有可能造成录像获取错误
                     if (!videoPageContent.contains("/V")) {
