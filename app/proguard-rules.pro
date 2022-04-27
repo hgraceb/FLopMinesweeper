@@ -26,8 +26,8 @@
 # 内部类混淆规则，搜索直达：Activity$
 -keep class com.flop.minesweeper.activity.*$* { public *; }
 
-# 录像解析混淆规则，搜索直达：AvfUtil、MvfUtil
--keep class com.flop.minesweeper.zhangye.util.*vfUtil { public *; }
+# 录像解析混淆规则，搜索直达：AvfUtil、MvfUtil、RmvUtil
+-keep class com.flop.minesweeper.zhangye.util.*Util { public analyzeVideo(...); }
 
 # 删除代码中Log相关的代码
 -assumenosideeffects class android.util.Log {
