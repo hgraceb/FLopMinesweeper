@@ -939,8 +939,10 @@ public class MainActivity extends AppCompatActivity implements KeyboardHeightObs
                 videoType = "Avf";
             } else if (filepath.endsWith(".mvf")) {
                 videoType = "Mvf";
+            } else if (filepath.endsWith(".rmv")) {
+                videoType = "Rmv";
             } else {
-                ToastUtil.showShort("请选择avf或mvf格式文件");
+                ToastUtil.showShort("请选择avf/mvf/rmv格式文件");
                 return;
             }
 

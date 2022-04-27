@@ -113,8 +113,8 @@ public class MvfUtil implements VideoUtil
     public void analyzeVideo(byte[] byteStream, VideoDisplayBean bean)
     {
         RawVideoBean rawVideoBean = convertRawVideo(byteStream);
-
         VideoCommon.convertVideoDisplay(rawVideoBean, bean);
+        rawVideo = rawVideoBean;
     }
 
     /**
@@ -183,7 +183,6 @@ public class MvfUtil implements VideoUtil
             rawVideoBean = read096(byteStream, rawVideoBean);
         }
 
-        rawVideo=rawVideoBean;
         CountryUtil.setIndex(-1);
 
         return rawVideoBean;

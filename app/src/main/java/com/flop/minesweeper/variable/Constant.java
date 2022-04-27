@@ -99,7 +99,7 @@ public class Constant {
 
 
     public static String[] VIDEO_INFO = {"ID", "Time", "3BV", "3BV/s", "Ces", "Clicks", "Corr", "STNB", "Flags",
-            "Left", "Right", "Double", "Openings", "Islands", "IOE", "Thrp", "QG", "RQP", "Path", "Date"};
+            "Left", "Right", "Double", "Openings", "Islands", "IOE", "Thrp", "QG", "RQP", "Path", "Type", "Date"};
 
     //弹出对话框请求储存空间权限
     public static final int REQUEST_EXTERNAL_STORAGE_CODE = 10512;

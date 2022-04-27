@@ -1,7 +1,6 @@
-package com.zy.minesweeper.base.bean;
+package com.flop.minesweeper.zhangye.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * 文件检验BEAN
@@ -16,7 +15,7 @@ public class RawEventDetailBean implements Serializable {
     /**
      * 事件事件
      */
-    private BigDecimal eventTime;
+    private double eventTime;
     private long rmvTime;
     /**
      * 事件类型
@@ -80,11 +79,11 @@ public class RawEventDetailBean implements Serializable {
      */
     private int lb;
 
-    public BigDecimal getEventTime() {
+    public double getEventTime() {
         return eventTime;
     }
 
-    public void setEventTime(BigDecimal eventTime) {
+    public void setEventTime(double eventTime) {
         this.eventTime = eventTime;
     }
 

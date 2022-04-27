@@ -1,4 +1,6 @@
-package com.zy.minesweeper.base.util;
+package com.flop.minesweeper.zhangye.util;
+
+import static com.flop.minesweeper.variable.Constant.rawVideo;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -6,14 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zy.minesweeper.base.bean.CellBean;
-import com.zy.minesweeper.base.bean.CellsBean;
-import com.zy.minesweeper.base.bean.RawBaseBean;
-import com.zy.minesweeper.base.bean.RawBoardBean;
-import com.zy.minesweeper.base.bean.RawEventDetailBean;
-import com.zy.minesweeper.base.bean.RawVideoBean;
-import com.zy.minesweeper.base.bean.VideoCheckBean;
-import com.zy.minesweeper.base.bean.VideoDisplayBean;
+import com.flop.minesweeper.zhangye.bean.CellBean;
+import com.flop.minesweeper.zhangye.bean.CellsBean;
+import com.flop.minesweeper.zhangye.bean.RawBaseBean;
+import com.flop.minesweeper.zhangye.bean.RawBoardBean;
+import com.flop.minesweeper.zhangye.bean.RawEventDetailBean;
+import com.flop.minesweeper.zhangye.bean.RawVideoBean;
+import com.flop.minesweeper.zhangye.bean.VideoCheckBean;
+import com.flop.minesweeper.zhangye.bean.VideoDisplayBean;
 
 /**
  * 拆分方法该方法主要内容为对rmv文件解析 关于rmv 介绍 rmv是用VSweeper 扫的，一般用在线上比赛上 早期版本后缀名为umv
@@ -59,10 +61,10 @@ public class RmvUtil implements VideoUtil
      * @param bean
      *            bean
      */
-    public void analyzeVideo(byte[] byteStream, VideoDisplayBean bean)
-    {
+    public void analyzeVideo(byte[] byteStream, VideoDisplayBean bean) {
         RawVideoBean rawVideoBean = convertRawVideo(byteStream);
         VideoCommon.convertVideoDisplay(rawVideoBean, bean);
+        rawVideo = rawVideoBean;
     }
 
     /**
@@ -252,7 +254,7 @@ public class RmvUtil implements VideoUtil
             // 分别为x坐标 和y坐标
 
             sboard.set(row * w + col, 1);
-            int pos = (row) * h + col;
+            int pos = (col) * h + row;
             cbBoard[pos].mine = 1;
             int posbean = (row + 1) * (w + 2) + col + 1;
             cells[posbean].what = 9;
@@ -278,7 +280,7 @@ public class RmvUtil implements VideoUtil
                 bean.setY(8 + 16 * row);
                 bean.setSec(0);
                 bean.setHun(0);
-                bean.setEventTime(new BigDecimal((bean.getSec()) + "." + (String.format("%02d", bean.getHun()))));
+                bean.setEventTime(new BigDecimal((bean.getSec()) + "." + (String.format("%02d", bean.getHun()))).doubleValue());
                 lst.add(bean);
                 cur++;
                 RawEventDetailBean bean2 = new RawEventDetailBean();
@@ -288,7 +290,7 @@ public class RmvUtil implements VideoUtil
                 bean2.setY(8 + 16 * row);
                 bean2.setSec(0);
                 bean2.setHun(0);
-                bean2.setEventTime(new BigDecimal((bean.getSec()) + "." + (String.format("%02d", bean.getHun()))));
+                bean2.setEventTime(new BigDecimal((bean.getSec()) + "." + (String.format("%02d", bean.getHun()))).doubleValue());
                 lst.add(bean2);
                 cur++;
             }
@@ -381,7 +383,6 @@ public class RmvUtil implements VideoUtil
                 int y = byteStream[++offSet] & 0xFF+1;
                 beans.setX(x);
                 beans.setY(y);
-                lst.add(beans);
                 cur++;
             }
             // Get game status (ie, 'won')
@@ -390,7 +391,6 @@ public class RmvUtil implements VideoUtil
                 RawEventDetailBean beans = new RawEventDetailBean();
                 beans.setRmvMouseType(eventTypeList[event]);
                 beans.setCur(cur);
-                lst.add(beans);
                 break;
             }
             else
@@ -426,8 +426,8 @@ public class RmvUtil implements VideoUtil
         rawVideoBean.setRawBoardBean(rawBoardBean);
         rawVideoBean.setRawEventDetailBean(lst);
        for(RawEventDetailBean bean:lst) {
-            
-            bean.setEventTime(BigDecimal.valueOf(bean.getRmvTime()).divide(new BigDecimal("1000")));
+
+            bean.setEventTime(BigDecimal.valueOf(bean.getRmvTime()).divide(new BigDecimal("1000")).doubleValue());
             //System.out.println(bean.getEventTime() +" "+bean.getRmvMouseType() +" "+  bean.getX() +" "+  bean.getY());
         }
         return rawVideoBean;

@@ -50,6 +50,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -210,13 +211,9 @@ public class VideoPlayActivity extends AppCompatActivity {
                     keyValuePair.put("Value", df.format(realTime));
                     break;
                 case "Date":
-                    if (videoType.equals("avf")) {
-                        //avf日期格式：2019/04/18 21:55:05.0360
-                        keyValuePair.put("Value", bean.getDate().substring(0, bean.getDate().indexOf(".")));
-                    } else {
-                        //mvf日期格式：2010/10/22 20:52:24
-                        keyValuePair.put("Value", bean.getDate());
-                    }
+                    // 统一格式显示 2019/04/18 21:55:05.0360 和 2010/10/22 20:52:24 格式的日期
+                    int pos = bean.getDate().indexOf(".");
+                    keyValuePair.put("Value", pos == -1 ? bean.getDate() : bean.getDate().substring(0, pos));
                     break;
                 case "3BV":
                     keyValuePair.put("Value", bean.getBbbv());
@@ -265,6 +262,9 @@ public class VideoPlayActivity extends AppCompatActivity {
                     break;
                 case "Path":
                     keyValuePair.put("Value", bean.getDistance());
+                    break;
+                case "Type":
+                    keyValuePair.put("Value", videoType.toLowerCase(Locale.ROOT));
                     break;
                 case "STNB":
                     if (gameLevel == 1) {
@@ -525,6 +525,9 @@ public class VideoPlayActivity extends AppCompatActivity {
                         case ".mvf":
                             videoType = "Mvf";
                             break;
+                        case ".rmv":
+                            videoType = "Rmv";
+                            break;
                         default:
                             return;
                     }
@@ -718,8 +721,6 @@ public class VideoPlayActivity extends AppCompatActivity {
 
     //获取录像事件并初始化游戏
     private void initVideos() {
-        String function = "initVideos";
-
         if (bean.getLevel() == null) {//bean内没有解析自定义录像的代码段，有需要时需自行添加
             ToastUtil.showShort("录像读取出错");
             finish();
@@ -814,17 +815,17 @@ public class VideoPlayActivity extends AppCompatActivity {
                 //避免超出后继续进行操作导致的有部分方块没有恢复正常状态
                 if (current != null) changeAroundNormal(current);//判断current是否已经初始化
 
-                if (events.get(plan).getMouseType() == 3) {//lc
+                if (events.get(plan).getMouseType() == 3 || "lc".equals(events.get(plan).getRmvMouseType())) {//lc
                     leftClick = true;
-                } else if (events.get(plan).getMouseType() == 9) {//rc
+                } else if (events.get(plan).getMouseType() == 9 || "rc".equals(events.get(plan).getRmvMouseType())) {//rc
                     rightClick = true;
-                } else if (events.get(plan).getMouseType() == 5 || events.get(plan).getMouseType() == 21) {//lr
+                } else if (events.get(plan).getMouseType() == 5 || events.get(plan).getMouseType() == 21 || "lr".equals(events.get(plan).getRmvMouseType())) {//lr
                     leftClick = false;
-                } else if (events.get(plan).getMouseType() == 17 || events.get(plan).getMouseType() == 145) {//rr
+                } else if (events.get(plan).getMouseType() == 17 || events.get(plan).getMouseType() == 145 || "rr".equals(events.get(plan).getRmvMouseType())) {//rr
                     rightClick = false;
-                } else if (events.get(plan).getMouseType() == 33) {//mc
+                } else if (events.get(plan).getMouseType() == 33 || "mc".equals(events.get(plan).getRmvMouseType())) {//mc
                     middleClick = true;
-                } else if (events.get(plan).getMouseType() == 65 || events.get(plan).getMouseType() == 193) {//mr
+                } else if (events.get(plan).getMouseType() == 65 || events.get(plan).getMouseType() == 193 || "mr".equals(events.get(plan).getRmvMouseType())) {//mr
                     middleClick = false;
                 }
 
@@ -869,15 +870,15 @@ public class VideoPlayActivity extends AppCompatActivity {
                 }
             }
 
-            if (events.get(plan).getMouseType() == 1) {//mv
+            if (events.get(plan).getMouseType() == 1 || "mv".equals(events.get(plan).getRmvMouseType())) {//mv
                 // 空语句，移动事件在前面已经处理过，如果是移动事件则无需进行后面的判断
-            } else if (events.get(plan).getMouseType() == 3) {//lc
+            } else if (events.get(plan).getMouseType() == 3 || "lc".equals(events.get(plan).getRmvMouseType())) {//lc
                 leftClick = true;
 
                 if (rightClick) {
                     changeAroundBlank(current);
                 }
-            } else if (events.get(plan).getMouseType() == 9) {//rc
+            } else if (events.get(plan).getMouseType() == 9 || "rc".equals(events.get(plan).getRmvMouseType())) {//rc
                 rightClick = true;
                 if (clickValid) {
                     //判断条件中的!leftClick不可省略,后面的条件需要用括号合并以改变判断条件的优先级
@@ -889,7 +890,7 @@ public class VideoPlayActivity extends AppCompatActivity {
                 if (leftClick) {
                     changeAroundBlank(current);
                 }
-            } else if (events.get(plan).getMouseType() == 5 || events.get(plan).getMouseType() == 21) {//lr
+            } else if (events.get(plan).getMouseType() == 5 || events.get(plan).getMouseType() == 21 || "lr".equals(events.get(plan).getRmvMouseType())) {//lr
                 leftClick = false;
                 if (clickValid) {
                     //判断条件中的!rightClick不可省略
@@ -905,7 +906,7 @@ public class VideoPlayActivity extends AppCompatActivity {
                 if (rightClick) {
                     changeAroundNormal(current);
                 }
-            } else if (events.get(plan).getMouseType() == 17 || events.get(plan).getMouseType() == 145) {//rr
+            } else if (events.get(plan).getMouseType() == 17 || events.get(plan).getMouseType() == 145 || "rr".equals(events.get(plan).getRmvMouseType())) {//rr
                 rightClick = false;
                 if (leftClick && getStyle(current).equals("number")) {
                     openAround(current);
@@ -914,10 +915,10 @@ public class VideoPlayActivity extends AppCompatActivity {
                 if (leftClick) {
                     changeAroundNormal(current);
                 }
-            } else if (events.get(plan).getMouseType() == 33) {//mc
+            } else if (events.get(plan).getMouseType() == 33 || "mc".equals(events.get(plan).getRmvMouseType())) {//mc
                 middleClick = true;
                 changeAroundBlank(current);
-            } else if (events.get(plan).getMouseType() == 65 || events.get(plan).getMouseType() == 193) {//mr
+            } else if (events.get(plan).getMouseType() == 65 || events.get(plan).getMouseType() == 193 || "mr".equals(events.get(plan).getRmvMouseType())) {//mr
                 middleClick = false;
                 changeAroundNormal(current);
                 openAround(current);
@@ -928,31 +929,6 @@ public class VideoPlayActivity extends AppCompatActivity {
             } else if (!leftClick && !rightClick) {
                 clickValid = true;
             }
-
-
-//            if (events.get(plan).getEventTime() > 3.70 && events.get(plan).getEventTime() < 4) {
-//                String temp = (plan + 23) + " " + events.get(plan).getSec() + "." + events.get(plan).getHun() + " ";
-//                if (events.get(plan).getMouseType() == 1) {//mv
-//                    temp += "mv ";
-//                } else if (events.get(plan).getMouseType() == 3) {//lc
-//                    temp += "lc ";
-//                } else if (events.get(plan).getMouseType() == 9) {//rc
-//                    temp += "rc ";
-//                } else if (events.get(plan).getMouseType() == 5 || events.get(plan).getMouseType() == 21) {//lr
-//                    temp += "lr ";
-//                } else if (events.get(plan).getMouseType() == 17 || events.get(plan).getMouseType() == 145) {//rr
-//                    temp += "rr ";
-//                } else if (events.get(plan).getMouseType() == 33) {//mc
-//                    temp += "mc ";
-//                } else if (events.get(plan).getMouseType() == 65 || events.get(plan).getMouseType() == 193) {//mr
-//                    temp += "mr ";
-//                }
-//                temp += (events.get(plan).getX() / 16 + 1) + " ";
-//                temp += (events.get(plan).getY() / 16 + 1) + "(";
-//                temp += +events.get(plan).getX() + " ";
-//                temp += events.get(plan).getY() + ")";
-//                Log.i(TAG, temp + " leftClick:" + leftClick + " rightClick:" + rightClick + " clickValid:" + clickValid);
-//            }
 
             plan++;
         }

@@ -30,8 +30,8 @@ public class AvfUtil implements VideoUtil {
      */
     public void analyzeVideo(byte[] byteStream, VideoDisplayBean bean) {
         RawVideoBean rawVideoBean = convertRawVideo(byteStream);
-
         VideoCommon.convertVideoDisplay(rawVideoBean, bean);
+        rawVideo = rawVideoBean;
     }
 
     /**
@@ -325,9 +325,6 @@ public class AvfUtil implements VideoUtil {
         rawBoardBean.setMines(m);
         rawVideoBean.setRawBoardBean(rawBoardBean);
         rawVideoBean.setRawEventDetailBean(lst);
-
-        rawVideo = rawVideoBean;
-
         return rawVideoBean;
     }
 

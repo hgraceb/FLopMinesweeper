@@ -3,6 +3,7 @@ package com.flop.minesweeper.zhangye.util;
 
 import com.flop.minesweeper.zhangye.bean.CellsBean;
 import com.flop.minesweeper.zhangye.bean.EventBean;
+import com.flop.minesweeper.zhangye.bean.RawBaseBean;
 import com.flop.minesweeper.zhangye.bean.RawBoardBean;
 import com.flop.minesweeper.zhangye.bean.RawEventDetailBean;
 import com.flop.minesweeper.zhangye.bean.RawProbBoardBean;
@@ -35,6 +36,7 @@ public class EventCommon {
     public static EventBean getEventBean(RawVideoBean rawVideoBean,
                                          VideoDisplayBean videoDisplayBean) {
         String markFlag = videoDisplayBean.getMarkFlag();
+        RawBaseBean rawBaseBean =rawVideoBean.getRawBaseBean();
         RawBoardBean rawBoardBean = rawVideoBean.getRawBoardBean();
         int height = rawBoardBean.getHeight();
         int width = rawBoardBean.getWidth();
@@ -140,77 +142,81 @@ public class EventCommon {
             if (mouse < 0) {
                 mouse = mouse + 256;
             }
-            String mouseType = "";
+            String mouseType;
             switch (mouse) {
-                case 1:
+                case 0x01:
                     mouseType = "mv";
-                    mvsize++;
-                    lact = 0;
-                    ract = 0;
-                    mact = 0;
                     break;
-                case 3:
+                case 0x03:
                     mouseType = "lc";
-                    lcsize++;
-                    lact = 1;
-                    ract = 0;
-                    mact = 0;
                     break;
-                case 5:
+                case 0x05:
                     mouseType = "lr";
-                    lrsize++;
-                    lact = -1;
-                    ract = 0;
-                    mact = 0;
                     break;
-                case 9:
+                case 0x09:
                     mouseType = "rc";
-                    rcsize++;
-                    lact = 0;
-                    ract = 1;
-                    mact = 0;
                     break;
-                case 17:
+                case 0x11:
+                case 0x81:
                     mouseType = "rr";
-                    rrsize++;
-                    lact = 0;
-                    ract = -1;
-                    mact = 0;
                     break;
-                case 33:
+                case 0x21:
                     mouseType = "mc";
-                    mcsize++;
-                    lact = 0;
-                    ract = 0;
-                    mact = 1;
                     break;
-                case 65:
+                case 0x41:
+                case 0xc1:
                     mouseType = "mr";
-                    mrsize++;
-                    lact = 0;
-                    ract = 0;
-                    mact = -1;
-                    break;
-                case 145:
-                    mouseType = "rr";
-                    rrsize++;
-                    lact = 0;
-                    ract = -1;
-                    mact = 0;
-                    break;
-                case 193:
-                    mouseType = "mr";
-                    mrsize++;
-                    lact = 0;
-                    ract = 0;
-                    mact = -1;
                     break;
                 default:
-                    mouseType = "rr";
-                    rrsize++;
-                    lact = 0;
-                    ract = -1;
-                    mact = 0;
+                    mouseType = String.valueOf(mouse);
+            }
+            if("rmv".equals(rawBaseBean.getProgram())) {
+                mouseType=rawEventDetailBean.getRmvMouseType();
+            }
+            if(  "mv".equals(mouseType)) {
+                mvsize++;
+                lact = 0;
+                ract = 0;
+                mact = 0;
+            }
+            else if(  "lc".equals(mouseType)) {
+                lcsize++;
+                lact = 1;
+                ract = 0;
+                mact = 0;
+            }
+            else if(  "lr".equals(mouseType)) {
+                lrsize++;
+                lact = -1;
+                ract = 0;
+                mact = 0;
+            }
+            else if(  "rc".equals(mouseType)) {
+                rcsize++;
+                lact = 0;
+                ract = 1;
+                mact = 0;
+            }
+            else if(  "rr".equals(mouseType)) {
+                rrsize++;
+                lact = 0;
+                ract = -1;
+                mact = 0;
+            }
+            else if(  "mc".equals(mouseType)) {
+                mcsize++;
+                lact = 0;
+                ract = 0;
+                mact = 1;
+            }
+            else if(  "mr".equals(mouseType)) {
+                mrsize++;
+                lact = 0;
+                ract = 0;
+                mact = -1;
+            }
+            else {
+                continue;
             }
             if (!"mv".equals(mouseType)) {
                 mouseTypeNomv = mouseType;
