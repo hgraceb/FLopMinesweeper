@@ -3,19 +3,18 @@
 ## 介绍
 Flop Mine是 [扫雷网](http://www.saolei.wang/Main/Index.asp) 的 Android 客户端（非官方），录像及用户数据均来自 [扫雷网](http://www.saolei.wang/Main/Index.asp)。
 
-### 截图
-<img alt="主页" src="assets/home.png" width=160>
-<img alt="页面跳转" src="assets/page_skip.png" width=160>
-<img alt="简单筛选" src="assets/filter_simple.png" width=160>
-<img alt="多条件筛选" src="assets/filter_complex.png" width=160>
-<img alt="菜单栏" src="assets/drawer.png" width=160>
-<img alt="偏好设置" src="assets/settings.png" width=160>
-<img alt="关于" src="assets/about.png" width=160>
-<img alt="开放源代码" src="assets/open_source.png" width=160>
-<img alt="新游戏" src="assets/new_game.png" width=160>
-<img alt="游戏设置" src="assets/new_game_settings.png" width=160>
-<img alt="录像播放" src="assets/video_play.jpg" width=405>
-<img alt="查看录像信息" src="assets/video_info.jpg" width=405>
+| 主页                     | 页面跳转                          | 简单筛选                              | 多条件筛选                               | 菜单栏                       |
+| ------------------------ | --------------------------------- | ------------------------------------- | ---------------------------------------- | ---------------------------- |
+| ![主页](assets/home.png) | ![页面跳转](assets/page_skip.png) | ![简单筛选](assets/filter_simple.png) | ![多条件筛选](assets/filter_complex.png) | ![菜单栏](assets/drawer.png) |
+
+
+| 偏好设置                         | 关于                      | 开放源代码                            | 新游戏                         | 游戏设置                                  |
+| -------------------------------- | ------------------------- | ------------------------------------- | ------------------------------ | ----------------------------------------- |
+| ![偏好设置](assets/settings.png) | ![关于](assets/about.png) | ![开放源代码](assets/open_source.png) | ![新游戏](assets/new_game.png) | ![游戏设置](assets/new_game_settings.png) |
+
+| 录像播放                           | 查看录像信息                           |
+| ---------------------------------- | -------------------------------------- |
+| ![录像播放](assets/video_play.jpg) | ![查看录像信息](assets/video_play.jpg) |
 
 ### 主要功能
 
